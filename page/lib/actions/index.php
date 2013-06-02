@@ -16,7 +16,7 @@
 
 
  
-global $LOCAL_PATH;
+global $LOCAL_PATH,$MAIN_DIR;
 include($LOCAL_PATH."/lib/actions/action.class.php");
 include($LOCAL_PATH."/lib/model/lib.php");
 /**

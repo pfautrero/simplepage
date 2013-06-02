@@ -30,7 +30,7 @@ require_once($CFG->libdir.'/filelib.php');
 
 global $LOCAL_PATH, $MAIN_DIR;
 /** $MAIN_DIR = "page" **/
-$MAIN_DIR = substr(dirname(__FILE__),strpos(dirname(__FILE__),"course/format")+13);
+$MAIN_DIR = substr(dirname(__FILE__),strpos(dirname(__FILE__),"course/format")+14);
 $LOCAL_PATH = ".";
 if (file_exists("./format/page/lib/controller/frontcontroller.class.php")) {
 	$LOCAL_PATH = "./format/page";

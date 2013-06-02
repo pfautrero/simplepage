@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="format/page/lib/template/css/menu.css">
 <script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 <script type="text/javascript" src="<?php echo JQUERYUI; ?>"></script>
+
 	<script>
 	
 	/*YUI().use('node', function (Y) {

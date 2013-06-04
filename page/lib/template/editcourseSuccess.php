@@ -1,19 +1,8 @@
-<link rel="stylesheet" type="text/css" href="format/page/lib/template/css/style.css">
+<link rel="stylesheet" type="text/css" href="<?php echo STYLECSS; ?>">
 <link type="text/css" href="<?php echo JQUERYUICSS; ?>" rel="stylesheet" />
 <script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 <script type="text/javascript" src="<?php echo JQUERYUI; ?>"></script>
 <script type="text/javascript" src="<?php echo JQUERYNESTABLE; ?>"></script>
-
-<script>
-    /*YUI().use('node', function (Y) {
-
-            var rightColumn = Y.one('#region-post');
-            <?php if ($editing) : ?>
-            if (rightColumn) rightColumn.prepend("<?php echo $adminBlock; ?>");	
-            <?php endif ?>
-    });*/
-</script>
-
 
 <?php if ($message): ?>
 <div class="alert"><?php echo $message; ?></div>

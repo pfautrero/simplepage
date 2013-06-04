@@ -1,5 +1,5 @@
 <link type="text/css" href="<?php echo JQUERYUICSS; ?>" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="format/page/lib/template/css/style.css">
+<link rel="stylesheet" type="text/css" href="<?php echo STYLECSS; ?>">
 <script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 <script type="text/javascript" src="<?php echo JQUERYUI; ?>"></script>
 <div class='format_content' style='width:100%;'>

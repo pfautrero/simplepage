@@ -30,6 +30,7 @@ $LOCAL_PATH = ".";
 if (file_exists("./format/".$MAIN_DIR."/lib/controller/frontcontroller.class.php")) {
 	$LOCAL_PATH = "./format/".$MAIN_DIR;
 }
+include('version.php');
 include('globals.php');
 include($LOCAL_PATH."/lib/controller/frontcontroller.class.php");
 $front = frontController::getInstance()->dispatch();

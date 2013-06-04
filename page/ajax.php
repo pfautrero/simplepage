@@ -35,6 +35,7 @@ $LOCAL_PATH = ".";
 if (file_exists("./format/page/lib/controller/frontcontroller.class.php")) {
 	$LOCAL_PATH = "./format/page";
 }
+include('version.php');
 include('globals.php');
 include_once("../../../lib/setup.php");
 include($LOCAL_PATH."/lib/controller/frontcontroller.class.php");

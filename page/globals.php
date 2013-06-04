@@ -30,14 +30,13 @@
         
 	define('CROSS','/pix/t/delete.gif');
 	define('CROSS2','/pix/t/edit-delete.gif');
-	
-	define('ARROW_UP','/pix/t/up.gif');
+        define('ARROW_UP','/pix/t/up.gif');
 	define('ARROW_DOWN','/pix/t/down.gif');
 	define('EXPAND','/pix/t/expanded.png');
 	define('SEE_PAGE','/pix/f/web-32.png');
+        
 	define('ITEM_MENU_VISIBLE','/course/format/'.$MAIN_DIR.'/images/ok.png');
 	define('ITEM_MENU_HIDDEN','/course/format/'.$MAIN_DIR.'/images/nok.png');
-        
         define('PDF','/course/format/'.$MAIN_DIR.'/lib/template/images/'.IMG_FOLDER.'/pdf.png');
         define('DUPLICATE','/course/format/'.$MAIN_DIR.'/lib/template/images/'.IMG_FOLDER.'/edit-copy.png');
         define('EDIT','/course/format/'.$MAIN_DIR.'/lib/template/images/'.IMG_FOLDER.'/edit.png');
@@ -61,6 +60,7 @@
 	define('JQUERYUI','format/'.$MAIN_DIR.'/lib/template/js/jquery-ui-1.9.1.custom.min.js');
 	define('JQUERYUICSS','format/'.$MAIN_DIR.'/lib/template/css/jquery-ui-1.9.1.custom.css');
         define('JQUERYNESTABLE','format/'.$MAIN_DIR.'/lib/template/js/jquery.nestable.js');
+        define('STYLECSS','format/'.$MAIN_DIR.'/lib/template/css/style.css?version='.$plugin->version);
 
 	// ============= Globals
 	define('NO_LINK', 0);
@@ -74,7 +74,9 @@
         // ============= Permissions
         define('PERMISSION_DELETE_MODULE', 'moodle/course:manageactivities');
         define('PERMISSION_ADD_NEW_PAGE', 'moodle/course:manageactivities');
-        
+        /**
+         * @todo : centralize ALL permissions here
+         */
         
         
 

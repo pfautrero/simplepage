@@ -33,36 +33,36 @@ class Request
     public function getTaintedParam($key)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if (isset($_POST[$key])){
-				return $_POST[$key];
-			}
-			else {
-				return null;
-			}
+            if (isset($_POST[$key])){
+                    return $_POST[$key];
+            }
+            else {
+                    return null;
+            }
         }else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 			
-			if (isset($_GET[$key])){
-				return $_GET[$key];
-			}
-			else {
-				return null;
-			}
+            if (isset($_GET[$key])){
+                    return $_GET[$key];
+            }
+            else {
+                    return null;
+            }
         }
-		else {
-			return null;
-		}
+        else {
+            return null;
+        }
     }
 	
     public function route()
     {
-		$matches = array();
+	$matches = array();
         $args = explode('&', parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY));
-		foreach ($args as $arg) {
-			$pos = strpos($arg, "action=");		
-			if ($pos !== false) {
-				$matches['action'] = substr($arg, $pos+7);
-			}		
-		}
+        foreach ($args as $arg) {
+            $pos = strpos($arg, "action=");		
+            if ($pos !== false) {
+                    $matches['action'] = substr($arg, $pos+7);
+            }		
+        }
         return $matches;
     }
 }

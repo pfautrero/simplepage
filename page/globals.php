@@ -20,6 +20,10 @@
  * @package simplepage
  * @subpackage config
  */
+
+/**
+ * @todo : convert these globals into a singleton
+ */
         global $MAIN_DIR;
 	// ============ Define images theme
 

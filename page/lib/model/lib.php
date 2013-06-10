@@ -14,6 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+
+include_once('../lib/completionlib.php');
+
 /**
  * General class used as simplepage model.
  * 
@@ -250,11 +253,7 @@ class SimplePage {
 	
 	public static function getCourseidForPage($pageid) {
 		global $DB;
-		$rec = $DB->get_record_sql("SELECT *
-                                                FROM {format_page}
-                                                WHERE id = '".$pageid."'
-
-                                                  ");
+		$rec = $DB->get_record_sql("SELECT * FROM {format_page} WHERE id = '".$pageid."' ");
 		return $rec->courseid;
 	}	
 
@@ -443,103 +442,115 @@ class SimplePage {
      * 
      */	
 	public static function getCourseModules($mypage, $uid) {
-		global $DB, $COURSE, $PAGE;
-		$coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-		$manageactivities = false;$viewhiddenactivities = false;
-		if (has_capability('moodle/course:manageactivities', $coursecontext)) {
-			$manageactivities = true;
-		}
-		if (has_capability('moodle/course:viewhiddenactivities', $coursecontext)) {
-			$viewhiddenactivities = true;
-		}		
-		
-		if ($manageactivities || $viewhiddenactivities) {
-			$recs = $DB->get_records_sql("SELECT *
-                                                            FROM {format_page_items}
-                                                            WHERE pageid = '$mypage' 
-                                                            AND blockinstance = '0'
-                                                            ORDER BY sortorder ASC");
-		}
-		else {
-			$recs = $DB->get_records_sql("SELECT *
-                                                            FROM {format_page_items}
-                                                            WHERE pageid = '$mypage' 
-                                                            AND blockinstance = '0'
-                                                            AND visible = '1'
-                                                            ORDER BY sortorder ASC");		
-		}
-		$modules = array();$i = 0;
-		foreach ($recs as $rec) {
-			//var_dump($rec->cmid);
-			
-			$course_module = $DB->get_record_sql("SELECT * FROM {course_modules} WHERE id = '".$rec->cmid."'");
-			if ($course_module) {
-				
-				$display = 0;
-				
-				// ===================== Verify user privileges
-				if ($manageactivities || !$course_module->groupmembersonly) {
-					$display = 1;
-					
-				}
-				else {
-					
-					if ($course_module->groupmembersonly) {
-						$rec2 = $DB->get_record_sql("SELECT gm.id
-										  FROM {groups_members} as gm, {groupings_groups} as gg
-										  WHERE gg.groupingid = '".$course_module->groupingid."' 
-										  AND gg.groupid = gm.groupid 
-										  AND gm.userid = '".$uid."'
-										  ");			
-						if ($rec2) $display = 1;
-					} 
-				}
-				
-				// ===================== Manage display if conditional date system is used
-				$config = $DB->get_record_sql("SELECT * FROM {config} WHERE name='enableavailability'");
-				if ($config) {
-					
-					if ($config->value == 1) {
-						
-						if ($course_module->availablefrom) {
-							$display = 0;
-							if (time() > $course_module->availablefrom) {
-								$display = 1;
-																
-							}
-							elseif (($course_module->showavailability == 1) || $manageactivities) $display = 2;  							
-						}
-						if ($course_module->availableuntil) {
-							$display = 0;
-							if (time() < $course_module->availableuntil) {
-								$display = 1;
-							}
-							elseif(($course_module->showavailability == 1) || $manageactivities) $display = 2;							
-						}
+            global $DB, $COURSE, $PAGE;
+            $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+            $manageactivities = false;$viewhiddenactivities = false;
+            if (has_capability('moodle/course:manageactivities', $coursecontext)) {
+                    $manageactivities = true;
+            }
+            if (has_capability('moodle/course:viewhiddenactivities', $coursecontext)) {
+                    $viewhiddenactivities = true;
+            }		
 
-					}							
-				}
-				
-				
-				// ===================== If user has right permissions, display current module
-				if ($display) {
-					$module = $DB->get_record_sql("SELECT * FROM {modules} WHERE id = '".$course_module->module."'");
-					$modulecontext = $DB->get_record_sql("SELECT * FROM {context} WHERE instanceid = '".$rec->cmid."' AND contextlevel = '70'");
-					$modules[$i]['object'] = $DB->get_record_sql("SELECT * FROM {".$module->name."} WHERE id = '".$course_module->instance."'");
-					$modules[$i]['type'] = $module->name;
-					$modules[$i]['cmid'] = $rec->cmid;
-					$modules[$i]['position'] = $rec->position;
-					$modules[$i]['sortorder'] = $rec->sortorder;
-					$modules[$i]['visible'] = $rec->visible;
-					$modules[$i]['id'] = $rec->id;
-					$modules[$i]['context'] = $modulecontext->id;
-					$modules[$i]['display_mode'] = $display;
-					$i++;
-				}
-			}
-		}
-		//var_dump($modules);
-		return $modules;
+            if ($manageactivities || $viewhiddenactivities) {
+                    $recs = $DB->get_records_sql("SELECT *
+                                                        FROM {format_page_items}
+                                                        WHERE pageid = '$mypage' 
+                                                        AND blockinstance = '0'
+                                                        ORDER BY sortorder ASC");
+            }
+            else {
+                    $recs = $DB->get_records_sql("SELECT *
+                                                        FROM {format_page_items}
+                                                        WHERE pageid = '$mypage' 
+                                                        AND blockinstance = '0'
+                                                        AND visible = '1'
+                                                        ORDER BY sortorder ASC");		
+            }
+
+            $config = $DB->get_record_sql("SELECT * FROM {config} WHERE name='enableavailability'");
+
+            $completion = new completion_info($COURSE);
+            $completion_enabled = false;
+            if ($completion->is_enabled_for_site() && $completion->is_enabled()) {
+                $completion_enabled = true;
+            }                
+
+            $modules = array();$i = 0;
+            foreach ($recs as $rec) {
+                $course_module = $DB->get_record_sql("SELECT * FROM {course_modules} WHERE id = '".$rec->cmid."'");
+                if ($course_module) {
+                    $display = 0;
+                    $module_completion = 0;
+                    // ===================== Verify user privileges
+                    if ($manageactivities || !$course_module->groupmembersonly) {
+                            $display = 1;
+                    }
+                    else {
+                        if ($course_module->groupmembersonly) {
+                            $rec2 = $DB->get_record_sql("SELECT gm.id
+                                                         FROM {groups_members} as gm, {groupings_groups} as gg
+                                                         WHERE gg.groupingid = '".$course_module->groupingid."' 
+                                                         AND gg.groupid = gm.groupid 
+                                                         AND gm.userid = '".$uid."'
+                                                         ");			
+                            if ($rec2) $display = 1;
+                        } 
+                    }
+
+                    // ===================== Manage display if completion is used
+                    
+                    if ($completion_enabled && $completion->is_enabled($course_module)) {
+                        if ($course_module->completion == COMPLETION_TRACKING_MANUAL) {
+                            $current = $completion->get_data($course_module,null,$uid);
+                            if ($current->completionstate == COMPLETION_COMPLETE) {
+                                $module_completion = 1;
+                            }
+                            else {
+                                $module_completion = 2;
+                            }
+                        }
+                    }
+
+                    // ===================== Manage display if conditional date system is used
+
+                    if ($config) {
+                        if ($config->value == 1) {
+                            if ($course_module->availablefrom) {
+                                $display = 0;
+                                if (time() > $course_module->availablefrom) {
+                                        $display = 1;
+                                }
+                                elseif (($course_module->showavailability == 1) || $manageactivities) $display = 2;  							
+                            }
+                            if ($course_module->availableuntil) {
+                                $display = 0;
+                                if (time() < $course_module->availableuntil) {
+                                        $display = 1;
+                                }
+                                elseif(($course_module->showavailability == 1) || $manageactivities) $display = 2;							
+                            }
+                        }							
+                    }
+                    // ===================== If user has right permissions, display current module
+                    if ($display) {
+                        $module = $DB->get_record_sql("SELECT * FROM {modules} WHERE id = '".$course_module->module."'");
+                        $modulecontext = $DB->get_record_sql("SELECT * FROM {context} WHERE instanceid = '".$rec->cmid."' AND contextlevel = '70'");
+                        $modules[$i]['object'] = $DB->get_record_sql("SELECT * FROM {".$module->name."} WHERE id = '".$course_module->instance."'");
+                        $modules[$i]['type'] = $module->name;
+                        $modules[$i]['cmid'] = $rec->cmid;
+                        $modules[$i]['position'] = $rec->position;
+                        $modules[$i]['sortorder'] = $rec->sortorder;
+                        $modules[$i]['visible'] = $rec->visible;
+                        $modules[$i]['id'] = $rec->id;
+                        $modules[$i]['context'] = $modulecontext->id;
+                        $modules[$i]['display_mode'] = $display;
+                        $modules[$i]['completion'] = $module_completion;
+                        $i++;
+                    }
+                }
+            }
+            return $modules;
 
 	}
     /**
@@ -799,7 +810,7 @@ class SimplePage {
 		}
 	}
     /**
-     * When a page is added just behing page 'n', we first reorder page 'n+1', 'n+2'
+     * When a page is added just behind page 'n', we first reorder page 'n+1', 'n+2'
      * 
      * 
      */

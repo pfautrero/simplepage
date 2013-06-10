@@ -66,12 +66,12 @@ class FrontController
 
     private function _getCommand($action)
     {
-		global $LOCAL_PATH;
-		$path = $LOCAL_PATH."/lib/actions/$action.php";
-		if(!file_exists($path)){
-			$action="index";
-			$path = $LOCAL_PATH."/lib/actions/$action.php";			
-		}
+        global $LOCAL_PATH;
+        $path = $LOCAL_PATH."/lib/actions/$action.php";
+        if(!file_exists($path)){
+                $action="index";
+                $path = $LOCAL_PATH."/lib/actions/$action.php";			
+        }
         require($path);
         $class = $action.'Action';
 

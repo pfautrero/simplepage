@@ -73,11 +73,11 @@
 <p><strong><?php echo get_string('remark', 'format_page'); ?></strong><?php echo get_string('comment2Sections', 'format_page'); ?></p>
 </div>
 <div style="text-align:center;margin:20px;">
-	<form id="deletesections" action="" method="post">
+<!--	<form id="deletesections" action="" method="post">
 	<input type="hidden" id="id" name="id" value="<?php echo $id; ?>" />
 	<input type="hidden" name="sesskey" value="<?php echo $sesskey; ?>" />
 	<span id="delete_span"><input style="margin:5px;" id="suppress_sections" type="submit" name="suppress_sections" value="<?php echo get_string('buttonDeleteSections', 'format_page'); ?>" /></span>
-	</form>
+	</form>-->
 	<form id="associatesections" action="" method="post">
 	<input type="hidden" id="id" name="id" value="<?php echo $id; ?>" />
 	<input type="hidden" name="sesskey" value="<?php echo $sesskey; ?>" />

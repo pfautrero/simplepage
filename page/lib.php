@@ -64,7 +64,15 @@ function callback_page_load_content(&$navigation, $course, $coursenode) {
 		$thingnode = $coursenode->find($children[0], navigation_node::TYPE_CONTAINER)
                                         ->add('Export', new moodle_url('/course/format/page/ajax.php?id='.$course->id.'&action=export'));
 	}
-	return $navigation->load_generic_course_sections($course, $coursenode, 'page');
+        $pages_parentes = $DB->get_records_sql("SELECT *
+                                                   FROM {format_page}
+                                                   WHERE courseid = '".$course->id."'
+                                                   AND parent='0'
+                                                   ORDER BY sortorder ASC");
+        foreach ($pages_parentes as $page_parente) {
+            $coursenode->add($page_parente->nameone, new moodle_url('/course/format/page/view.php?id='.$course->id.'&page='.$page_parente->id));
+        }        
+	//return $navigation->load_generic_course_sections($course, $coursenode, 'page');
 }
 
 /**
@@ -171,7 +179,7 @@ class format_page extends format_base {
         $ajaxsupport->capable = true;
         $ajaxsupport->testedbrowsers = array('MSIE' => 9.0, 'Gecko' => 20061111, 'Safari' => 531, 'Chrome' => 6.0);
         return $ajaxsupport;
-    }   
+    }  
     /**
      * used to manage navigation block and breadcrumb (navbar)
      * for moodle 2.4 and upper
@@ -195,11 +203,20 @@ class format_page extends format_base {
 	if (has_capability('moodle/course:manageactivities', $coursecontext)) {
 		$coursenode = $PAGE->navigation->find($course->id, navigation_node::TYPE_COURSE);
 		$children = $coursenode->get_children_key_list();
+                
 		$thingnode = $coursenode->find($children[0], navigation_node::TYPE_CONTAINER)
                                         ->add('Export', new moodle_url('/course/format/page/ajax.php?id='.$course->id.'&action=export'));
 	}
+        $pages_parentes = $DB->get_records_sql("SELECT *
+                                                   FROM {format_page}
+                                                   WHERE courseid = '".$course->id."'
+                                                   AND parent='0'
+                                                   ORDER BY sortorder ASC");
+        foreach ($pages_parentes as $page_parente) {
+            $coursenode->add($page_parente->nameone, new moodle_url('/course/format/page/view.php?id='.$course->id.'&page='.$page_parente->id));
+        }
         
-        parent::extend_course_navigation($navigation, $coursenode);        
+        //parent::extend_course_navigation($navigation, $coursenode);        
         
         
     }

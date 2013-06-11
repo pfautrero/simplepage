@@ -68,6 +68,7 @@ function callback_page_load_content(&$navigation, $course, $coursenode) {
                                                    FROM {format_page}
                                                    WHERE courseid = '".$course->id."'
                                                    AND parent='0'
+                                                   AND display='7'
                                                    ORDER BY sortorder ASC");
         foreach ($pages_parentes as $page_parente) {
             $coursenode->add($page_parente->nameone, new moodle_url('/course/view.php?id='.$course->id.'&page='.$page_parente->id));
@@ -211,6 +212,7 @@ class format_page extends format_base {
                                                    FROM {format_page}
                                                    WHERE courseid = '".$course->id."'
                                                    AND parent='0'
+                                                   AND display='7'
                                                    ORDER BY sortorder ASC");
         foreach ($pages_parentes as $page_parente) {
             $coursenode->add($page_parente->nameone, new moodle_url('/course/view.php?id='.$course->id.'&page='.$page_parente->id));

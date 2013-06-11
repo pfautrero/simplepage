@@ -70,7 +70,7 @@ function callback_page_load_content(&$navigation, $course, $coursenode) {
                                                    AND parent='0'
                                                    ORDER BY sortorder ASC");
         foreach ($pages_parentes as $page_parente) {
-            $coursenode->add($page_parente->nameone, new moodle_url('/course/format/page/view.php?id='.$course->id.'&page='.$page_parente->id));
+            $coursenode->add($page_parente->nameone, new moodle_url('/course/view.php?id='.$course->id.'&page='.$page_parente->id));
         }        
 	//return $navigation->load_generic_course_sections($course, $coursenode, 'page');
 }
@@ -213,7 +213,7 @@ class format_page extends format_base {
                                                    AND parent='0'
                                                    ORDER BY sortorder ASC");
         foreach ($pages_parentes as $page_parente) {
-            $coursenode->add($page_parente->nameone, new moodle_url('/course/format/page/view.php?id='.$course->id.'&page='.$page_parente->id));
+            $coursenode->add($page_parente->nameone, new moodle_url('/course/view.php?id='.$course->id.'&page='.$page_parente->id));
         }
         
         //parent::extend_course_navigation($navigation, $coursenode);        

@@ -197,11 +197,26 @@ class indexAction extends Action {
                         elseif ($course_module['completion']) {
                             if ($course_module['completion'] == 1) {
                                 $Column2[$course_module['position']][$course_module['sortorder']]['header'] .="
-                                        <input class='completion' type='checkbox' checked />";
+                                    
+<div class='squaredOne'>
+	<input type='checkbox' id='s1' checked />
+	<label for='s1'></label>
+</div>
+
+
+
+
+                                        ";
                             }
                             if ($course_module['completion'] == 2) {
                                 $Column2[$course_module['position']][$course_module['sortorder']]['header'] .="
-                                        <input class='completion' type='checkbox' />";
+<div class='squaredOne'>
+	<input type='checkbox' id='s2' />
+	<label for='s2'></label>
+</div>                                        
+
+
+";
                             }                            
                             
                         }

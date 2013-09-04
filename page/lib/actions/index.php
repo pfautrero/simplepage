@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // This file is part of Simplepage
 //
 // Simplepage is free software: you can redistribute it and/or modify
@@ -25,7 +25,7 @@ include($LOCAL_PATH."/lib/model/lib.php");
  *
  * @package    simplepage
  * @subpackage actions
- * @copyright  2012 Pascal Fautrero - CRDP Versailles
+ * @copyright  2013 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class indexAction extends Action {
@@ -47,15 +47,20 @@ class indexAction extends Action {
 
         // ============ retrieve created module and set the correct page owner.		
         if (isset($_SESSION[$entry]['idpage'])) {
-                $current = $_SESSION[$entry]['idpage'];
-                $lastmoduleid = $_SESSION[$entry]['lastmoduleid'];
-                unset($_SESSION[$entry]['idpage']);
-                unset($_SESSION[$entry]['lastmoduleid']);
-                $newlastmoduleid = SimplePage::getLastIdModuleOfPage($current);
-                if ($lastmoduleid != $newlastmoduleid) {
-                        SimplePage::setModuleInPage($current, $newlastmoduleid);
-                        $page = $current;
+            $current = $_SESSION[$entry]['idpage'];
+            $last_added = SimplePage::getLastModuleTimestamp($current);
+            if ($last_added && ($_SESSION[$entry]['timestamp'] < $last_added)) {
+                $new_module_id = SimplePage::getLastIdOrphanModule($current,$_SESSION[$entry]['timestamp']);
+                if ($new_module_id) {
+                    unset($_SESSION[$entry]['idpage']);
+                    unset($_SESSION[$entry]['lastmoduleid']);
+                    SimplePage::setModuleInPage($current, $new_module_id);
+                    $page = $current;                    
                 }
+                else {
+                    $_SESSION[$entry]['timestamp'] = time();
+                }
+            }
         }
 
         // =============== 	Clic sur une section du bloc de navigation
@@ -197,26 +202,20 @@ class indexAction extends Action {
                         elseif ($course_module['completion']) {
                             if ($course_module['completion'] == 1) {
                                 $Column2[$course_module['position']][$course_module['sortorder']]['header'] .="
-                                    
-<div class='squaredOne'>
-	<input type='checkbox' id='s1' checked />
-	<label for='s1'></label>
-</div>
-
-
-
+                                    <div class='squaredOne'>
+                                            <input type='checkbox' id='checkbox_".$course_module['cmid']."' checked />
+                                            <label for='checkbox_".$course_module['cmid']."'></label>
+                                    </div>
 
                                         ";
                             }
                             if ($course_module['completion'] == 2) {
                                 $Column2[$course_module['position']][$course_module['sortorder']]['header'] .="
-<div class='squaredOne'>
-	<input type='checkbox' id='s2' />
-	<label for='s2'></label>
-</div>                                        
-
-
-";
+                                    <div class='squaredOne'>
+                                            <input type='checkbox' id='checkbox_".$course_module['cmid']."' />
+                                            <label for='checkbox_".$course_module['cmid']."'></label>
+                                    </div>                                        
+                                        ";
                             }                            
                             
                         }

@@ -1170,6 +1170,49 @@ class SimplePage {
                                               ");									  
             return $module->maxid;
 	}	
+        
+    /**
+     * Retrieve id of last orphan module
+     * 
+     * @param   int     $id
+     * @return  int     module id
+     */
+    public static function getLastIdOrphanModule($pageid,$timestamp) {
+        global $DB;
+        $rec = $DB->get_record_sql("SELECT * FROM {format_page} WHERE id = '".$pageid."' ");
+        $module = $DB->get_record_sql(" SELECT cm.id 
+                                        FROM {course_modules} AS cm LEFT OUTER JOIN {format_page_items} AS fpi ON fpi.cmid=cm.id
+                                        WHERE cm.course='".$rec->courseid."'
+                                        AND added > '".$timestamp."'
+                                        AND fpi.cmid IS NULL");
+        if ($module) {
+            $return = $module->id;
+        }
+        else {
+            $return = NULL;
+        }
+        return $return;
+    }   
+
+    /**
+     * Retrieve Max Timestamp of modules from a specific course
+     * 
+     * @param   int     $id
+     * @return  int     maxid
+     */
+    public static function getLastModuleTimestamp($pageid) {
+        global $DB;
+        $rec = $DB->get_record_sql("SELECT * FROM {format_page} WHERE id = '".$pageid."' ");
+        if ($rec->courseid == $_SESSION['courseid']) {
+            $module = $DB->get_record_sql("SELECT MAX(added) as max_timestamp FROM {course_modules} WHERE course = '".$rec->courseid."' ");									  
+            $return=$module->max_timestamp;            
+        }
+        else {
+            $return=NULL;
+        }
+        return $return;
+    }    
+    
     /**
      * 
      * 

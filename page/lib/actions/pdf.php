@@ -33,6 +33,7 @@ class pdfAction extends Action {
     {
 		global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH, $USER;
 		header_remove();
+
 		// ===========	Retrieve GET variables
 		$page=$request->getParam('page');
 		$id=$request->getParam('id');
@@ -42,19 +43,19 @@ class pdfAction extends Action {
 		//					 Affichage des onglets
 		//
 		// ======================================================
-		$pages = SimplePage::DisplayTabs($id, $page, $tabs);
+		//$pages = SimplePage::DisplayTabs($id, $page, $tabs);
 		
 		// ======================================================
 		//
 		//					Affichage des modules 
 		//
 		// ======================================================
-		if (!$page) {	
-			if ($pages) {
-				reset($pages);
-				$page = current($pages)->id;
-			}
-		}	
+//		if (!$page) {	
+//			if ($pages) {
+//				reset($pages);
+//				$page = current($pages)->id;
+//			}
+//		}	
 	
 	
 		$course = $DB->get_record('course', array('id'=>$id));
@@ -88,6 +89,7 @@ class pdfAction extends Action {
 		
 			$course_modules = SimplePage::getCourseModules($page, $USER->id);
 			$i = 0;
+                        $doc = new DOMDocument();
 			foreach($course_modules as $course_module) {
 	
 				$Column2[$course_module['position']][$course_module['sortorder']]['content'] = "<input class='input_id' type='hidden' name='".$course_module['id']."' value='' />";
@@ -115,9 +117,19 @@ class pdfAction extends Action {
 					$Column2[$course_module['position']][$course_module['sortorder']]['content'] .= SimplePage::getPagemenuLinks($course_module['object']->id, $id);
 				}
 				// ==================== Module Label
-				else if ($course_module['type'] == "label") {
-					$Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "<div style='padding-bottom:20px;'>".$course_module['object']->intro."</div>";
-				}
+                                else if ($course_module['type'] == "label") {
+                                        $filtered_content = file_rewrite_pluginfile_urls($course_module['object']->intro, 'pluginfile.php',$course_module['context'],'mod_label', 'intro');
+                                        @$doc->loadHTML($filtered_content);    
+                                        $tags = $doc->getElementsByTagName('img');
+                                        foreach ($tags as $tag) {
+                                            $url = $tag->getAttribute('src');
+                                            $extension = end(explode('.',$url));
+                                            $b64image = base64_encode(file_get_contents($url));
+                                            $new_img_tag = "data:image/".$extension.";base64,".$b64image;
+                                            $filtered_content = str_replace($url, $new_img_tag, $filtered_content);
+                                        }
+                                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "<div style='padding-bottom:20px;'>".$filtered_content."</div>";
+                                }
 				// ==================== Module url
 				else if ($course_module['type'] == "url") {
 					if ($course_module['object']->name) {

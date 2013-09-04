@@ -46,19 +46,19 @@ class indexAction extends Action {
         $entry = 'formatpage'.$USER->id;
 
         // ============ retrieve created module and set the correct page owner.		
-        if (isset($_SESSION[$entry]['idpage'])) {
-            $current = $_SESSION[$entry]['idpage'];
+        if (isset($_SESSION[$entry][$COURSE->id]['idpage'])) {
+            $current = $_SESSION[$entry][$COURSE->id]['idpage'];
             $last_added = SimplePage::getLastModuleTimestamp($current);
-            if ($last_added && ($_SESSION[$entry]['timestamp'] < $last_added)) {
-                $new_module_id = SimplePage::getLastIdOrphanModule($current,$_SESSION[$entry]['timestamp']);
+            if ($last_added && ($_SESSION[$entry][$COURSE->id]['timestamp'] < $last_added)) {
+                $new_module_id = SimplePage::getLastIdOrphanModule($current,$_SESSION[$entry][$COURSE->id]['timestamp']);
                 if ($new_module_id) {
-                    unset($_SESSION[$entry]['idpage']);
-                    unset($_SESSION[$entry]['lastmoduleid']);
+                    unset($_SESSION[$entry][$COURSE->id]['idpage']);
+                    unset($_SESSION[$entry][$COURSE->id]['lastmoduleid']);
                     SimplePage::setModuleInPage($current, $new_module_id);
                     $page = $current;                    
                 }
                 else {
-                    $_SESSION[$entry]['timestamp'] = time();
+                    $_SESSION[$entry][$COURSE->id]['timestamp'] = time();
                 }
             }
         }

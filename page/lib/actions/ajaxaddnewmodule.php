@@ -59,9 +59,8 @@ class ajaxaddnewmoduleAction extends Action {
 		$current=$request->getParam('current');
 		if (is_numeric($current)) {
 			$entry = 'formatpage'.$USER->id;
-			$_SESSION[$entry]['idpage'] = $current;
-                        $_SESSION[$entry]['timestamp'] = time();
-			//$_SESSION[$entry]['lastmoduleid'] = SimplePage::getLastIdModuleOfPage($current);
+			$_SESSION[$entry][$course->id]['idpage'] = $current;
+                        $_SESSION[$entry][$course->id]['timestamp'] = time();
 		}
 		$content = "done";
 		$response->addVar('content', $content);

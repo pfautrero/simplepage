@@ -89,7 +89,18 @@ $(document).ready(function() {
             $("#region-main").prepend("<div style='margin:10px;float:right;width:300px;'><?php echo $adminBlock; ?></div>");
         }
 
-            
+	$('.squaredOne').click(function(ev) {
+            //ev.preventDefault();
+            _current = $(this).children(':checkbox').attr('id');
+            $.ajax({
+                url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxassignment',
+                type: 'POST',
+                data: 'current='+_current+'&sesskey=<?php echo $sesskey; ?>',
+                success: function(data) {
+                        //
+                }
+            });
+	});            
             
         <?php if ($editing) : ?>
 	
@@ -218,20 +229,7 @@ $(document).ready(function() {
             });
 	});	
 		
-	$('.squaredOne').click(function(ev) {
-            //ev.preventDefault();
-            _current = $(this).children(':checkbox').attr('id');
-            $.ajax({
-                url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxassignment',
-                type: 'POST',
-                data: 'current='+_current+'&sesskey=<?php echo $sesskey; ?>',
-                success: function(data) {
-                        //
-                }
-            });
-	});	
-	
-	
+
 	<?php endif ?>	
 
 });

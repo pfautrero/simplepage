@@ -587,45 +587,45 @@ $(function() {
     //
     // =================================    
     $(".dd-item").children(".showactivities").click(function(ev) {
-            ev.preventDefault();
-            _current = $(this).parent().children(".input_course").attr('name');
-            _container = $(this).parent().children(".dd");
-            if (_container.hasClass("hideactivities")) {
-                
-                if (_container.children(".dd-list-table").length) {
-                    // Wrap table into a div to make slidedown effect working
-                    // the div wrapper is removed at the end of this effect
-                    _container.wrap("<div style='width:100%;' class='table-wrapper'/>");
-                    _container.parent().hide();
-                    _container.show();                         
-                    _container.parent().slideDown("slow", 'swing', function(){
-                        _container.unwrap();                                            
-                    });
-                }
-                else {
-                    $.ajax({
-                        url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxshowactivities',
-                        type: "POST",
-                        data: "current="+_current+"&sesskey=<?php echo $sesskey; ?>",
-                        success: function(data) {
-                            _container.children(".dd-list-table").remove();
-                            _container.append(data);
-                            // Wrap table into a div to make slidedown effect working
-                            // the div wrapper is removed at the end of this effect
-                            _container.wrap("<div style='width:100%;' class='table-wrapper'/>");
-                            _container.parent().hide();
-                            _container.show();                         
-                            _container.parent().slideDown("slow", 'swing', function(){
-                            _container.unwrap();                        
-                            });
-                        }
-                    });
-                }
+        ev.preventDefault();
+        _current = $(this).parent().children(".input_course").attr('name');
+        _container = $(this).parent().children(".dd");
+        if (_container.hasClass("hideactivities")) {
+
+            if (_container.children(".dd-list-table").length) {
+                // Wrap table into a div to make slidedown effect working
+                // the div wrapper is removed at the end of this effect
+                _container.wrap("<div style='width:100%;' class='table-wrapper'/>");
+                _container.parent().hide();
+                _container.show();                         
+                _container.parent().slideDown("slow", 'swing', function(){
+                    _container.unwrap();                                            
+                });
             }
             else {
-                _container.fadeOut('slow');
+                $.ajax({
+                    url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxshowactivities',
+                    type: "POST",
+                    data: "current="+_current+"&sesskey=<?php echo $sesskey; ?>",
+                    success: function(data) {
+                        _container.children(".dd-list-table").remove();
+                        _container.append(data);
+                        // Wrap table into a div to make slidedown effect working
+                        // the div wrapper is removed at the end of this effect
+                        _container.wrap("<div style='width:100%;' class='table-wrapper'/>");
+                        _container.parent().hide();
+                        _container.show();                         
+                        _container.parent().slideDown("slow", 'swing', function(){
+                        _container.unwrap();                        
+                        });
+                    }
+                });
             }
-            _container.toggleClass("hideactivities");
+        }
+        else {
+            _container.fadeOut('slow');
+        }
+        _container.toggleClass("hideactivities");
     });
 
     // =================================

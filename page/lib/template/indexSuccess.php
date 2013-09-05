@@ -218,7 +218,18 @@ $(document).ready(function() {
             });
 	});	
 		
-	
+	$('.squaredOne').click(function(ev) {
+            //ev.preventDefault();
+            _current = $(this).children(':checkbox').attr('id');
+            $.ajax({
+                url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxassignment',
+                type: 'POST',
+                data: 'current='+_current+'&sesskey=<?php echo $sesskey; ?>',
+                success: function(data) {
+                        //
+                }
+            });
+	});	
 	
 	
 	<?php endif ?>	

@@ -1603,6 +1603,24 @@ class SimplePage {
             }
         }
     /**
+     * Called when a user manually change the assignment state of a module
+     * 
+     * @param int   $module_id
+     * 
+     */	
+	public static function toggleAssignment($module_id) {
+            global $DB,$COURSE,$USER;
+            $completion = new completion_info($COURSE);
+            $course_module = $DB->get_record_sql("SELECT * FROM {course_modules} WHERE id = '".$module_id."'");
+            $current = $completion->get_data($course_module,null,$USER->id);
+            if ($current->completionstate == COMPLETION_COMPLETE) {
+                $completion->update_state($course_module,COMPLETION_INCOMPLETE,$USER->id);
+            }
+            else {
+                $completion->update_state($course_module,COMPLETION_COMPLETE,$USER->id);
+            }            
+	}        
+    /**
      * 
      * 
      * 

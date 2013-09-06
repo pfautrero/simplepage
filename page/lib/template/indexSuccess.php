@@ -5,9 +5,15 @@
 <div class='format_content' style='width:100%;'>
 <input id='sesskey' type='hidden' value='<?php echo $sesskey; ?>' />
 
+    <?php if ($message): ?>
+    <div class="alert"><?php echo $message; ?></div>
+    <?php endif; ?>
+
 <div style="display:none;"><a href="#contenu">Aller au contenu</a></div>
 <?php echo $tabs; ?>
 <div id="contenu"></div>
+
+
 
     <div style="clear:both;"></div>
 
@@ -89,7 +95,7 @@ $(document).ready(function() {
             $("#region-main").prepend("<div style='margin:10px;float:right;width:300px;'><?php echo $adminBlock; ?></div>");
         }
 
-	$('.squaredOne').click(function(ev) {
+	$('.squaredOne').mouseup(function(ev) {
             //ev.preventDefault();
             _current = $(this).children(':checkbox').attr('id');
             $.ajax({

@@ -1609,16 +1609,19 @@ class SimplePage {
      * 
      */	
 	public static function toggleAssignment($module_id) {
-            global $DB,$COURSE,$USER;
-            $completion = new completion_info($COURSE);
+            global $DB,$USER;
+            
             $course_module = $DB->get_record_sql("SELECT * FROM {course_modules} WHERE id = '".$module_id."'");
+            $course = $DB->get_record_sql("SELECT * FROM {course} WHERE id = '".$course_module->course."'");
+            $completion = new completion_info($course);
             $current = $completion->get_data($course_module,null,$USER->id);
             if ($current->completionstate == COMPLETION_COMPLETE) {
                 $completion->update_state($course_module,COMPLETION_INCOMPLETE,$USER->id);
             }
             else {
                 $completion->update_state($course_module,COMPLETION_COMPLETE,$USER->id);
-            }            
+            }  
+            return $USER->id."-".$course->id;
 	}        
     /**
      * 

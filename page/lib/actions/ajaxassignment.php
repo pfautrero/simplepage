@@ -55,13 +55,14 @@ class ajaxassignmentAction extends Action {
 			$this->printOut();		
 			return;
 		}		
-		
+		$content = "";
 		$current=$request->getParam('current');
                 $current=substr($current,9);
 		if (is_numeric($current)) {
-			SimplePage::toggleAssignment($current);
+                        $content = "good";
+			$content .= SimplePage::toggleAssignment($current);
 		}
-		$content = "done";
+		$content .= "done";
 		$response->addVar('content', $content);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
 		$this->printOut();

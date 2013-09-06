@@ -66,49 +66,48 @@ class indexAction extends Action {
         // =============== 	Clic sur une section du bloc de navigation
         // 						Il faut récupérer la page correspondante.
         if (isset($_GET['topic'])) {
-                $page = SimplePage::getPageFromSection($topic,$COURSE->id);
+            $page = SimplePage::getPageFromSection($topic,$COURSE->id);
         }
         else if (isset($_GET['section'])) {
-                $page = SimplePage::getPageFromSection($section,$COURSE->id);
+            $page = SimplePage::getPageFromSection($section,$COURSE->id);
         }
         else if ($page === NULL) {
-                if (isset($_SESSION[$entry][$id]['lastpagevisited'])) $page = $_SESSION[$entry][$id]['lastpagevisited'];
+            if (isset($_SESSION[$entry][$id]['lastpagevisited'])) $page = $_SESSION[$entry][$id]['lastpagevisited'];
         }
 
 
         // =============== add a page
         if($request->getParam('addpage')!==null) {
-                $params = new stdClass;
-                if($request->getParam('page_name')) {
-                        if(($request->getParam('pageparente')!==null) && (is_numeric($request->getParam('pageparente')))) {
-                                $pageparente = $request->getParam('pageparente');
-                        }
-                        else {
-                                $pageparente = 0;
-                        }
-                        $params->parent = $pageparente;
-                        $max = $DB->get_records_sql("SELECT MAX(sortorder) as max
-                                                     FROM {format_page}
-                                                     WHERE courseid = $id
-                                                     AND parent='".$pageparente."'
-                                                     ");
-                        $max = array_values($max);
-
-                        $params->sortorder = $max[0]->max + 1;
-                        $params->nameone = addslashes($request->getParam('page_name'));
-                        $params->nametwo = addslashes($request->getParam('page_name'));
-                        $params->display = 7;
-                        $params->courseid = $id;
-                        $params->prefcenterwidth = 600;
-                        $params->showbuttons = 3;
-
-                        $new_id = $DB->insert_record('format_page', $params, true);
-                        $message = get_string('successAddPage', 'format_page');
-                        $page = $new_id;
+            $params = new stdClass;
+            if($request->getParam('page_name')) {
+                if(($request->getParam('pageparente')!==null) && (is_numeric($request->getParam('pageparente')))) {
+                        $pageparente = $request->getParam('pageparente');
                 }
                 else {
-                        $message = get_string('voidNamePage', 'format_page');
+                        $pageparente = 0;
                 }
+                $params->parent = $pageparente;
+                $max = $DB->get_records_sql("SELECT MAX(sortorder) as max
+                                             FROM {format_page}
+                                             WHERE courseid = $id
+                                             AND parent='".$pageparente."'
+                                             ");
+                $max = array_values($max);
+
+                $params->sortorder = $max[0]->max + 1;
+                $params->nameone = addslashes($request->getParam('page_name'));
+                $params->nametwo = addslashes($request->getParam('page_name'));
+                $params->display = 7;
+                $params->courseid = $id;
+                $params->prefcenterwidth = 600;
+                $params->showbuttons = 3;
+
+                $new_id = $DB->insert_record('format_page', $params, true);
+                $page = $new_id;
+            }
+            else {
+                $message = get_string('voidNamePage', 'format_page');
+            }
         }
 
         $pages = SimplePage::DisplayTabs($id, $page, $tabs);
@@ -156,11 +155,12 @@ class indexAction extends Action {
                     }
                 }
 
-                // ======================================================
-                //
-                // Retrieve modules
-                //
-                // ======================================================
+                /** 
+                 *
+                 * Retrieve modules
+                 * 
+                 * 
+                 */
 
                 $course_modules = SimplePage::getCourseModules($page, $USER->id);
                 $i = 0;
@@ -205,17 +205,14 @@ class indexAction extends Action {
                                     <div class='squaredOne'>
                                             <input type='checkbox' id='checkbox_".$course_module['cmid']."' checked />
                                             <label for='checkbox_".$course_module['cmid']."'></label>
-                                    </div>
-
-                                        ";
+                                    </div>";
                             }
                             if ($course_module['completion'] == 2) {
                                 $Column2[$course_module['position']][$course_module['sortorder']]['header'] .="
                                     <div class='squaredOne'>
                                             <input type='checkbox' id='checkbox_".$course_module['cmid']."' />
                                             <label for='checkbox_".$course_module['cmid']."'></label>
-                                    </div>                                        
-                                        ";
+                                    </div>";
                             }                            
                             
                         }
@@ -245,17 +242,33 @@ class indexAction extends Action {
                         }
                         // ==================== Module Label
                         else if ($course_module['type'] == "label") {
-                                $filtered_content = file_rewrite_pluginfile_urls($course_module['object']->intro, 'pluginfile.php',$course_module['context'],'mod_label', 'intro');
-                                $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "<div style='padding-bottom:20px;'>".$filtered_content."</div>";
+                                $filtered_content = file_rewrite_pluginfile_urls($course_module['object']->intro, 
+                                                                                'pluginfile.php',
+                                                                                $course_module['context'],
+                                                                                'mod_label', 
+                                                                                'intro');
+                                $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                                                <div style='padding-bottom:20px;'>".
+                                                    $filtered_content."
+                                                </div>";
                         }
                         // ==================== Module url
                         else if ($course_module['type'] == "url") {
                                 if ($course_module['object']->name) {
                                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                                <div class='module'><a href='".$course_module['object']->externalurl."'>".$course_module['object']->name."</a></div>";
+                                                <div class='module'>
+                                                <a href='".$course_module['object']->externalurl."'>".
+                                                    $course_module['object']->name."
+                                                </a>
+                                                </div>";
                                 }
                                 else {
-                                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "<div><a href='".$course_module['object']->externalurl."'>".$course_module['object']->externalurl."</a></div>";
+                                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                                                <div>
+                                                <a href='".$course_module['object']->externalurl."'>".
+                                                    $course_module['object']->externalurl."
+                                                </a>
+                                                </div>";
                                 }				
                         }
                         // ==================== Module choice
@@ -511,7 +524,6 @@ class indexAction extends Action {
                 $Column['l'] = SimplePage::stringFilter($Column['l']);	
                 $Column['r'] = SimplePage::stringFilter($Column['r']);
 
-                //var_dump($Column['l']);
                 // ==================================================
                 //
                 // Display columns
@@ -530,7 +542,6 @@ class indexAction extends Action {
 
 
                 // ======================================================
-                //
                 // display links at the bottom of the page 
                 // ======================================================
 
@@ -576,6 +587,7 @@ class indexAction extends Action {
                 $response->addVar('prev_page', $prev_page);
                 $response->addVar('next_page', $next_page);
                 $response->addVar('id', $id);
+                $response->addVar('message', $message);
                 $response->addVar('pageid', $page);
                 $response->addVar('sesskey', $USER->sesskey);
                 $response->addVar('maindir', $MAIN_DIR);

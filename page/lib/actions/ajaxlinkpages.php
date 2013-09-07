@@ -57,7 +57,7 @@ class ajaxlinkpagesAction extends Action {
 		}
 		$current=$request->getParam('current');
 		$link=$request->getParam('link');
-		SimplePage::modifyLinkState($current, $link);
+		SimplePageLib::modifyLinkState($current, $link);
 		$content = "done";
 		$response->addVar('content', $content);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");

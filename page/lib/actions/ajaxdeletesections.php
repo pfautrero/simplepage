@@ -65,7 +65,7 @@ class ajaxdeletesectionsAction extends Action {
 
 		$current=$request->getParam('current');
 		if (is_numeric($current)) {
-			SimplePage::deleteSections($current);
+			SimplePageLib::deleteSections($current);
 		}
 		rebuild_course_cache($current);
 		$content = 'done';

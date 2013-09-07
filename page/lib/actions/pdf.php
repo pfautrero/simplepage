@@ -60,14 +60,14 @@ class pdfAction extends Action {
 	
 		$course = $DB->get_record('course', array('id'=>$id));
 		$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);	
-		if (SimplePage::isPageHidden($page)) {
+		if (SimplePageLib::isPageHidden($page)) {
 			if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
 				$page = null;	
 			} 
 		}	
 		if ($page) {
 			
-			$tab = SimplePage::getTab($page);
+			$tab = SimplePageLib::getTab($page);
 			
 			$Column = array();
 			$Column['l'] = null;
@@ -87,7 +87,7 @@ class pdfAction extends Action {
 			//
 			// ======================================================
 		
-			$course_modules = SimplePage::getCourseModules($page, $USER->id);
+			$course_modules = SimplePageLib::getCourseModules($page, $USER->id);
 			$i = 0;
                         $doc = new DOMDocument();
 			foreach($course_modules as $course_module) {
@@ -114,7 +114,7 @@ class pdfAction extends Action {
 				// ==================== Module PageMenu
 				else if ($course_module['type'] == "pagemenu") {
 					if ($course_module['object']->displayname) $Column[$course_module['position']] .= $course_module['object']->name;
-					$Column2[$course_module['position']][$course_module['sortorder']]['content'] .= SimplePage::getPagemenuLinks($course_module['object']->id, $id);
+					$Column2[$course_module['position']][$course_module['sortorder']]['content'] .= SimplePageLib::getPagemenuLinks($course_module['object']->id, $id);
 				}
 				// ==================== Module Label
                                 else if ($course_module['type'] == "label") {
@@ -164,7 +164,7 @@ class pdfAction extends Action {
 			//
 			// ======================================================
 			
-			$blocks = SimplePage::getBlocks($page);
+			$blocks = SimplePageLib::getBlocks($page);
 			include_once('../../../blocks/moodleblock.class.php');
 			foreach ($blocks as $block) {
 				include_once('../../../blocks/'.$block->blockname.'/block_'.$block->blockname.'.php');	
@@ -219,7 +219,7 @@ class pdfAction extends Action {
 			//
 			// ==================================================		
 			
-			$active_filters = SimplePage::getActiveFilters();
+			$active_filters = SimplePageLib::getActiveFilters();
 			$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
 			foreach ($active_filters as $currentfilter) {
 				if (file_exists($CFG->dirroot . '/filter/'.$currentfilter->filter.'/filter.php')) {

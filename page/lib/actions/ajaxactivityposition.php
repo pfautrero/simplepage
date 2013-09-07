@@ -57,7 +57,7 @@ class ajaxactivitypositionAction extends Action {
 		}
 		$current=$request->getParam('current');
 		$position=$request->getParam('position');
-		SimplePage::setItemPosition($current, $position);
+		SimplePageLib::setItemPosition($current, $position);
 		$content = "done";
 		$response->addVar('content', $content);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");

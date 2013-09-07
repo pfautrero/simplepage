@@ -64,17 +64,17 @@ class ajaxmovemoduleAction extends Action {
 		$current=$request->getParam('current');
 		$pageid=$request->getParam('pageid');
                 $previous=$request->getParam('previous');
-		$courseid = SimplePage::getCourseidForPage($pageid);
+		$courseid = SimplePageLib::getCourseidForPage($pageid);
                 if ($previous) {
-                    SimplePage::moduleDisplacement($current, $pageid, $previous);                    
+                    SimplePageLib::moduleDisplacement($current, $pageid, $previous);                    
                     $content = "done";
                 }
                 else {
                     // called by lookForOrphans
-                    $newmoduleid = SimplePage::moveModuleToPage($current, $pageid);                    
+                    $newmoduleid = SimplePageLib::moveModuleToPage($current, $pageid);                    
                     $content = $newmoduleid;
                 }
-		SimplePage::associateSections($courseid);
+		SimplePageLib::associateSections($courseid);
 		rebuild_course_cache($courseid);
 		
 		$response->addVar('content', $content);

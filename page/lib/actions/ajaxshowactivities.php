@@ -58,7 +58,7 @@ class ajaxshowactivitiesAction extends Action {
 		}
 		$current=$request->getParam('current');
 		$name=$request->getParam('name');
-		$items = SimplePage::getPageItems($current);
+		$items = SimplePageLib::getPageItems($current);
 		$content = $items;
 		$response->addVar('content', $content);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");

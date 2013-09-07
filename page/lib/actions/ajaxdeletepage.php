@@ -59,7 +59,7 @@ class ajaxdeletepageAction extends Action {
 
 		$current=$request->getParam('current');
 		if (is_numeric($current)) {
-			$message = SimplePage::deletePage($current);
+			$message = SimplePageLib::deletePage($current);
 		}
 		$content = $message;
 		$response->addVar('content', $content);

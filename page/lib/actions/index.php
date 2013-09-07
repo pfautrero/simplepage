@@ -48,13 +48,13 @@ class indexAction extends Action {
         // ============ retrieve created module and set the correct page owner.		
         if (isset($_SESSION[$entry][$COURSE->id]['idpage'])) {
             $current = $_SESSION[$entry][$COURSE->id]['idpage'];
-            $last_added = SimplePage::getLastModuleTimestamp($current);
+            $last_added = SimplePageLib::getLastModuleTimestamp($current);
             if ($last_added && ($_SESSION[$entry][$COURSE->id]['timestamp'] < $last_added)) {
-                $new_module_id = SimplePage::getLastIdOrphanModule($current,$_SESSION[$entry][$COURSE->id]['timestamp']);
+                $new_module_id = SimplePageLib::getLastIdOrphanModule($current,$_SESSION[$entry][$COURSE->id]['timestamp']);
                 if ($new_module_id) {
                     unset($_SESSION[$entry][$COURSE->id]['idpage']);
                     unset($_SESSION[$entry][$COURSE->id]['lastmoduleid']);
-                    SimplePage::setModuleInPage($current, $new_module_id);
+                    SimplePageLib::setModuleInPage($current, $new_module_id);
                     $page = $current;                    
                 }
                 else {
@@ -66,10 +66,10 @@ class indexAction extends Action {
         // =============== 	Clic sur une section du bloc de navigation
         // 						Il faut récupérer la page correspondante.
         if (isset($_GET['topic'])) {
-            $page = SimplePage::getPageFromSection($topic,$COURSE->id);
+            $page = SimplePageLib::getPageFromSection($topic,$COURSE->id);
         }
         else if (isset($_GET['section'])) {
-            $page = SimplePage::getPageFromSection($section,$COURSE->id);
+            $page = SimplePageLib::getPageFromSection($section,$COURSE->id);
         }
         else if ($page === NULL) {
             if (isset($_SESSION[$entry][$id]['lastpagevisited'])) $page = $_SESSION[$entry][$id]['lastpagevisited'];
@@ -110,7 +110,7 @@ class indexAction extends Action {
             }
         }
 
-        $pages = SimplePage::DisplayTabs($id, $page, $tabs);
+        $pages = SimplePageLib::DisplayTabs($id, $page, $tabs);
 
         if (!$page) {	
             if ($pages) {
@@ -120,12 +120,12 @@ class indexAction extends Action {
         }	
 
         $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);	
-        if (SimplePage::isPageHidden($page)) {
+        if (SimplePageLib::isPageHidden($page)) {
             if (has_capability('moodle/course:manageactivities', $coursecontext)) {
                 echo "<div class='alert'>Page cachée.</div>";	
             } else {
                 echo "<div class='alert'>".get_string('pageForAdministratorsOnly', 'format_page')."</div>";	
-                $adminBlock = SimplePage::getAdminBlock($id);
+                $adminBlock = SimplePageLib::getAdminBlock($id);
                 $response->addVar('editing', $PAGE->user_is_editing());
                 $response->addVar('adminBlock', $adminBlock);
                 $this->render($LOCAL_PATH."/lib/template/voidSuccess.php");
@@ -135,7 +135,7 @@ class indexAction extends Action {
         }	
         if ($page) {
                 $_SESSION[$entry][$id]['lastpagevisited'] = $page;
-                $tab = SimplePage::getTab($page);
+                $tab = SimplePageLib::getTab($page);
                 $Column = array();
                 $Column['l'] = null;
                 $Column['r'] = null;
@@ -150,7 +150,7 @@ class indexAction extends Action {
                 if ($displacement == "up" || $displacement == "down") {
                     if ($PAGE->user_is_editing() && has_capability('moodle/course:manageactivities', $coursecontext)) {
                         if ($moduleid) {
-                                SimplePage::moveModule($moduleid,$displacement);
+                                SimplePageLib::moveModule($moduleid,$displacement);
                         }
                     }
                 }
@@ -162,7 +162,7 @@ class indexAction extends Action {
                  * 
                  */
 
-                $course_modules = SimplePage::getCourseModules($page, $USER->id);
+                $course_modules = SimplePageLib::getCourseModules($page, $USER->id);
                 $i = 0;
                 foreach($course_modules as $course_module) {
 
@@ -238,7 +238,7 @@ class indexAction extends Action {
                         // ==================== Module PageMenu
                         else if ($course_module['type'] == "pagemenu") {
                                 if ($course_module['object']->displayname) $Column[$course_module['position']] .= $course_module['object']->name;
-                                $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= SimplePage::getPagemenuLinks($course_module['object']->id, $id);
+                                $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= SimplePageLib::getPagemenuLinks($course_module['object']->id, $id);
                         }
                         // ==================== Module Label
                         else if ($course_module['type'] == "label") {
@@ -384,7 +384,7 @@ class indexAction extends Action {
                 //
                 // ======================================================
 
-                $blocks = SimplePage::getBlocks($page);
+                $blocks = SimplePageLib::getBlocks($page);
                 include_once('../blocks/moodleblock.class.php');
                 foreach ($blocks as $block) {
                         include_once('../blocks/'.$block->blockname.'/block_'.$block->blockname.'.php');	
@@ -493,7 +493,7 @@ class indexAction extends Action {
 
                 $adminBlock = null;
                 if ($PAGE->user_is_editing()) {
-                        $adminBlock = SimplePage::getAdminBlockIndex($id);
+                        $adminBlock = SimplePageLib::getAdminBlockIndex($id);
                 }
 
 
@@ -504,7 +504,7 @@ class indexAction extends Action {
                 //
                 // ==================================================		
 
-                $active_filters = SimplePage::getActiveFilters();
+                $active_filters = SimplePageLib::getActiveFilters();
                 $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
                 foreach ($active_filters as $currentfilter) {
                     if (file_exists($CFG->dirroot . '/filter/'.$currentfilter->filter.'/filter.php')) {
@@ -521,8 +521,8 @@ class indexAction extends Action {
                 }
 
                 // ======= éviter les échappements js
-                $Column['l'] = SimplePage::stringFilter($Column['l']);	
-                $Column['r'] = SimplePage::stringFilter($Column['r']);
+                $Column['l'] = SimplePageLib::stringFilter($Column['l']);	
+                $Column['r'] = SimplePageLib::stringFilter($Column['r']);
 
                 // ==================================================
                 //
@@ -559,10 +559,10 @@ class indexAction extends Action {
                     }
                 }
 
-                $tab = SimplePage::getChainedPages($id);
+                $tab = SimplePageLib::getChainedPages($id);
                 reset($tab);current($tab);$i = key($tab);
                 ob_start();
-                SimplePage::generatePagesTree($i,$tab, 0);
+                SimplePageLib::generatePagesTree($i,$tab, 0);
                 $pagestree = ob_get_contents();
                 ob_end_clean();	
 
@@ -598,7 +598,7 @@ class indexAction extends Action {
                 $adminBlock = null;
                 if ($PAGE->user_is_editing()) {
                         echo "<div class='alert'>".get_string('courseIsEmpty', 'format_page')."</div>";	
-                        $adminBlock = SimplePage::getAdminBlock($id);
+                        $adminBlock = SimplePageLib::getAdminBlock($id);
                 }
                 else {
                         echo "<div class='alert'>".get_string('courseUnderConstruction', 'format_page')."</div>";	

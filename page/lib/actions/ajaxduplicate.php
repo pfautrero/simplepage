@@ -57,7 +57,7 @@ class ajaxduplicateAction extends Action {
 		}
 		$current=$request->getParam('current');
 		$pageid=$request->getParam('pageid');
-		$newmoduleid = SimplePage::insertNewItem($current, $pageid);
+		$newmoduleid = SimplePageLib::insertNewItem($current, $pageid);
 		$response->addVar('content', $newmoduleid);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
 		$this->printOut();

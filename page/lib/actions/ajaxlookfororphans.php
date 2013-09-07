@@ -59,7 +59,7 @@ class ajaxlookfororphansAction extends Action {
 
 		$current=$request->getParam('current');
 		if (is_numeric($current)) {
-			$content = SimplePage::lookforOrphans($current);
+			$content = SimplePageLib::lookforOrphans($current);
 		}
 
 		$response->addVar('content', $content);

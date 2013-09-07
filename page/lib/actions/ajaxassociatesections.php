@@ -65,7 +65,7 @@ class ajaxassociatesectionsAction extends Action {
 
 		$current=$request->getParam('current');
 		if (is_numeric($current)) {
-			SimplePage::associateSections($current);
+			SimplePageLib::associateSections($current);
 		}
 		rebuild_course_cache($current);
 		$content = 'done';

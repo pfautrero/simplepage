@@ -59,8 +59,8 @@ class ajaxmoveAction extends Action {
 		$parent=$request->getParam('parent');
 		$previous=$request->getParam('previous');
 		$current=$request->getParam('current');
-		SimplePage::reorderCurrentBrothers($current,$id);
-		SimplePage::reorderPreviousBrothers($previous,$parent,$current,$id);
+		SimplePageLib::reorderCurrentBrothers($current,$id);
+		SimplePageLib::reorderPreviousBrothers($previous,$parent,$current,$id);
 		
 		$content = "done";
 		$response->addVar('content', $content);

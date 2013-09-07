@@ -60,7 +60,7 @@ class ajaxassignmentAction extends Action {
                 $current=substr($current,9);
 		if (is_numeric($current)) {
                         $content = "good";
-			$content .= SimplePage::toggleAssignment($current);
+			$content .= SimplePageLib::toggleAssignment($current);
 		}
 		$content .= "done";
 		$response->addVar('content', $content);

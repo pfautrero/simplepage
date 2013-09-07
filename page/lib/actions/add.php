@@ -49,9 +49,9 @@ class addAction extends Action {
         $message = null;
         $adminBlock = null;
         if ($PAGE->user_is_editing()) {
-            $adminBlock = SimplePage::getAdminBlockAdd($id);
+            $adminBlock = SimplePageLib::getAdminBlockAdd($id);
         }
-        $pagesparentes = SimplePage::getParentPages($id);
+        $pagesparentes = SimplePageLib::getParentPages($id);
         $response->addVar('pagesparentes', $pagesparentes);
         $response->addVar('message', $message);
         $response->addVar('adminBlock', $adminBlock);

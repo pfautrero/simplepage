@@ -104,27 +104,27 @@ class editcourseAction extends Action {
 			}
 		}
 		$adminBlock = null;
-		$tab = SimplePage::getChainedPages($id);
+		$tab = SimplePageLib::getChainedPages($id);
 		reset($tab);current($tab);$i = key($tab);
 		ob_start();
-		SimplePage::generateHtmlPagesTree($i,$tab, 0);
+		SimplePageLib::generateHtmlPagesTree($i,$tab, 0);
 		$tree = ob_get_contents();
 		ob_end_clean();
 
 		reset($tab);current($tab);$i = key($tab);
 		ob_start();
-		SimplePage::generateHtmlPagesTree2($i,$tab, 0);
+		SimplePageLib::generateHtmlPagesTree2($i,$tab, 0);
 		$tree2 = ob_get_contents();
 		ob_end_clean();                
                 
 		reset($tab);current($tab);$i = key($tab);
 		ob_start();
-		SimplePage::generatePagesTree($i,$tab, 0);
+		SimplePageLib::generatePagesTree($i,$tab, 0);
 		$pagestree = ob_get_contents();
 		ob_end_clean();
 		
 		if ($PAGE->user_is_editing()) {
-			$adminBlock = SimplePage::getAdminBlock($id);
+			$adminBlock = SimplePageLib::getAdminBlock($id);
 		}
 
 		$course = $DB->get_record_sql("SELECT * FROM {course} WHERE id='$id'");

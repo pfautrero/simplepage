@@ -56,7 +56,7 @@ class ajaxshowactivityAction extends Action {
 			return;
 		}
 		$current=$request->getParam('current');
-		SimplePage::showhideActivity($current);
+		SimplePageLib::showhideActivity($current);
 		$content = 'done';
 		$response->addVar('content', $content);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");

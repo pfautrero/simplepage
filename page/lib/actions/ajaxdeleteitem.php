@@ -57,7 +57,7 @@ class ajaxdeleteitemAction extends Action {
 		}
 		$current=$request->getParam('current');
 		if (is_numeric($current)) {
-			$state = SimplePage::deleteItem($current);
+			$state = SimplePageLib::deleteItem($current);
 		}
 		$content = $state;
 		$response->addVar('content', $content);

@@ -15,7 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 
-include_once('../lib/completionlib.php');
+//include_once('../lib/completionlib.php');
+global $CFG;
+include_once($CFG->dirroot.'/lib/completionlib.php');
 
 /**
  * General class used as simplepage model.
@@ -26,7 +28,7 @@ include_once('../lib/completionlib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-class SimplePage {
+class SimplePageLib {
 
     /**
      * Build html/css drop-down menu
@@ -133,7 +135,7 @@ class SimplePage {
                             }
 			}
 			
-			$final_tabs = SimplePage::DisplaySpecialTopTabs($tabs[0], 'tab'.$index);
+			$final_tabs = SimplePageLib::DisplaySpecialTopTabs($tabs[0], 'tab'.$index);
 			$array_pages = array_values($pages);
 
 			for ($j = 0;$j < count($array_pages);$j++) {
@@ -180,7 +182,7 @@ class SimplePage {
             $bc->id = "admin1337";
             $bc->attributes = array("id"=>"inst".$bc->id, "class"=>"block");
             $adminBlock = $OUTPUT->block($bc, null);
-            $adminBlock = SimplePage::stringFilter($adminBlock);	
+            $adminBlock = SimplePageLib::stringFilter($adminBlock);	
             return $adminBlock;
 	}
 	
@@ -209,7 +211,7 @@ class SimplePage {
             $bc->id = "admin1337";
             $bc->attributes = array("id"=>"inst".$bc->id, "class"=>"block");
             $adminBlock = $OUTPUT->block($bc, null);
-            $adminBlock = SimplePage::stringFilter($adminBlock);	
+            $adminBlock = SimplePageLib::stringFilter($adminBlock);	
             return $adminBlock;
 	}
 	
@@ -238,7 +240,7 @@ class SimplePage {
             $bc->id = "admin1337";
             $bc->attributes = array("id"=>"inst".$bc->id, "class"=>"block");
             $adminBlock = $OUTPUT->block($bc, null);
-            $adminBlock = SimplePage::stringFilter($adminBlock);	
+            $adminBlock = SimplePageLib::stringFilter($adminBlock);	
             return $adminBlock;
 	}	
 
@@ -593,7 +595,7 @@ class SimplePage {
             foreach ($pages as $page) {
                     $tab[$page->id] = $page;
             }
-            SimplePage::generateChain($tab);
+            SimplePageLib::generateChain($tab);
 
             return $tab;
 	}
@@ -672,7 +674,7 @@ class SimplePage {
 
                 if (isset($tab[$i]->child)) {
                         echo "<ol>";
-                        SimplePage::generateHtmlPagesTree($tab[$i]->child, $tab, $indent);
+                        SimplePageLib::generateHtmlPagesTree($tab[$i]->child, $tab, $indent);
                         echo "</ol>";
                 }
                 if (!isset($tab[$i]->next)) {
@@ -741,7 +743,7 @@ class SimplePage {
                     </table>";
                 if (isset($tab[$i]->child)) {
                     echo "<ol class='dd-list'>";
-                    SimplePage::generateHtmlPagesTree2($tab[$i]->child, $tab, $indent);
+                    SimplePageLib::generateHtmlPagesTree2($tab[$i]->child, $tab, $indent);
                     echo "</ol>";
                 }
                 if (!isset($tab[$i]->next)) {
@@ -767,7 +769,7 @@ class SimplePage {
             while (isset($tab[$i]->id) && !$end) {
                 echo "<option style='padding-left:".$indent."px;' value='".$tab[$i]->id."'>".$tab[$i]->nameone."</option>"; 
                 if (isset($tab[$i]->child)) {
-                        SimplePage::generatePagesTree($tab[$i]->child, $tab, $indent+10);
+                        SimplePageLib::generatePagesTree($tab[$i]->child, $tab, $indent+10);
                 }
                 if (!isset($tab[$i]->next)) {
                         $end = true;
@@ -807,79 +809,79 @@ class SimplePage {
      * 
      */
      	
-	public static function reorderPreviousBrothers($previous, $parent, $current,$id) {
-            global $DB;
+    public static function reorderPreviousBrothers($previous, $parent, $current,$id) {
+        global $DB;
 
-            if ($previous != 'undefined') {
-                    $rec = $DB->get_record_sql("SELECT * FROM {format_page} WHERE id = '".$previous."' ");
-                    $parent = $rec->parent;
-                    $rank = $rec->sortorder;
-            }
-            else {
-                    $rank = 0;
-            }
+        if ($previous != 'undefined') {
+                $rec = $DB->get_record_sql("SELECT * FROM {format_page} WHERE id = '".$previous."' ");
+                $parent = $rec->parent;
+                $rank = $rec->sortorder;
+        }
+        else {
+                $rank = 0;
+        }
 
-            if ($parent == 'undefined') $parent = 0;
-            $recs = $DB->get_records_sql("SELECT *
-                                                FROM {format_page}
-                                                WHERE parent = '".$parent."'
-                                                AND courseid='".$id."'
-                                                ORDER BY sortorder ASC
-                                                  ");
-            foreach($recs as $rec) {
-                    if ($rec->sortorder > $rank) {
-                            $rec->sortorder = $rec->sortorder+1;
-                            $DB->update_record('format_page', $rec);
-                    }
-            }
-            $rec = $DB->get_record_sql("SELECT *
-                                                FROM {format_page}
-                                                WHERE id = '".$current."'
-                                                  ");
-            $rec->sortorder = $rank+1;
-            $rec->parent = $parent;
-            $DB->update_record('format_page', $rec);
-	}
-    /**
-     * 
-     * 
-     * 
-     */
-	
-	public static function showhidePage($current) {
-            global $DB;
-            $rec = $DB->get_record_sql("SELECT *
+        if ($parent == 'undefined') $parent = 0;
+        $recs = $DB->get_records_sql("SELECT *
                                             FROM {format_page}
-                                            WHERE id = '".$current."'
+                                            WHERE parent = '".$parent."'
+                                            AND courseid='".$id."'
+                                            ORDER BY sortorder ASC
                                               ");
-            if ($rec->display == 0) {
-                    $rec->display = 7;
-            }
-            else {
-                    $rec->display = 0;
-            }
-            $DB->update_record('format_page', $rec);
-	}
-
-    /**
-     * 
-     * 
-     * 
-     */
-	
-	public static function isPageHidden($pageid) {
-            global $DB;
-            $rec = $DB->get_record_sql("SELECT *
-                                            FROM {format_page}
-                                            WHERE id = '".$pageid."'
-                                              ");
-            if ($rec) {		
-                if ($rec->display == 0) {
-                    return true;
+        foreach($recs as $rec) {
+                if ($rec->sortorder > $rank) {
+                        $rec->sortorder = $rec->sortorder+1;
+                        $DB->update_record('format_page', $rec);
                 }
+        }
+        $rec = $DB->get_record_sql("SELECT *
+                                            FROM {format_page}
+                                            WHERE id = '".$current."'
+                                              ");
+        $rec->sortorder = $rank+1;
+        $rec->parent = $parent;
+        $DB->update_record('format_page', $rec);
+    }
+    /**
+     * 
+     * 
+     * 
+     */
+	
+    public static function showhidePage($current) {
+        global $DB;
+        $rec = $DB->get_record_sql("SELECT *
+                                        FROM {format_page}
+                                        WHERE id = '".$current."'
+                                          ");
+        if ($rec->display == 0) {
+                $rec->display = 7;
+        }
+        else {
+                $rec->display = 0;
+        }
+        $DB->update_record('format_page', $rec);
+    }
+
+    /**
+     * 
+     * 
+     * 
+     */
+	
+    public static function isPageHidden($pageid) {
+        global $DB;
+        $rec = $DB->get_record_sql("SELECT *
+                                        FROM {format_page}
+                                        WHERE id = '".$pageid."'
+                                          ");
+        if ($rec) {		
+            if ($rec->display == 0) {
+                return true;
             }
-            return false;
-	}
+        }
+        return false;
+    }
 	
     /**
      * 
@@ -887,15 +889,15 @@ class SimplePage {
      * 
      */
 	
-	public static function renamePage($current, $name) {
-            global $DB;
-            $rec = $DB->get_record_sql("SELECT *
-                                            FROM {format_page}
-                                            WHERE id = '".$current."'
-                                              ");
-            $rec->nameone = addslashes($name);
-            $DB->update_record('format_page', $rec);
-	}
+    public static function renamePage($pageid, $newpagename) {
+        global $DB;
+        $rec = $DB->get_record_sql("SELECT *
+                                        FROM {format_page}
+                                        WHERE id = '".$pageid."'
+                                          ");
+        $rec->nameone = addslashes($newpagename);
+        $DB->update_record('format_page', $rec);
+    }
 	
     /**
      * Display modules and blocks for a specific page
@@ -1240,48 +1242,78 @@ class SimplePage {
      * 
      */
 	
-	public static function insertNewItem($current, $pageid) {
-            global $DB;
-            $rec = $DB->get_record_sql("SELECT *
-                                            FROM {format_page_items}
-                                            WHERE id = '".$current."'
-                                             ");
-            $max = $DB->get_record_sql("SELECT MAX(sortorder) as maxsortorder
-                                            FROM {format_page_items}
-                                            WHERE pageid = '".$pageid."'
-                                              ");
-            $rec->pageid = $pageid;
-            $rec->sortorder = $max->maxsortorder + 1;
-            $new_module = $DB->insert_record('format_page_items', $rec, true);
-            return $new_module;
-	}
+    public static function insertNewItem($current, $pageid) {
+        global $DB;
+        $rec = $DB->get_record_sql("SELECT *
+                                        FROM {format_page_items}
+                                        WHERE id = '".$current."'
+                                         ");
+        $max = $DB->get_record_sql("SELECT MAX(sortorder) as maxsortorder
+                                        FROM {format_page_items}
+                                        WHERE pageid = '".$pageid."'
+                                          ");
+        $rec->pageid = $pageid;
+        $rec->sortorder = $max->maxsortorder + 1;
+        $new_module = $DB->insert_record('format_page_items', $rec, true);
+        return $new_module;
+    }
 
+    /**
+     * add a new page
+     * 
+     * @global type $DB
+     * @param string $pagename
+     * @param int $courseid
+     * @param int $pageparentid
+     * @return int $new_id
+     */
+        
+    public static function addPage($pagename,$courseid,$pageparentid) {
+        global $DB;        
+        $params = new stdClass;
+        $params->parent = $pageparentid;
+        $max = $DB->get_records_sql("SELECT MAX(sortorder) as max
+                                     FROM {format_page}
+                                     WHERE courseid = $courseid
+                                     AND parent='".$pageparentid."'
+                                     ");
+        $max = array_values($max);
+        $params->sortorder = $max[0]->max + 1;
+        $params->nameone = addslashes($pagename);
+        $params->nametwo = addslashes($pagename);
+        $params->display = 7;
+        $params->courseid = $courseid;
+        $params->prefcenterwidth = 600;
+        $params->showbuttons = 3;
+        $new_id = $DB->insert_record('format_page', $params, true);
+        return $new_id;
+     }    
     /**
      * 
      * 
      * 
      */
 	
-	public static function deletePage($pageid) {
-            global $DB;
-            $rec = $DB->get_records_sql("SELECT * FROM {format_page}  WHERE parent = '".$pageid."' ");
+    public static function deletePage($pageid) {
+        global $DB;
+        $rec = $DB->get_records_sql("SELECT * FROM {format_page}  WHERE parent = '".$pageid."' ");
+        if (!$rec) {
+            $rec = $DB->get_records_sql("SELECT * FROM {format_page_items}  WHERE pageid = '".$pageid."' ");
             if (!$rec) {
-                $rec = $DB->get_records_sql("SELECT * FROM {format_page_items}  WHERE pageid = '".$pageid."' ");
-                if (!$rec) {
-                    $page = array();
-                    $page['id'] = $pageid;
-                    $DB->delete_records('format_page', $page);	
-                    $message = 'done';
-                }
-                else {
-                    $message = get_string('warningDeletePage', 'format_page');
-                }
+                $page = array();
+                $page['id'] = $pageid;
+                $DB->delete_records('format_page', $page);	
+                $message = 'done';
             }
             else {
-                $message = "La page ne peut pas être supprimée car elle contient au moins une sous-page.";
+                $message = get_string('warningDeletePage', 'format_page');
             }
-            return trim($message);
-	}
+        }
+        else {
+            $message = "La page ne peut pas être supprimée car elle contient au moins une sous-page.";
+        }
+        return trim($message);
+    }
     /**
      * 
      * 
@@ -1312,9 +1344,9 @@ class SimplePage {
             $sec = $DB->get_record_sql("SELECT (count(*)) as rank FROM {course_sections} WHERE section < $section AND course=$courseid");
             if ($sec) {
                 $linear_pages = array();$pages=array();
-                $pages = SimplePage::getChainedPages($courseid);
+                $pages = SimplePageLib::getChainedPages($courseid);
                 reset($pages);current($pages);$i = key($pages);
-                SimplePage::linearizePages($i,$pages,$linear_pages);
+                SimplePageLib::linearizePages($i,$pages,$linear_pages);
                 if (isset($linear_pages[$sec->rank])) return $linear_pages[$sec->rank]->id;
             }
             return 0;		
@@ -1335,9 +1367,9 @@ class SimplePage {
 
             $new_section = new stdClass;$update_module = new stdClass;
             $linear_pages = array();$pages=array();
-            $pages = SimplePage::getChainedPages($courseid);
+            $pages = SimplePageLib::getChainedPages($courseid);
             reset($pages);current($pages);$i = key($pages);
-            SimplePage::linearizePages($i,$pages,$linear_pages);
+            SimplePageLib::linearizePages($i,$pages,$linear_pages);
             $i = 0;
             foreach($linear_pages as $linear_page) {
                 $new_section->course = $linear_page->courseid;
@@ -1377,7 +1409,7 @@ class SimplePage {
             while (isset($tab[$i]->id) && !$end) {
                 array_push($linear_tab, $tab[$i]);
                 if (isset($tab[$i]->child)) {
-                        SimplePage::linearizePages($tab[$i]->child, $tab,$linear_tab);
+                        SimplePageLib::linearizePages($tab[$i]->child, $tab,$linear_tab);
                 }
                 if (!isset($tab[$i]->next)) {
                         $end = true;

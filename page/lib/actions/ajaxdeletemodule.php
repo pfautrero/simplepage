@@ -59,8 +59,8 @@ class ajaxdeletemoduleAction extends Action {
 		
 		$current=$request->getParam('current');
 		if (is_numeric($current)) {
-			SimplePage::deleteModule($current);
-			SimplePage::clearModinfo($course->id);
+			SimplePageLib::deleteModule($current);
+			SimplePageLib::clearModinfo($course->id);
 		}
 		$content = "done";
 		$response->addVar('content', $content);

@@ -57,7 +57,7 @@ class ajaxrenameAction extends Action {
 		}
 		$current=$request->getParam('current');
 		$name=htmlentities($request->getParam('name'), ENT_QUOTES, 'UTF-8');
-		SimplePage::renamePage($current, $name);
+		SimplePageLib::renamePage($current, $name);
 		$content = "done";
 		$response->addVar('content', $content);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");

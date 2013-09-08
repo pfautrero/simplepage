@@ -34,6 +34,7 @@ class indexAction extends Action {
     {
         global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH, $USER, $COURSE, $MAIN_DIR;
 
+        $message ='';
         $_SESSION['courseid'] = $COURSE->id;
         // ===========	Retrieve GET variables
         $page=$request->getParam('page');
@@ -81,29 +82,12 @@ class indexAction extends Action {
             $params = new stdClass;
             if($request->getParam('page_name')) {
                 if(($request->getParam('pageparente')!==null) && (is_numeric($request->getParam('pageparente')))) {
-                        $pageparente = $request->getParam('pageparente');
+                    $pageparente = $request->getParam('pageparente');
                 }
                 else {
-                        $pageparente = 0;
+                    $pageparente = 0;
                 }
-                $params->parent = $pageparente;
-                $max = $DB->get_records_sql("SELECT MAX(sortorder) as max
-                                             FROM {format_page}
-                                             WHERE courseid = $id
-                                             AND parent='".$pageparente."'
-                                             ");
-                $max = array_values($max);
-
-                $params->sortorder = $max[0]->max + 1;
-                $params->nameone = addslashes($request->getParam('page_name'));
-                $params->nametwo = addslashes($request->getParam('page_name'));
-                $params->display = 7;
-                $params->courseid = $id;
-                $params->prefcenterwidth = 600;
-                $params->showbuttons = 3;
-
-                $new_id = $DB->insert_record('format_page', $params, true);
-                $page = $new_id;
+                $page = SimplePageLib::addPage($request->getParam('page_name'), $id, $pageparente);
             }
             else {
                 $message = get_string('voidNamePage', 'format_page');
@@ -111,14 +95,12 @@ class indexAction extends Action {
         }
 
         $pages = SimplePageLib::DisplayTabs($id, $page, $tabs);
-
         if (!$page) {	
             if ($pages) {
                 reset($pages);
                 $page = current($pages)->id;
             }
         }	
-
         $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);	
         if (SimplePageLib::isPageHidden($page)) {
             if (has_capability('moodle/course:manageactivities', $coursecontext)) {
@@ -141,9 +123,9 @@ class indexAction extends Action {
                 $Column['r'] = null;
                 $Column['c'] = null;
                 $Column2 = array();
-                $Column2['l'] = null;
-                $Column2['r'] = null;
-                $Column2['c'] = null;
+                $Column2['l'] = array();
+                $Column2['r'] = array();
+                $Column2['c'] = array();
                 $TempColumn = array();
 
                 // ============ Manage modules displacements			

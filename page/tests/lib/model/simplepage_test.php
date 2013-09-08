@@ -15,7 +15,7 @@ include_once($CFG->dirroot.'/course/format/page/lib/model/lib.php');
 class simplepage_lib_test extends advanced_testcase {
 
     /** 
-     * test add and delete operarions on a page
+     * test add and delete operations on a page
      * 
      * @global type $DB
      */

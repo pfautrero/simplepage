@@ -24,6 +24,11 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
+$string['assign'] = '';
+$string['book'] = '';
+$string['hidefromothers'] = 'Cacher le topic';
+$string['showfromothers'] = 'Montrer le topic';
 $string['sectionname'] = 'simplepage';
 $string['pluginname'] = 'simplepage';
 $string['section0name'] = 'Parcours';

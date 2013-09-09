@@ -70,39 +70,6 @@ class editcourseAction extends Action {
 			}		
 		}
 		
-		// =============== add a page
-		if($request->getParam('addpage')!==null) {
-			$params = new stdClass;
-			if($request->getParam('page_name')) {
-				if(($request->getParam('pageparente')!==null) && (is_numeric($request->getParam('pageparente')))) {
-					$pageparente = $request->getParam('pageparente');
-				}
-				else {
-					$pageparente = 0;
-				}
-				$params->parent = $pageparente;
-				$max = $DB->get_records_sql("SELECT MAX(sortorder) as max
-									   FROM {format_page}
-									  WHERE courseid = $id
-									  AND parent='".$pageparente."'
-									  ");
-				$max = array_values($max);
-				
-				$params->sortorder = $max[0]->max + 1;
-				$params->nameone = addslashes($request->getParam('page_name'));
-				$params->nametwo = addslashes($request->getParam('page_name'));
-				$params->display = 7;
-				$params->courseid = $id;
-				$params->prefcenterwidth = 600;
-				$params->showbuttons = 3;
-
-				$new_id = $DB->insert_record('format_page', $params, true);
-				$message = get_string('successAddPage', 'format_page');
-			}
-			else {
-				$message = get_string('voidNamePage', 'format_page');
-			}
-		}
 		$adminBlock = null;
 		$tab = SimplePageLib::getChainedPages($id);
 		reset($tab);current($tab);$i = key($tab);

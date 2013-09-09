@@ -16,7 +16,7 @@
 
 global $CFG;
 include($CFG->dirroot."/course/format/page/lib/actions/action.class.php");
-include($CFG->dirroot."/course/format/page/lib/model/lib.php");
+include_once($CFG->dirroot."/course/format/page/lib/model/lib.php");
 
 /**
  * Class used to add a new page and to display the dedicated page for this stuff
@@ -32,6 +32,7 @@ class addAction extends Action {
     {
         global $COURSE,$PAGE, $USER,$CFG;	
         $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        
         if ($coursecontext == null) {
             $content = "context_null";
             $response->addVar('content', $content);

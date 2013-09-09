@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 
-global $LOCAL_PATH;
-include($LOCAL_PATH."/lib/controller/request.class.php");
-include($LOCAL_PATH."/lib/controller/response.class.php");
-include($LOCAL_PATH."/lib/view/view.class.php");
+global $CFG;
+include_once($CFG->dirroot."/course/format/page/lib/controller/request.class.php");
+include_once($CFG->dirroot."/course/format/page/lib/controller/response.class.php");
+include_once($CFG->dirroot."/course/format/page/lib/view/view.class.php");
 /**
  * Front controller (routing, rendering)
  *
@@ -66,13 +66,13 @@ class FrontController
 
     private function _getCommand($action)
     {
-        global $LOCAL_PATH;
-        $path = $LOCAL_PATH."/lib/actions/$action.php";
+        global $CFG;
+        $path = $CFG->dirroot."/course/format/page/lib/actions/$action.php";
         if(!file_exists($path)){
                 $action="index";
-                $path = $LOCAL_PATH."/lib/actions/$action.php";			
+                $path = $CFG->dirroot."/course/format/page/lib/actions/$action.php";			
         }
-        require($path);
+        require_once($path);
         $class = $action.'Action';
 
         return new $class($this);

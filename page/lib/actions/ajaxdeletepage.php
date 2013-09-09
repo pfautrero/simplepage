@@ -14,9 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-global $LOCAL_PATH;
-include($LOCAL_PATH."/lib/actions/action.class.php");
-include($LOCAL_PATH."/lib/model/lib.php");
+global $CFG;
+include_once($CFG->dirroot."/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot."/course/format/page/lib/model/lib.php");
+
 
 /**
  * Version details
@@ -32,19 +33,19 @@ class ajaxdeletepageAction extends Action {
 
     public function launch(Request $request, Response $response)
     {
-		global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH;	
+		global $CFG, $DB;	
 		
 		$course = $DB->get_record('course', array('id'=>$_SESSION['courseid']));
 		$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
                 if ($coursecontext == null) {
                     $content = "context_null";
                     $response->addVar('content', $content);
-                    $this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
+                    $this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
                     $this->printOut();      
                     return;
                 }                
 		if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-			$this->render($LOCAL_PATH."/lib/template/forbiddenSuccess.php");
+			$this->render($CFG->dirroot."/course/format/page/lib/template/forbiddenSuccess.php");
 			$this->printOut();		
 			return;
 		}
@@ -52,7 +53,7 @@ class ajaxdeletepageAction extends Action {
 		$sesskey=$request->getParam('sesskey');
 		if ($sesskey != $USER->sesskey) {
 			$response->addVar('content', "Token non valide");
-			$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
+			$this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
 			$this->printOut();		
 			return;
 		}
@@ -63,7 +64,7 @@ class ajaxdeletepageAction extends Action {
 		}
 		$content = $message;
 		$response->addVar('content', $content);
-		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
+		$this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
 		$this->printOut();
     }
 }

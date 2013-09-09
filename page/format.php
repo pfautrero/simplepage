@@ -23,7 +23,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-global $LOCAL_PATH,$MAIN_DIR;
+global $LOCAL_PATH,$MAIN_DIR,$CFG;
 /** $MAIN_DIR = "page" **/
 $MAIN_DIR = substr(dirname(__FILE__),strpos(dirname(__FILE__),"course/format")+14);
 $LOCAL_PATH = ".";
@@ -35,7 +35,7 @@ if (!isset($plugin)) {
 }
 include('version.php');
 include('globals.php');
-include($LOCAL_PATH."/lib/controller/frontcontroller.class.php");
+include($CFG->dirroot."/course/format/page/lib/controller/frontcontroller.class.php");
 $front = frontController::getInstance()->dispatch();
 
 ?>

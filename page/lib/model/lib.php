@@ -27,7 +27,7 @@ include_once($CFG->dirroot.'/lib/completionlib.php');
  * @copyright  2013 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+//var_dump(debug_backtrace());
 class SimplePageLib {
 
     /**

@@ -42,12 +42,6 @@ class ajaxassignmentAction extends Action {
                     $this->printOut();      
                     return;
                 }                
-		if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-			$this->render($LOCAL_PATH."/lib/template/forbiddenSuccess.php");
-			$this->printOut();		
-			return;
-		}
-		global $USER;
 		$sesskey=$request->getParam('sesskey');
 		if ($sesskey != $USER->sesskey) {
 			$response->addVar('content', "Token non valide");
@@ -59,10 +53,8 @@ class ajaxassignmentAction extends Action {
 		$current=$request->getParam('current');
                 $current=substr($current,9);
 		if (is_numeric($current)) {
-                        $content = "good";
-			$content .= SimplePageLib::toggleAssignment($current);
+			$content = SimplePageLib::toggleAssignment($current);
 		}
-		$content .= "done";
 		$response->addVar('content', $content);
 		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
 		$this->printOut();

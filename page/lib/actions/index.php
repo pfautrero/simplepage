@@ -183,14 +183,14 @@ class indexAction extends Action {
                         }
                         elseif ($course_module['completion']) {
                             if ($course_module['completion'] == 1) {
-                                $Column2[$course_module['position']][$course_module['sortorder']]['header'] .="
+                                $Column2[$course_module['position']][$course_module['sortorder']]['header'] ="
                                     <div class='squaredOne'>
                                             <input type='checkbox' id='checkbox_".$course_module['cmid']."' checked />
                                             <label for='checkbox_".$course_module['cmid']."'></label>
                                     </div>";
                             }
                             if ($course_module['completion'] == 2) {
-                                $Column2[$course_module['position']][$course_module['sortorder']]['header'] .="
+                                $Column2[$course_module['position']][$course_module['sortorder']]['header'] ="
                                     <div class='squaredOne'>
                                             <input type='checkbox' id='checkbox_".$course_module['cmid']."' />
                                             <label for='checkbox_".$course_module['cmid']."'></label>
@@ -202,7 +202,12 @@ class indexAction extends Action {
                         // ==================== Module Page
                         if ($course_module['type'] == "page") {
                                 if ($course_module['object']->display != DISPLAY_POPUP) {
-                                        $filtered_content = file_rewrite_pluginfile_urls($course_module['object']->content, 'pluginfile.php',$course_module['context'],'mod_page', 'content',0);
+                                        $filtered_content = file_rewrite_pluginfile_urls(   $course_module['object']->content, 
+                                                                                            'pluginfile.php',
+                                                                                            $course_module['context'],
+                                                                                            'mod_page', 
+                                                                                            'content',
+                                                                                            0);
                                         $page_options = unserialize($course_module['object']->displayoptions);
                                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "<div class='page'>";						
                                         if ($page_options['printheading']) $Column2[$course_module['position']][$course_module['sortorder']]['content'] .="<h1>".$course_module['object']->name."</h1>";
@@ -228,7 +233,9 @@ class indexAction extends Action {
                                                                                 'pluginfile.php',
                                                                                 $course_module['context'],
                                                                                 'mod_label', 
-                                                                                'intro');
+                                                                                'intro',
+                                                                                null);
+                                
                                 $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                                 <div style='padding-bottom:20px;'>".
                                                     $filtered_content."

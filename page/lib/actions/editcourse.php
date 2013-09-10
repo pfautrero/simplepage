@@ -41,7 +41,7 @@ class editcourseAction extends Action {
                     $this->printOut();      
                     return;
                 }                
-		if (!$PAGE->user_is_editing() || !has_capability('moodle/course:manageactivities', $coursecontext)) {
+		if (!$PAGE->user_is_editing() || !has_capability(PERMISSION_ACCESS_EDIT_PAGE, $coursecontext)) {
 			$this->render($LOCAL_PATH."/lib/template/forbiddenSuccess.php");
 			$this->printOut();		
 			return;

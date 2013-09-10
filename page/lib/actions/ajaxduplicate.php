@@ -42,7 +42,7 @@ class ajaxduplicateAction extends Action {
                     $this->printOut();      
                     return;
                 }                
-		if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
+		if (!has_capability(PERMISSION_DUPLICATE_ITEM, $coursecontext)) {
 			$this->render($LOCAL_PATH."/lib/template/forbiddenSuccess.php");
 			$this->printOut();		
 			return;

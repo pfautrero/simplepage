@@ -6,15 +6,14 @@
 </div>
 <script>
 $(document).ready(function() {
-	<?php if ($editing) : ?>
-	// ============== Add admin block
-        if ($("#region-post").length != 0) {
-            $("#region-post").prepend("<?php echo $adminBlock; ?>");        
-        }
-        else {
-            $("#region-main").prepend("<div style='margin:10px;float:right;width:300px;'><?php echo $adminBlock; ?></div>");
-        }	
-	<?php endif ?>	
-
+    <?php if ($editing) : ?>
+    // ============== Add admin block
+    if ($("#region-post").length != 0) {
+        $("#region-post").prepend("<?php echo $adminBlock; ?>");        
+    }
+    else {
+        $("#region-main").prepend("<div style='margin:10px;float:right;width:300px;'><?php echo $adminBlock; ?></div>");
+    }	
+    <?php endif ?>	
 });
 </script>

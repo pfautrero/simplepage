@@ -77,7 +77,13 @@
         
         // ============= Permissions
         define('PERMISSION_DELETE_MODULE', 'moodle/course:manageactivities');
+        define('PERMISSION_ACCESS_EDIT_PAGE', 'moodle/course:manageactivities');
+        define('PERMISSION_DELETE_ITEM', 'moodle/course:manageactivities');
+        define('PERMISSION_DUPLICATE_ITEM', 'moodle/course:manageactivities');
+        define('PERMISSION_DELETE_PAGE', 'moodle/course:manageactivities');
+        define('PERMISSION_SHOW_HIDE_PAGE', 'moodle/course:manageactivities');
         define('PERMISSION_ADD_NEW_PAGE', 'moodle/course:manageactivities');
+        define('PERMISSION_ADD_NEW_MODULE', 'moodle/course:manageactivities');
         /**
          * @todo : centralize ALL permissions here
          */

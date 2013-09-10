@@ -7,10 +7,10 @@
 <?php if ($message): ?>
 <div class="alert"><?php echo $message; ?></div>
 <script>
-	setTimeout(hidealert, 4000);
-	function hidealert() {
-		$('.alert').fadeOut('slow');
-	}
+    setTimeout(hidealert, 4000);
+    function hidealert() {
+            $('.alert').fadeOut('slow');
+    }
 </script>
 <?php endif; ?>
 

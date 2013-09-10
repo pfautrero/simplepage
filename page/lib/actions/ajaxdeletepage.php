@@ -44,7 +44,7 @@ class ajaxdeletepageAction extends Action {
                     $this->printOut();      
                     return;
                 }                
-		if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
+		if (!has_capability(PERMISSION_DELETE_PAGE, $coursecontext)) {
 			$this->render($CFG->dirroot."/course/format/page/lib/template/forbiddenSuccess.php");
 			$this->printOut();		
 			return;

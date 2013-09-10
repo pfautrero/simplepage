@@ -16,19 +16,19 @@
 <input type="hidden" name="id" value="<?php echo $id; ?>"/>
 <p><span>Nom de la page : </span><span><input style="padding:3px;" size="40" name="page_name" type="textbox"/></span></p>
 <p>
-	<span>Page parente : </span>
-	<span>
-	<select style="padding:3px;border:2px solid black;" name="pageparente">
-		<option value="0" selected></option>
-		<?php foreach ($pagesparentes as $pageparente): ?>
-			<?php if ($pageparente['level'] == 0): ?>
-			<option style="margin-left:3px;margin-right:3px;" value="<?php echo $pageparente['id']; ?>"><?php echo $pageparente['name']; ?></option>
-			<?php else: ?>
-			<option style="background:url('/pix/y/ln.gif') no-repeat;margin-left:3px;margin-right:3px;padding-left:20px;" value="<?php echo $pageparente['id']; ?>"><?php echo $pageparente['name']; ?></option>
-			<?php endif; ?>
-		<?php endforeach; ?>
-	</select>
-	</span>
+    <span>Page parente : </span>
+    <span>
+    <select style="padding:3px;border:2px solid black;" name="pageparente">
+        <option value="0" selected></option>
+        <?php foreach ($pagesparentes as $pageparente): ?>
+                <?php if ($pageparente['level'] == 0): ?>
+                <option style="margin-left:3px;margin-right:3px;" value="<?php echo $pageparente['id']; ?>"><?php echo $pageparente['name']; ?></option>
+                <?php else: ?>
+                <option style="background:url('/pix/y/ln.gif') no-repeat;margin-left:3px;margin-right:3px;padding-left:20px;" value="<?php echo $pageparente['id']; ?>"><?php echo $pageparente['name']; ?></option>
+                <?php endif; ?>
+        <?php endforeach; ?>
+    </select>
+    </span>
 </p>
 <div style="width:146px;margin:0 auto;padding:10px;"><input class="addpage" type="submit" name="addpage" value=""/></div>
 </p>

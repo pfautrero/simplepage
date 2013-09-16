@@ -15,8 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 global $LOCAL_PATH;
-include($LOCAL_PATH."/lib/actions/action.class.php");
-include($LOCAL_PATH."/lib/model/lib.php");
+include($LOCAL_PATH . "/lib/actions/action.class.php");
+include($LOCAL_PATH . "/lib/model/lib.php");
 
 /**
  * Version details
@@ -26,61 +26,52 @@ include($LOCAL_PATH."/lib/model/lib.php");
  * @copyright  2012 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class ajaxmovemoduleAction extends Action 
+{
 
-
-class ajaxmovemoduleAction extends Action {
-
-    public function launch(Request $request, Response $response)
+    public function launch(Request $request, Response $response) 
     {
-		global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH;	
-		global $USER;
-		
-		// ============== Clear Session cache for the Navigation Block
-		// In that way, if we ask sections deletion, result is immediatly visible once page is reloaded.
-		$_SESSION['SESSION']->navcache = new stdClass;	
+        global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH;
+        global $USER;
 
-		$course = $DB->get_record('course', array('id'=>$_SESSION['courseid']));
-		$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
-                if ($coursecontext == null) {
-                    $content = "context_null";
-                    $response->addVar('content', $content);
-                    $this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-                    $this->printOut();      
-                    return;
-                }                
-		if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-			$this->render($LOCAL_PATH."/lib/template/forbiddenSuccess.php");
-			$this->printOut();		
-			return;
-		}
+        // Clear Session cache for the Navigation Block
+        // In that way, if we ask sections deletion, 
+        // result is immediatly visible once page is reloaded.
+        $_SESSION['SESSION']->navcache = new stdClass;
 
-		$sesskey=$request->getParam('sesskey');
-		if ($sesskey != $USER->sesskey) {
-			$response->addVar('content', get_string('invalidToken', 'format_page'));
-			$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-			$this->printOut();		
-			return;
-		}
-		$current=$request->getParam('current');
-		$pageid=$request->getParam('pageid');
-                $previous=$request->getParam('previous');
-		$courseid = SimplePageLib::getCourseidForPage($pageid);
-                if ($previous) {
-                    SimplePageLib::moduleDisplacement($current, $pageid, $previous);                    
-                    $content = "done";
-                }
-                else {
-                    // called by lookForOrphans
-                    $newmoduleid = SimplePageLib::moveModuleToPage($current, $pageid);                    
-                    $content = $newmoduleid;
-                }
-		SimplePageLib::associateSections($courseid);
-		rebuild_course_cache($courseid);
-		
-		$response->addVar('content', $content);
-		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-		$this->printOut();
+        $course = $DB->get_record('course', array('id' => $_SESSION['courseid']));
+        $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+
+        if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
+            $this->render($LOCAL_PATH . "/lib/template/forbiddenSuccess.php");
+            $this->printOut();
+            return;
+        }
+
+        $sesskey = $request->getParam('sesskey');
+        if ($sesskey != $USER->sesskey) {
+            $response->addVar('content', get_string('invalidToken', 'format_page'));
+            $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+            $this->printOut();
+            return;
+        }
+        $current = $request->getParam('current');
+        $pageid = $request->getParam('pageid');
+        $previous = $request->getParam('previous');
+        $courseid = SimplePageLib::getCourseidForPage($pageid);
+        if ($previous) {
+            SimplePageLib::moduleDisplacement($current, $pageid, $previous);
+            $content = "done";
+        } else {
+            // called by lookForOrphans
+            $newmoduleid = SimplePageLib::moveModuleToPage($current, $pageid);
+            $content = $newmoduleid;
+        }
+        SimplePageLib::associateSections($courseid);
+        rebuild_course_cache($courseid);
+
+        $response->addVar('content', $content);
+        $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+        $this->printOut();
     }
 }
-
-?>

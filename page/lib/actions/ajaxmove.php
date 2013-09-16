@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 global $LOCAL_PATH;
-include($LOCAL_PATH."/lib/actions/action.class.php");
-include($LOCAL_PATH."/lib/model/lib.php");
+include($LOCAL_PATH . "/lib/actions/action.class.php");
+include($LOCAL_PATH . "/lib/model/lib.php");
 
 /**
  * Class used to move a page
@@ -25,48 +25,40 @@ include($LOCAL_PATH."/lib/model/lib.php");
  * @copyright  2012 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class ajaxmoveAction extends Action 
+{
 
-class ajaxmoveAction extends Action {
-
-    public function launch(Request $request, Response $response)
+    public function launch(Request $request, Response $response) 
     {
-		global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH;	
+        global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH;
 
-		$course = $DB->get_record('course', array('id'=>$_SESSION['courseid']));
-		$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
-                if ($coursecontext == null) {
-                    $content = "context_null";
-                    $response->addVar('content', $content);
-                    $this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-                    $this->printOut();      
-                    return;
-                }                
-		if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-			$this->render($LOCAL_PATH."/lib/template/forbiddenSuccess.php");
-			$this->printOut();		
-			return;
-		}
-		global $USER;
-		$sesskey=$request->getParam('sesskey');
-		if ($sesskey != $USER->sesskey) {
-			$response->addVar('content', "Token non valide");
-			$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-			$this->printOut();		
-			return;
-		}
-		
-		$id=$request->getParam('id');
-		$parent=$request->getParam('parent');
-		$previous=$request->getParam('previous');
-		$current=$request->getParam('current');
-		SimplePageLib::reorderCurrentBrothers($current,$id);
-		SimplePageLib::reorderPreviousBrothers($previous,$parent,$current,$id);
-		
-		$content = "done";
-		$response->addVar('content', $content);
-		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-		$this->printOut();
+        $course = $DB->get_record('course', array('id' => $_SESSION['courseid']));
+        $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+
+        if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
+            $this->render($LOCAL_PATH . "/lib/template/forbiddenSuccess.php");
+            $this->printOut();
+            return;
+        }
+        global $USER;
+        $sesskey = $request->getParam('sesskey');
+        if ($sesskey != $USER->sesskey) {
+            $response->addVar('content', "Token non valide");
+            $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+            $this->printOut();
+            return;
+        }
+
+        $id = $request->getParam('id');
+        $parent = $request->getParam('parent');
+        $previous = $request->getParam('previous');
+        $current = $request->getParam('current');
+        SimplePageLib::reorderCurrentBrothers($current, $id);
+        SimplePageLib::reorderPreviousBrothers($previous, $parent, $current, $id);
+
+        $content = "done";
+        $response->addVar('content', $content);
+        $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+        $this->printOut();
     }
 }
-
-?>

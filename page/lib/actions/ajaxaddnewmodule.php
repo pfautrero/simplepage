@@ -15,8 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 global $LOCAL_PATH;
-include($LOCAL_PATH."/lib/actions/action.class.php");
-include($LOCAL_PATH."/lib/model/lib.php");
+include($LOCAL_PATH . "/lib/actions/action.class.php");
+include($LOCAL_PATH . "/lib/model/lib.php");
 
 /**
  * Version details
@@ -26,47 +26,38 @@ include($LOCAL_PATH."/lib/model/lib.php");
  * @copyright  2012 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class ajaxaddnewmoduleAction extends Action 
+{
 
-
-class ajaxaddnewmoduleAction extends Action {
-
-    public function launch(Request $request, Response $response)
+    public function launch(Request $request, Response $response) 
     {
-		global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH, $USER;	
-		$course = $DB->get_record('course', array('id'=>$_SESSION['courseid']));
-		$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
-                if ($coursecontext == null) {
-                    $content = "context_null";
-                    $response->addVar('content', $content);
-                    $this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-                    $this->printOut();      
-                    return;
-                }                
-		if (!has_capability(PERMISSION_ADD_NEW_MODULE, $coursecontext)) {
-			$this->render($LOCAL_PATH."/lib/template/forbiddenSuccess.php");
-			$this->printOut();		
-			return;
-		}
-		global $USER;
-		$sesskey=$request->getParam('sesskey');
-		if ($sesskey != $USER->sesskey) {
-			$response->addVar('content', "Token non valide");
-			$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-			$this->printOut();		
-			return;
-		}		
-		
-		$current=$request->getParam('current');
-		if (is_numeric($current)) {
-			$entry = 'formatpage'.$USER->id;
-			$_SESSION[$entry][$course->id]['idpage'] = $current;
-                        $_SESSION[$entry][$course->id]['timestamp'] = time();
-		}
-		$content = "done";
-		$response->addVar('content', $content);
-		$this->render($LOCAL_PATH."/lib/template/ajaxSuccess.php");
-		$this->printOut();
+        global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH, $USER;
+        $course = $DB->get_record('course', array('id' => $_SESSION['courseid']));
+        $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+
+        if (!has_capability(PERMISSION_ADD_NEW_MODULE, $coursecontext)) {
+            $this->render($LOCAL_PATH . "/lib/template/forbiddenSuccess.php");
+            $this->printOut();
+            return;
+        }
+        global $USER;
+        $sesskey = $request->getParam('sesskey');
+        if ($sesskey != $USER->sesskey) {
+            $response->addVar('content', "Token non valide");
+            $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+            $this->printOut();
+            return;
+        }
+
+        $current = $request->getParam('current');
+        if (is_numeric($current)) {
+            $entry = 'formatpage' . $USER->id;
+            $_SESSION[$entry][$course->id]['idpage'] = $current;
+            $_SESSION[$entry][$course->id]['timestamp'] = time();
+        }
+        $content = "done";
+        $response->addVar('content', $content);
+        $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+        $this->printOut();
     }
 }
-
-?>

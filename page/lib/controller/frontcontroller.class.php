@@ -59,8 +59,16 @@ class FrontController
 
     public function forward($action)
     {
+        global $COURSE;
+        $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        if ($coursecontext == null) {
+            $content = "context_null";
+            $this->_response->addVar('content', $content);
+            $this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
+            $this->_response->printOut;      
+            return;
+        }        
         $command = $this->_getCommand($action);
-
         $command->launch($this->_request, $this->_response);
     }
 

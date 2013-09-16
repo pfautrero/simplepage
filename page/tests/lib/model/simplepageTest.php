@@ -10,28 +10,38 @@
  * @package simplepage
  */
 global $CFG;
-include_once($CFG->dirroot.'/course/format/page/lib/model/lib.php');
+include_once($CFG->dirroot . '/course/format/page/lib/model/lib.php');
 
-class simplepage_lib_test extends advanced_testcase {
+class simplepage_lib_test extends advanced_testcase 
+{
 
-    /** 
+    /**
      * test add and delete operations on a page
      * 
      * @global type $DB
      */
-    
-     function testPageAddDelete() {
-         global $DB;
-         $this->resetAfterTest(true);
-         $this->setAdminUser();
-         $category = $this->getDataGenerator()->create_category(array('name'=>'My Category'));
-         $course = $this->getDataGenerator()->create_course(array('name'=>'My first Course','category'=>$category->id,'format'=>'page'));
-         $pageid =  SimplePageLib::addPage("First Page", $course->id, 0);
-         $this->assertTrue($DB->record_exists('format_page',array('id'=>$pageid)));
-         SimplePageLib::deletePage($pageid);
-         $this->assertFalse($DB->record_exists('format_page',array('id'=>$pageid)));
-     }
-     
-     
+    function testPageAddDelete() 
+    {
+        global $DB;
+        $this->resetAfterTest(true);
+        $this->setAdminUser();
+        $category = $this->getDataGenerator()
+                         ->create_category(array('name' => 'My Category'));
+        $course = $this->getDataGenerator()
+                       ->create_course(
+                           array(
+                               'name' => 'My first Course', 
+                               'category' => $category->id, 
+                               'format' => 'page'
+                           )
+                       );
+        $pageid = SimplePageLib::addPage("First Page", $course->id, 0);
+        $this->assertTrue(
+            $DB->record_exists('format_page', array('id' => $pageid))
+        );
+        SimplePageLib::deletePage($pageid);
+        $this->assertFalse(
+            $DB->record_exists('format_page', array('id' => $pageid))
+        );
+    }
 }
-?>

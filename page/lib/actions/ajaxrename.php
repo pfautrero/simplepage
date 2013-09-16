@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Simplepage
 //
 // Simplepage is free software: you can redistribute it and/or modify
@@ -15,8 +16,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 global $CFG;
-include_once($CFG->dirroot."/course/format/page/lib/actions/action.class.php");
-include_once($CFG->dirroot."/course/format/page/lib/model/lib.php");
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**
  * Version details
@@ -26,43 +27,34 @@ include_once($CFG->dirroot."/course/format/page/lib/model/lib.php");
  * @copyright  2012 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class ajaxrenameAction extends Action 
+{
 
-
-class ajaxrenameAction extends Action {
-
-    public function launch(Request $request, Response $response)
+    public function launch(Request $request, Response $response) 
     {
-		global $CFG, $DB;	
-		$course = $DB->get_record('course', array('id'=>$_SESSION['courseid']));
-		$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
-                if ($coursecontext == null) {
-                    $content = "context_null";
-                    $response->addVar('content', $content);
-                    $this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
-                    $this->printOut();      
-                    return;
-                }                
-		if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-			$this->render($CFG->dirroot."/course/format/page/lib/template/forbiddenSuccess.php");
-			$this->printOut();		
-			return;
-		}
-		global $USER;
-		$sesskey=$request->getParam('sesskey');
-		if ($sesskey != $USER->sesskey) {
-			$response->addVar('content', get_string('invalidToken', 'format_page'));
-			$this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
-			$this->printOut();		
-			return;
-		}
-		$current=$request->getParam('current');
-		$name=htmlentities($request->getParam('name'), ENT_QUOTES, 'UTF-8');
-		SimplePageLib::renamePage($current, $name);
-		$content = "done";
-		$response->addVar('content', $content);
-		$this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
-		$this->printOut();
+        global $CFG, $DB;
+        $course = $DB->get_record('course', array('id' => $_SESSION['courseid']));
+        $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+
+        if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/forbiddenSuccess.php");
+            $this->printOut();
+            return;
+        }
+        global $USER;
+        $sesskey = $request->getParam('sesskey');
+        if ($sesskey != $USER->sesskey) {
+            $response->addVar('content', get_string('invalidToken', 'format_page'));
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
+            $this->printOut();
+            return;
+        }
+        $current = $request->getParam('current');
+        $name = htmlentities($request->getParam('name'), ENT_QUOTES, 'UTF-8');
+        SimplePageLib::renamePage($current, $name);
+        $content = "done";
+        $response->addVar('content', $content);
+        $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
+        $this->printOut();
     }
 }
-
-?>

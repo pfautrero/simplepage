@@ -15,8 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 global $CFG;
-include($CFG->dirroot."/course/format/page/lib/actions/action.class.php");
-include_once($CFG->dirroot."/course/format/page/lib/model/lib.php");
+include($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**
  * Class used to add a new page and to display the dedicated page for this stuff
@@ -26,26 +26,25 @@ include_once($CFG->dirroot."/course/format/page/lib/model/lib.php");
  * @copyright  2013 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class addAction extends Action {
-
-    public function launch(Request $request, Response $response)
+class addAction extends Action
+{
+    public function launch(Request $request, Response $response) 
     {
-        global $COURSE,$PAGE, $USER,$CFG;	
+        global $COURSE, $PAGE, $USER, $CFG;
         $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
-        
-        if ($coursecontext == null) {
-            $content = "context_null";
-            $response->addVar('content', $content);
-            $this->render($CFG->dirroot."/course/format/page/lib/template/ajaxSuccess.php");
-            $this->printOut();      
+
+        if (
+            !$PAGE->user_is_editing() || 
+            !has_capability(PERMISSION_ADD_NEW_PAGE, $coursecontext)
+           ) {
+            $this->render(
+                $CFG->dirroot 
+                . "/course/format/page/lib/template/forbiddenSuccess.php"
+            );
+            $this->printOut();
             return;
         }
-        if (!$PAGE->user_is_editing() || !has_capability(PERMISSION_ADD_NEW_PAGE, $coursecontext)) {
-            $this->render($CFG->dirroot."/course/format/page/lib/template/forbiddenSuccess.php");
-            $this->printOut();		
-            return;
-        }		
-        $id=$request->getParam('id');
+        $id = $request->getParam('id');
         $message = null;
         $adminBlock = null;
         if ($PAGE->user_is_editing()) {
@@ -58,9 +57,11 @@ class addAction extends Action {
         $response->addVar('id', $id);
         $response->addVar('sesskey', $USER->sesskey);
         $response->addVar('editing', $PAGE->user_is_editing());
-        $this->render($CFG->dirroot."/course/format/page/lib/template/addSuccess.php");
+        $this->render(
+            $CFG->dirroot 
+            . "/course/format/page/lib/template/addSuccess.php"
+        );
         $this->printOut();
     }
-}
 
-?>
+}

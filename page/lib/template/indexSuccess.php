@@ -17,9 +17,9 @@
 
     <div style="clear:both;"></div>
 
-    <a class="page_pdf_url"  href="/course/format/<?php echo $maindir; ?>/ajax.php?id=<?php echo $id; ?>&page=<?php echo $pageid; ?>&sesskey=<?php echo $sesskey; ?>&action=pdf">
+    <!-- <a class="page_pdf_url"  href="/course/format/<?php echo $maindir; ?>/ajax.php?id=<?php echo $id; ?>&page=<?php echo $pageid; ?>&sesskey=<?php echo $sesskey; ?>&action=pdf">
     <img class="page_pdf" src="<?php echo PDF; ?>" alt='impression pdf' title='impression pdf de la page' />
-    </a>
+    </a> -->
     <div id="pdf_alert" class="alert" style="display:none;">Veuillez patienter...</div>
 
     <?php if ($rightColumn): ?>

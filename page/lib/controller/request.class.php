@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Simplepage
 //
 // Simplepage is free software: you can redistribute it and/or modify
@@ -24,46 +25,42 @@
  */
 class Request 
 {
-    public function getParam($key)
+    public function getParam($key) 
     {
         //return filter_var($this->getTaintedParam($key), FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		return $this->getTaintedParam($key);
+        return $this->getTaintedParam($key);
     }
-	
-    public function getTaintedParam($key)
+
+    public function getTaintedParam($key) 
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST[$key])){
-                    return $_POST[$key];
+            if (isset($_POST[$key])) {
+                return $_POST[$key];
+            } else {
+                return null;
             }
-            else {
-                    return null;
+        } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+            if (isset($_GET[$key])) {
+                return $_GET[$key];
+            } else {
+                return null;
             }
-        }else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-			
-            if (isset($_GET[$key])){
-                    return $_GET[$key];
-            }
-            else {
-                    return null;
-            }
-        }
-        else {
+        } else {
             return null;
         }
     }
-	
-    public function route()
+
+    public function route() 
     {
-	$matches = array();
+        $matches = array();
         $args = explode('&', parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY));
         foreach ($args as $arg) {
-            $pos = strpos($arg, "action=");		
+            $pos = strpos($arg, "action=");
             if ($pos !== false) {
-                    $matches['action'] = substr($arg, $pos+7);
-            }		
+                $matches['action'] = substr($arg, $pos + 7);
+            }
         }
         return $matches;
     }
 }
-?>

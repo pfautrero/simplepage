@@ -3,6 +3,10 @@
 <script type="text/javascript" src="<?php echo JQUERY; ?>"></script>
 <script type="text/javascript" src="<?php echo JQUERYUI; ?>"></script>
 <div class='format_content' style='width:100%;'>
+    <?php if ($message): ?>
+    <div class="alert"><?php echo $message; ?></div>
+    <?php endif; ?>
+    
 </div>
 <script>
 $(document).ready(function() {

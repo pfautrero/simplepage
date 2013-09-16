@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Simplepage
 //
 // Simplepage is free software: you can redistribute it and/or modify
@@ -23,17 +24,23 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die();
-global $LOCAL_PATH,$MAIN_DIR,$CFG;
-/** $MAIN_DIR = "page" **/
-$MAIN_DIR = substr(dirname(__FILE__),strpos(dirname(__FILE__),"course/format")+14);
+global $LOCAL_PATH, $MAIN_DIR, $CFG;
+/** $MAIN_DIR = "page" * */
+$MAIN_DIR = substr(
+    dirname(__FILE__), strpos(dirname(__FILE__), "course/format") + 14
+);
 $LOCAL_PATH = ".";
-if (file_exists("./format/".$MAIN_DIR."/lib/controller/frontcontroller.class.php")) {
-	$LOCAL_PATH = "./format/".$MAIN_DIR;
+if (
+    file_exists("./format/" . $MAIN_DIR 
+    . "/lib/controller/frontcontroller.class.php")
+   ) {
+    $LOCAL_PATH = "./format/" . $MAIN_DIR;
 }
-if (!isset($plugin)) $plugin = new stdClass();
+if (!isset($plugin)) {
+    $plugin = new stdClass();
+}
 include('version.php');
 include('globals.php');
-include($CFG->dirroot."/course/format/page/lib/controller/frontcontroller.class.php");
+include($CFG->dirroot 
+    . "/course/format/page/lib/controller/frontcontroller.class.php");
 $front = frontController::getInstance()->dispatch();
-
-?>

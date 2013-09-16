@@ -106,7 +106,3 @@ class restore_format_page_plugin extends restore_format_plugin {
     }
     
 }
-
-
-
-

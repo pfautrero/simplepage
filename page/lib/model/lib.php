@@ -265,7 +265,7 @@ class SimplePageLib {
      * 
      */	
 	public static function getPagemenuLinks($id, $courseid) {
-            global $DB, $PAGE;
+            global $DB;
             $pagemenu_links = $DB->get_records_sql("SELECT * FROM {pagemenu_links} WHERE pagemenuid = $id ORDER BY previd ASC ");
             $i = key($pagemenu_links);
             $value = "<ul>";

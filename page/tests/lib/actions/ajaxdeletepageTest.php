@@ -10,9 +10,10 @@ global $CFG, $MAIN_DIR;
 $MAIN_DIR = 'page';
 if (!isset($plugin))
     $plugin = new stdClass();
+include_once($CFG->dirroot . '/course/format/page/version.php');
 include_once($CFG->dirroot . '/course/format/page/lib/model/lib.php');
 include_once($CFG->dirroot . '/course/format/page/lib/controller/frontcontroller.class.php');
-include_once($CFG->dirroot . '/course/format/page/version.php');
+
 include_once($CFG->dirroot . '/course/format/page/globals.php');
 
 class ajaxdeletepage_test extends advanced_testcase 

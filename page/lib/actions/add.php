@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 global $CFG;
-include($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
 include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**

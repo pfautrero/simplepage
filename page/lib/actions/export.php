@@ -16,10 +16,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 
-global $LOCAL_PATH;
-include($LOCAL_PATH . "/lib/actions/action.class.php");
-include($LOCAL_PATH . "/lib/model/lib.php");
-
+global $CFG;
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 /**
  * Class used to export a list of users in a specified course 
  *
@@ -30,43 +29,21 @@ include($LOCAL_PATH . "/lib/model/lib.php");
  */
 class exportAction extends Action 
 {
-    public function getRecords($courseid) 
+    public function generateCsv($courseid) 
     {
         global $DB;
-
-//        $users = $DB->get_records_sql("SELECT u.firstname, u.lastname, u.email 
-//                        FROM {role_assignments} as ra, {user} as u 
-//                        WHERE ra.contextid = '".$coursecontextid."' 
-//                        AND u.id = ra.userid				 
-//                        ORDER BY u.lastname ASC");
-//        
-        $users = $DB->get_records_sql("SELECT u.firstname, u.lastname, u.email 
-                        FROM {enrol} as e, {user} as u, {user_enrolments} as ue
-                        WHERE ue.enrolid = e.id
-                        AND u.id = ue.userid
-                        AND e.courseid = '" . $courseid . "'
-                        ORDER BY u.lastname ASC");
-
-        return $users;
-    }
-
-    public function launch(Request $request, Response $response) 
-    {
-        global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH;
-        if (isset($_GET['id'])) {
-            $course = $DB->get_record('course', array('id' => $_GET['id']));
-            $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
-
-            if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-                $this->render($LOCAL_PATH . "/lib/template/forbiddenSuccess.php");
-                $this->printOut();
-                return;
-            }
-        }
-        $rows = array();
         $csv = utf8_decode("nom;prénom;email\n");
-        $users = $this->getRecords($course->id);
+
+        $users = $DB->get_records_sql("SELECT u.firstname, u.lastname, u.email 
+                        FROM {user} as u
+                        INNER JOIN {user_enrolments} as ue ON u.id = ue.userid
+                        INNER JOIN {enrol} as e ON ue.enrolid = e.id
+                        WHERE e.courseid = '" . $courseid . "'
+                        ORDER BY u.lastname ASC");                
+       
+        $i=0;
         foreach ($users as $user) {
+            $i++;
             $csv .= utf8_decode("\"" 
                     . $user->lastname 
                     . "\";\"" 
@@ -75,9 +52,36 @@ class exportAction extends Action
                     . $user->email 
                     . "\"\n");
         }
-        header_remove();
-        header('Content-Disposition: attachment; filename="participants_' . $course->id . '.csv"');
-        header('Content-Type: text/csv; charset=ISO-8859-1');
-        echo $csv;
+          return $csv;
+        
+    }
+    
+    public function launch(Request $request, Response $response) 
+    {
+        global $DB, $CFG;
+        if (isset($_GET['id'])) {
+            $course = $DB->get_record('course', array('id' => $_GET['id']));
+            $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+
+            if (
+                !has_capability(
+                    'moodle/course:manageactivities', 
+                    $coursecontext
+                )
+            ) {
+                $this->render(
+                    $CFG->dirroot 
+                    . "/course/format/page/lib/template/forbiddenSuccess.php");
+                $this->printOut();
+                return;
+            }
+
+            $csv = $this->generateCsv($course->id);
+            header_remove();
+            header('Content-Disposition: attachment; filename="participants_' . $course->id . '.csv"');
+            header('Content-Type: text/csv; charset=ISO-8859-1');
+            echo $csv;            
+            
+        }
     }
 }

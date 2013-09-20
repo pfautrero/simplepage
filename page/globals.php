@@ -65,7 +65,6 @@
 	define('JQUERYUICSS','format/'.$MAIN_DIR.'/lib/template/css/jquery-ui-1.9.1.custom.css');
         define('JQUERYNESTABLE','format/'.$MAIN_DIR.'/lib/template/js/jquery.nestable.js');
         define('STYLECSS','format/'.$MAIN_DIR.'/lib/template/css/style.css?version='.$plugin->version);
-
 	// ============= Globals
 	define('NO_LINK', 0);
 	define('PREVIOUS_LINK', 1);

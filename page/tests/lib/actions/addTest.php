@@ -8,12 +8,11 @@
  */
 global $CFG, $MAIN_DIR;
 $MAIN_DIR = 'page';
-if (!isset($plugin))
-    $plugin = new stdClass();
-include($CFG->dirroot
-    . '/course/format/page/lib/controller/frontcontroller.class.php');
+if (!isset($plugin)) $plugin = new stdClass();
 include($CFG->dirroot . '/course/format/page/version.php');
-include($CFG->dirroot . '/course/format/page/globals.php');
+include_once($CFG->dirroot
+    . '/course/format/page/lib/controller/frontcontroller.class.php');
+include_once($CFG->dirroot . '/course/format/page/globals.php');
 
 class add_test extends advanced_testcase 
 {

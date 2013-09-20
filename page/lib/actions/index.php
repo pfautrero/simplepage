@@ -37,10 +37,6 @@ class indexAction extends Action
     public function retrieveModules($page, &$Column2) 
     {
         global $PAGE, $USER;
-//        $Column2 = array();
-//        $Column2['l'] = array();
-//        $Column2['r'] = array();
-//        $Column2['c'] = array();
         $course_modules = SimplePageLib::getCourseModules($page, $USER->id);
         $i = 0;
         foreach ($course_modules as $course_module) {
@@ -77,19 +73,21 @@ class indexAction extends Action
                                     alt='dupliquer' 
                                     title='Afficher également sur une autre page' />";
             } elseif ($course_module['completion']) {
-                if ($course_module['completion'] == 1) {
-                    $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
-                        <div class='squaredOne'>
-                                <input type='checkbox' id='checkbox_" . $course_module['cmid'] . "' checked />
-                                <label for='checkbox_" . $course_module['cmid'] . "'></label>
-                        </div>";
-                }
-                if ($course_module['completion'] == 2) {
-                    $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
-                        <div class='squaredOne'>
-                                <input type='checkbox' id='checkbox_" . $course_module['cmid'] . "' />
-                                <label for='checkbox_" . $course_module['cmid'] . "'></label>
-                        </div>";
+                if (isset($USER->username) && ($USER->username!="guest")) {
+                    if ($course_module['completion'] == 1) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
+                            <div class='squaredOne'>
+                                    <input type='checkbox' id='checkbox_" . $course_module['cmid'] . "' checked />
+                                    <label for='checkbox_" . $course_module['cmid'] . "'></label>
+                            </div>";
+                    }
+                    if ($course_module['completion'] == 2) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
+                            <div class='squaredOne'>
+                                    <input type='checkbox' id='checkbox_" . $course_module['cmid'] . "' />
+                                    <label for='checkbox_" . $course_module['cmid'] . "'></label>
+                            </div>";
+                    }
                 }
             }
             $Column2[$course_module['position']][$course_module['sortorder']]['content'] = "<input class='input_id' type='hidden' name='" . $course_module['id'] . "' value='' />";
@@ -299,69 +297,69 @@ class indexAction extends Action
     public function buildOutput(&$Column, &$Column2) 
     {
         global $PAGE,$COURSE;    
-       
-    
-            ksort($Column2['l']);
-            ksort($Column2['c']);
-            ksort($Column2['r']);
-            foreach ($Column2 as $key => $selected_column) {
-                if ($selected_column)
-                    $selected_column = array_values($selected_column);
-                for ($i = 0; $i < count($selected_column); $i++) {
-                    if ($PAGE->user_is_editing() && has_capability('moodle/course:manageactivities', $this->coursecontext)) {
-                        if ($i != 0) {
-                            $selected_column[$i]['header'] .= "
-                                            <a href='/course/view.php?id=" . $COURSE->id . "&module=" . $selected_column[$i]['moduleid'] . "&displacement=up'>
-                                            <img class='moveup' style='width:20px;margin:2px;' src='" . ARROW_UP . "' alt='monter' title='Monter le module' />
-                                            </a>	";
-                        }
-                        if ($i < count($selected_column) - 1) {
-                            $selected_column[$i]['header'] .= "
-                                            <a href='/course/view.php?id=" . $COURSE->id . "&module=" . $selected_column[$i]['moduleid'] . "&displacement=down'>
-                                            <img class='movedown' style='width:20px;margin:2px;' src='" . ARROW_DOWN . "' alt='descendre' title='Descendre le module' />
-                                            </a>	";
-                        }
-                        if ($selected_column[$i]['display_mode'] == 2) {
-                            $Column[$key] .= "  <div class='module_mode_unavailable'>
-                                                        <div class='header_module'>" .
-                                    $selected_column[$i]['header'] .
-                                    "</div>" .
-                                    $selected_column[$i]['content'] .
-                                    "</div>";
-                        } else {
-                            $Column[$key] .= "  <div class='module_mode_edit'>
-                                                        <div class='header_module'>" .
-                                    $selected_column[$i]['header'] .
-                                    "</div>" .
-                                    $selected_column[$i]['content'] .
-                                    "</div>";
-                        }
+   
+        ksort($Column2['l']);
+        ksort($Column2['c']);
+        ksort($Column2['r']);
+        foreach ($Column2 as $key => $selected_column) {
+            if ($selected_column)
+                $selected_column = array_values($selected_column);
+            for ($i = 0; $i < count($selected_column); $i++) {
+                if ($PAGE->user_is_editing() && has_capability('moodle/course:manageactivities', $this->coursecontext)) {
+                    if ($i != 0) {
+                        $selected_column[$i]['header'] .= "
+                                        <a href='/course/view.php?id=" . $COURSE->id . "&module=" . $selected_column[$i]['moduleid'] . "&displacement=up'>
+                                        <img class='moveup' style='width:20px;margin:2px;' src='" . ARROW_UP . "' alt='monter' title='Monter le module' />
+                                        </a>	";
+                    }
+                    if ($i < count($selected_column) - 1) {
+                        $selected_column[$i]['header'] .= "
+                                        <a href='/course/view.php?id=" . $COURSE->id . "&module=" . $selected_column[$i]['moduleid'] . "&displacement=down'>
+                                        <img class='movedown' style='width:20px;margin:2px;' src='" . ARROW_DOWN . "' alt='descendre' title='Descendre le module' />
+                                        </a>	";
+                    }
+                    if ($selected_column[$i]['display_mode'] == 2) {
+                        $Column[$key] .= "
+                            <div class='module_mode_unavailable'>
+                            <div class='header_module'>" .
+                            $selected_column[$i]['header'] .
+                            "</div>" .
+                            $selected_column[$i]['content'] .
+                            "</div>";
                     } else {
-                        if ($selected_column[$i]['display_mode'] == 2) {
-                            $Column[$key] .= "  <div class='module_mode_unavailable'>
-                                                        <div class='header_module'>" .
-                                    $selected_column[$i]['header'] .
-                                    "</div>" .
-                                    $selected_column[$i]['content'] .
-                                    "</div>";
-                        } elseif (isset($selected_column[$i]['completion']) && $selected_column[$i]['completion'] != 0) {
-                            $Column[$key] .= "  <div class='module_mode_edit'>
-                                                        <div class='header_module'>" .
-                                    $selected_column[$i]['header'] .
-                                    "</div>" .
-                                    $selected_column[$i]['content'] .
-                                    "</div>";
-                        } else {
-                            $Column[$key] .= "  <div>
-                                                        <div class='header_module'>" .
-                                    $selected_column[$i]['header'] .
-                                    "</div>" .
-                                    $selected_column[$i]['content'] .
-                                    "</div>";
-                        }
+                        $Column[$key] .= "  <div class='module_mode_edit'>
+                                                    <div class='header_module'>" .
+                                $selected_column[$i]['header'] .
+                                "</div>" .
+                                $selected_column[$i]['content'] .
+                                "</div>";
+                    }
+                } else {
+                    if ($selected_column[$i]['display_mode'] == 2) {
+                        $Column[$key] .= "  <div class='module_mode_unavailable'>
+                                                    <div class='header_module'>" .
+                                $selected_column[$i]['header'] .
+                                "</div>" .
+                                $selected_column[$i]['content'] .
+                                "</div>";
+                    } elseif (isset($selected_column[$i]['completion']) && $selected_column[$i]['completion'] != 0) {
+                        $Column[$key] .= "  <div class='module_mode_edit'>
+                                                    <div class='header_module'>" .
+                                $selected_column[$i]['header'] .
+                                "</div>" .
+                                $selected_column[$i]['content'] .
+                                "</div>";
+                    } else {
+                        $Column[$key] .= "  <div>
+                                                    <div class='header_module'>" .
+                                $selected_column[$i]['header'] .
+                                "</div>" .
+                                $selected_column[$i]['content'] .
+                                "</div>";
                     }
                 }
-            }    
+            }
+        }    
     }
     
     

@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-global $LOCAL_PATH;
-include($LOCAL_PATH . "/lib/actions/action.class.php");
-include($LOCAL_PATH . "/lib/model/lib.php");
+global $CFG;
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**
  * Class used by ajax call to define the column where we must display a module
@@ -36,7 +36,7 @@ class ajaxactivitypositionAction extends Action
         $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
 
         if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-            $this->render($LOCAL_PATH . "/lib/template/forbiddenSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/forbiddenSuccess.php");
             $this->printOut();
             return;
         }
@@ -44,7 +44,7 @@ class ajaxactivitypositionAction extends Action
         $sesskey = $request->getParam('sesskey');
         if ($sesskey != $USER->sesskey) {
             $response->addVar('content', "Token non valide");
-            $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
             $this->printOut();
             return;
         }
@@ -53,7 +53,7 @@ class ajaxactivitypositionAction extends Action
         SimplePageLib::setItemPosition($current, $position);
         $content = "done";
         $response->addVar('content', $content);
-        $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+        $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
         $this->printOut();
     }
 }

@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-global $LOCAL_PATH;
-include($LOCAL_PATH . "/lib/actions/action.class.php");
-include($LOCAL_PATH . "/lib/model/lib.php");
+global $CFG;
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**
  * Version details
@@ -43,7 +43,7 @@ class ajaxmovemoduleAction extends Action
         $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
 
         if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
-            $this->render($LOCAL_PATH . "/lib/template/forbiddenSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/forbiddenSuccess.php");
             $this->printOut();
             return;
         }
@@ -51,7 +51,7 @@ class ajaxmovemoduleAction extends Action
         $sesskey = $request->getParam('sesskey');
         if ($sesskey != $USER->sesskey) {
             $response->addVar('content', get_string('invalidToken', 'format_page'));
-            $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
             $this->printOut();
             return;
         }
@@ -71,7 +71,7 @@ class ajaxmovemoduleAction extends Action
         rebuild_course_cache($courseid);
 
         $response->addVar('content', $content);
-        $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+        $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
         $this->printOut();
     }
 }

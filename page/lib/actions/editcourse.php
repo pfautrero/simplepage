@@ -16,9 +16,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 
-global $LOCAL_PATH, $MAIN_DIR;
-include($LOCAL_PATH . "/lib/actions/action.class.php");
-include($LOCAL_PATH . "/lib/model/lib.php");
+global $CFG;
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**
  * Class used to display edit page
@@ -38,7 +38,7 @@ class editcourseAction extends Action
         $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
 
         if (!$PAGE->user_is_editing() || !has_capability(PERMISSION_ACCESS_EDIT_PAGE, $coursecontext)) {
-            $this->render($LOCAL_PATH . "/lib/template/forbiddenSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/forbiddenSuccess.php");
             $this->printOut();
             return;
         }
@@ -122,7 +122,7 @@ class editcourseAction extends Action
         $response->addVar('sesskey', $USER->sesskey);
         $response->addVar('editing', $PAGE->user_is_editing());
         $response->addVar('maindir', $MAIN_DIR);
-        $this->render($LOCAL_PATH . "/lib/template/editcourseSuccess.php");
+        $this->render($CFG->dirroot . "/course/format/page/lib/template/editcourseSuccess.php");
         $this->printOut();
     }
 }

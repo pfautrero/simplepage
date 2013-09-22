@@ -22,9 +22,9 @@
  * @copyright  2012 Pascal Fautrero - CRDP Versailles
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-global $LOCAL_PATH;
-include($LOCAL_PATH . "/lib/actions/action.class.php");
-include($LOCAL_PATH . "/lib/model/lib.php");
+global $CFG;
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 class pdfAction extends Action 
 {
@@ -238,7 +238,7 @@ class pdfAction extends Action
                 }
             }
         }
-        require_once($LOCAL_PATH . "/lib/model/dompdf/dompdf_config.inc.php");
+        require_once($CFG->dirroot . "/course/format/page/lib/model/dompdf/dompdf_config.inc.php");
 
         $html = '<html><body>';
         $html .='<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>';

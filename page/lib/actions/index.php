@@ -17,9 +17,9 @@
 
 
 
-global $LOCAL_PATH, $MAIN_DIR;
-include($LOCAL_PATH . "/lib/actions/action.class.php");
-include($LOCAL_PATH . "/lib/model/lib.php");
+global $CFG;
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**
  * prepare a page display

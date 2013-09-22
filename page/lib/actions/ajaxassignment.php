@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
-global $LOCAL_PATH;
-include($LOCAL_PATH . "/lib/actions/action.class.php");
-include($LOCAL_PATH . "/lib/model/lib.php");
+global $CFG;
+include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
 
 /**
  * Version details
@@ -37,7 +37,7 @@ class ajaxassignmentAction extends Action
         $sesskey = $request->getParam('sesskey');
         if ($sesskey != $USER->sesskey) {
             $response->addVar('content', "Token non valide");
-            $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
             $this->printOut();
             return;
         }
@@ -48,7 +48,7 @@ class ajaxassignmentAction extends Action
             $content = SimplePageLib::toggleAssignment($current);
         }
         $response->addVar('content', $content);
-        $this->render($LOCAL_PATH . "/lib/template/ajaxSuccess.php");
+        $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
         $this->printOut();
     }
 

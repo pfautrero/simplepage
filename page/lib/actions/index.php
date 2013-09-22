@@ -525,7 +525,7 @@ class indexAction extends Action
                     $response->addVar('editing', $PAGE->user_is_editing());
                     $response->addVar('adminBlock', $adminBlock);
                     $response->addVar('message', $message);
-                    $this->render($LOCAL_PATH . "/lib/template/voidSuccess.php");
+                    $this->render($CFG->dirroot . "/course/format/page/lib/template/voidSuccess.php");
                     $this->printOut();
                     return;
                 }
@@ -570,7 +570,7 @@ class indexAction extends Action
             $response->addVar('pageid', $page);
             $response->addVar('sesskey', $USER->sesskey);
             $response->addVar('maindir', $MAIN_DIR);
-            $this->render($LOCAL_PATH . "/lib/template/indexSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/indexSuccess.php");
             $this->printOut();
         } else {
             $adminBlock = null;
@@ -583,7 +583,7 @@ class indexAction extends Action
             $response->addVar('editing', $PAGE->user_is_editing());
             $response->addVar('adminBlock', $adminBlock);
             $response->addVar('message', $message);
-            $this->render($LOCAL_PATH . "/lib/template/voidSuccess.php");
+            $this->render($CFG->dirroot . "/course/format/page/lib/template/voidSuccess.php");
             $this->printOut();
         }
     }

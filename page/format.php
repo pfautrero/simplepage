@@ -25,11 +25,7 @@
  */
 defined('MOODLE_INTERNAL') || die();
 global $LOCAL_PATH, $MAIN_DIR, $CFG;
-/** $MAIN_DIR = "page" * */
-// test
-$MAIN_DIR = substr(
-    dirname(__FILE__), strpos(dirname(__FILE__), "course/format") + 14
-);
+$MAIN_DIR = "page";
 $LOCAL_PATH = ".";
 if (
     file_exists("./format/" . $MAIN_DIR 

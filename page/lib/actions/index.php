@@ -36,7 +36,7 @@ class indexAction extends Action
 
     public function retrieveModules($page, &$Column2) 
     {
-        global $PAGE, $USER;
+        global $PAGE, $USER,$CFG;
         $course_modules = SimplePageLib::getCourseModules($page, $USER->id);
         $i = 0;
         foreach ($course_modules as $course_module) {

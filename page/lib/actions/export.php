@@ -34,7 +34,7 @@ class exportAction extends Action
         global $DB;
         $csv = utf8_decode("nom;prénom;email\n");
 
-        $users = $DB->get_records_sql("SELECT u.firstname, u.lastname, u.email 
+        $users = $DB->get_records_sql("SELECT u.id, u.firstname, u.lastname, u.email 
                         FROM {user} as u
                         INNER JOIN {user_enrolments} as ue ON u.id = ue.userid
                         INNER JOIN {enrol} as e ON ue.enrolid = e.id

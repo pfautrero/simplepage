@@ -66,7 +66,7 @@ class exportAction extends Action
         global $DB, $CFG;
         if (isset($_GET['id'])) {
             $course = $DB->get_record('course', array('id' => $_GET['id']));
-            
+            $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
 
             if (
                 !has_capability(

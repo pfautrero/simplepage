@@ -46,7 +46,12 @@ class export_test extends advanced_testcase
                                     'lastname' => 'lastname_user' . $i
                                 )
                              );        
-            $this->getDataGenerator()->enrol_user($user[$i]->id,$course->id);
+            if ($i < 50) {
+                $this->getDataGenerator()->enrol_user($user[$i]->id,$course->id,2);
+            }
+            else {
+                $this->getDataGenerator()->enrol_user($user[$i]->id,$course->id);
+            }
         }
         
         $export = new exportAction(frontController::getInstance());

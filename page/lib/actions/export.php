@@ -32,13 +32,16 @@ class exportAction extends Action
     public function generateCsv($courseid) 
     {
         global $DB;
-        $csv = utf8_decode("nom;prénom;email\n");
-
-        $users = $DB->get_records_sql("SELECT u.id, u.firstname, u.lastname, u.email 
-                        FROM {user} as u
-                        INNER JOIN {user_enrolments} as ue ON u.id = ue.userid
-                        INNER JOIN {enrol} as e ON ue.enrolid = e.id
+        $csv = utf8_decode("nom;prénom;rôle;email\n");
+        $coursecontext = get_context_instance(CONTEXT_COURSE, $courseid);
+        $users = $DB->get_records_sql("SELECT u.id, u.firstname, u.lastname, u.email ,r.shortname as rolename
+                        FROM {enrol} as e
+                        INNER JOIN {user_enrolments} as ue ON e.id = ue.enrolid
+                        INNER JOIN {user} as u ON ue.userid = u.id
+                        LEFT OUTER JOIN {role_assignments} as ra ON ra.userid = u.id
+                        INNER JOIN {role} as r ON r.id = ra.roleid
                         WHERE e.courseid = '" . $courseid . "'
+                        AND ra.contextid = '".$coursecontext->id."'
                         ORDER BY u.lastname ASC");                
        
         $i=0;
@@ -49,6 +52,8 @@ class exportAction extends Action
                     . "\";\"" 
                     . $user->firstname 
                     . "\";\"" 
+                    . $user->rolename
+                    . "\";\""                     
                     . $user->email 
                     . "\"\n");
         }
@@ -61,7 +66,7 @@ class exportAction extends Action
         global $DB, $CFG;
         if (isset($_GET['id'])) {
             $course = $DB->get_record('course', array('id' => $_GET['id']));
-            $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+            
 
             if (
                 !has_capability(

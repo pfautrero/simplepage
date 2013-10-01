@@ -1,0 +1,60 @@
+.training_table {
+	box-shadow: 1px 1px 5px #555;
+	margin:20px auto 5px auto;
+	border-collapse: collapse;
+	border:1px solid #d0d5eb;
+	width:100%;
+}
+.training_table  td {
+	padding:5px;
+	text-align:center;
+	border:2px solid white;
+	margin:0;
+	height:20px;
+}
+.training_table th {
+	font-weight:900;
+	padding:5px;
+	text-align:center;
+	border:0px solid black;
+	margin:0;
+	background-color:#d0d5eb;
+}
+
+.training_table th {
+    font-size: 13px;
+    font-weight: 900;
+    padding: 8px;
+    background: #b9c9fe url('../images/gradhead.png') repeat-x;
+    border-top: 2px solid #d3ddff;
+    border-bottom: 1px solid #fff;
+    color: #039;
+}
+.training_table td {
+    padding: 8px;
+    border-bottom: 1px solid #fff;
+    color: #669;
+    border-top: 1px solid #fff;
+    background: #e8edff url('../images/gradback.png') repeat-x;
+}
+.training_table tfoot tr td {
+    background: #e8edff;
+    font-size: 16px;
+    color: #99c;
+    text-align:center;
+}
+.training_table tbody tr:hover td {
+    background: #d0dafd url('../images/gradhover.png') repeat-x;
+    color: #339;
+}
+.training_table a:hover {
+    text-decoration:underline;
+}
+.training_table input {
+	border:0px;
+	background-color:white;
+	width:20px;
+	padding:4px;
+	text-align:center;
+
+}

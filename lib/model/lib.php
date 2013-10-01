@@ -569,12 +569,12 @@ class SimplePageLib {
                                                        WHERE parent = '".$page_parente->id."'
                                                        ORDER BY sortorder ASC
                                                        ");
-                $result[$i]['name'] = $page_parente->nameone;
+                $result[$i]['name'] = stripslashes($page_parente->nameone);
                 $result[$i]['id'] = $page_parente->id;
                 $result[$i]['level'] = 0;
                 $i++;
                 foreach($pages_filles as $page_fille) {
-                        $result[$i]['name'] = $page_fille->nameone;
+                        $result[$i]['name'] = stripslashes($page_fille->nameone);
                         $result[$i]['id'] = $page_fille->id;				
                         $result[$i]['level'] = 1;
                         $i++;

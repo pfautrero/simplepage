@@ -336,11 +336,12 @@ class indexAction extends Action
                     }
                 } else {
                     if ($selected_column[$i]['display_mode'] == 2) {
-                        $Column[$key] .= "  <div class='module_mode_unavailable'>
-                                                    <div class='header_module'>" .
-                                $selected_column[$i]['header'] .
+                        $Column[$key] .= "  
+                                <div class='module_mode_unavailable'>
+                                <div class='header_module'>" .
+                                    $selected_column[$i]['header'] .
                                 "</div>" .
-                                $selected_column[$i]['content'] .
+                                    $selected_column[$i]['content'] .
                                 "</div>";
                     } elseif (isset($selected_column[$i]['completion']) && $selected_column[$i]['completion'] != 0) {
                         $Column[$key] .= "  <div class='module_mode_edit'>
@@ -350,9 +351,12 @@ class indexAction extends Action
                                 $selected_column[$i]['content'] .
                                 "</div>";
                     } else {
-                        $Column[$key] .= "  <div>
-                                                    <div class='header_module'>" .
-                                $selected_column[$i]['header'] .
+                        // add rectangle around each item event if it is not
+                        // in edit mode
+                        $Column[$key] .= "
+                                <div class='module_mode_edit'>
+                                <div class='header_module'>" .
+                                //$selected_column[$i]['header'] .
                                 "</div>" .
                                 $selected_column[$i]['content'] .
                                 "</div>";

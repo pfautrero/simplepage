@@ -1,14 +1,3 @@
-// ==================================================================
-//
-//	SimplePage
-//	Course format for Moodle 2.x
-//
-// ==================================================================
-
-@date : june 2013
-@version : 1.0
-@author : Pascal Fautrero - CRDP Versailles - France
-
 ## 1- INTRODUCTION
 
 FlexPage for Moodle 1.9 was a great plugin implemented by moodlerooms team. 
@@ -27,6 +16,7 @@ Now, you can do this migration thanks to SimplePage !
 
 
 Pre-requisites : 
+
 * php_curl enabled for php CLI.
 * root access on the server
 
@@ -42,16 +32,8 @@ SimplePage does not manage blocks anymore. Look at each course to control its bl
 But, to help you in your migration job, SimplePage displays your blocks at their original place. 
 Thus, in some pages, you will see your blocks twice : one version displayed by SimplePage and the version displayed by moodle2. 
 
-**Remark 2 :** In moodle2, left and right columns (called side-pre and side-post) can't be controlled by course format anymore. 
+**Remark 2 :** SimplePage does not need specific moodle theme. Thus, right and left columns are not managed by this course format.
 Fortunately, SimplePage is a naughty guy and forces moodle2 to display activities and resources in the correct column (using javascript).
-
-**Remark 3 :** In moodle2, a new block follows user during his navigation. 
-This block is located in the left column and is called "navigation block 2.0". Of course, you can disable this block. 
-If you want to use this new block and if you look at its content, you can see for each course some strange links named "Section 0", "Section 1"... 
-In fact, moodle uses these sections to store activities. But, FlexPage1 did not manage these sections. 
-SimplePage helps you to make a one-one relation between sections and pages. Manually for each course, just go in the "edit course" page and click on "make a one-one relation between sections and pages". To transform these sections in simple links (and not in toggle button to hide/show content section), go in the administrator block, "appearance", "navigation" and enable navlinkcoursesections.
-
-
 
 
 ## 3- NEW INSTALLATION

@@ -80,163 +80,163 @@
 
 $(document).ready(function() {
 	
-	// ================= Add modules in the right and left columns
-	if ($("#region-pre").length != 0) {
-		$("#region-pre").prepend("<?php echo $leftColumn; ?>");
-	}
-	else {
-            $("#region-main").prepend("<div style='float:left;width:300px;'><?php echo $leftColumn; ?></div>");
-	}
+    // ================= Add modules in the right and left columns
+    if ($("#region-pre").length != 0) {
+        $("#region-pre").prepend("<?php echo $leftColumn; ?>");
+    }
+    else {
+        $("#region-main").prepend("<div style='float:left;width:300px;'><?php echo $leftColumn; ?></div>");
+    }
 
-        if ($("#region-post").length != 0) {
-            $("#region-post").prepend("<?php echo $adminBlock; ?>");        
+    if ($("#region-post").length != 0) {
+        $("#region-post").prepend("<?php echo $adminBlock; ?>");        
+    }
+    else {
+        $("#region-main").prepend("<div style='margin:10px;float:right;width:300px;'><?php echo $adminBlock; ?></div>");
+    }
+
+    $('.squaredOne').mouseup(function(ev) {
+        //ev.preventDefault();
+        _current = $(this).children(':checkbox').attr('id');
+        $.ajax({
+            url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxassignment',
+            type: 'POST',
+            data: 'current='+_current+'&sesskey=<?php echo $sesskey; ?>',
+            success: function(data) {
+                    //
+            }
+        });
+    });            
+
+    <?php if ($editing) : ?>
+
+
+    $('.radiobutton').click(function(ev) {	
+        _id = $(this).attr('id');
+        _sesskey = $('#sesskey').attr('value');
+        $.ajax({
+            url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxmoduleposition',
+            type: 'POST',
+            data: 'position='+_id+'&sesskey='+_sesskey,
+            success: function(data) {
+                    //
+            }
+        });		
+    });
+
+    // ================== Handle ajax requests
+    $('.showhideactivities').click(function(ev) {
+        ev.preventDefault();
+        _current = $(this).parent().parent().children('.input_id').attr('name');
+        _sesskey = $('#sesskey').attr('value');
+        if ($(this).hasClass('hideactivity')) {
+            $(this).attr('src','<?php echo EYE_OPENED ?>');
         }
         else {
-            $("#region-main").prepend("<div style='margin:10px;float:right;width:300px;'><?php echo $adminBlock; ?></div>");
+            $(this).attr('src','<?php echo EYE_CLOSED ?>');
         }
-
-	$('.squaredOne').mouseup(function(ev) {
-            //ev.preventDefault();
-            _current = $(this).children(':checkbox').attr('id');
-            $.ajax({
-                url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxassignment',
-                type: 'POST',
-                data: 'current='+_current+'&sesskey=<?php echo $sesskey; ?>',
-                success: function(data) {
-                        //
-                }
-            });
-	});            
-            
-        <?php if ($editing) : ?>
-	
-	
-	$('.radiobutton').click(function(ev) {	
-		_id = $(this).attr('id');
-		_sesskey = $('#sesskey').attr('value');
-		$.ajax({
-			url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxmoduleposition',
-			type: 'POST',
-			data: 'position='+_id+'&sesskey='+_sesskey,
-			success: function(data) {
-				//
-			}
-		});		
-	});
-	
-	// ================== Handle ajax requests
-	$('.showhideactivities').click(function(ev) {
-            ev.preventDefault();
-            _current = $(this).parent().parent().children('.input_id').attr('name');
-            _sesskey = $('#sesskey').attr('value');
-            if ($(this).hasClass('hideactivity')) {
-                    $(this).attr('src','<?php echo EYE_OPENED ?>');
+        $(this).toggleClass('hideactivity');
+        $.ajax({
+            url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxshowactivity',
+            type: 'POST',
+            data: 'current='+_current+'&sesskey='+_sesskey,
+            success: function(data) {
+                    //
             }
-            else {
-                    $(this).attr('src','<?php echo EYE_CLOSED ?>');
-            }
-            $(this).toggleClass('hideactivity');
-            $.ajax({
-                    url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxshowactivity',
-                    type: 'POST',
-                    data: 'current='+_current+'&sesskey='+_sesskey,
-                    success: function(data) {
-                            //
-                    }
-            });
-	});
-	
-	// ====== Avoid replay during 10 sec
-	_generatePdf = false;
-	$('.page_pdf_url').click(function() {
-		if (!_generatePdf) {
-			_generatePdf = true;
-			$("#pdf_alert").fadeIn('slow');
-			setTimeout(hidealert, 10000);
-			return true;
-		}
-		return false;
-		
-	});	
-	function hidealert() {
-		_generatePdf = false;
-		$('.alert').fadeOut('slow');
-	}
-	
-	$('.deleteitem').click(function(ev) {
-		ev.preventDefault();
-		_parent = $(this).parent().parent();
-		_current = $(this).parent().parent().children('.input_id').attr('name');
-		_sesskey = $('#sesskey').attr('value');
-		$('#popup_delete').dialog({
-			closeOnEscape: true,
-			width:'550px',
-			buttons: { 
-				'confirmer la suppression': function() {
-					$(this).dialog('close');
-					$.ajax({
-						url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxdeleteitem',
-						type: 'POST',
-						data: 'current='+_current+'&sesskey='+_sesskey,
-						success: function(data) {
-							_parent.fadeOut('slow');
-						}
-					});									
-				}
-			},
-			modal:true 
-		});
-	});	
-	
-	$('.duplicate').click(function(ev) {
-            ev.preventDefault();
-            _current = $(this).parent().parent().children('.input_id').attr('name');
-            _sesskey = $('#sesskey').attr('value');
-            $('#popup_duplication').dialog({
-                closeOnEscape: true,
-                width:'550px',
-                buttons: { 
-                    'valider': function() {
-                        $(this).dialog('close');
-                        _pageid = $('#select_page_duplication :selected').attr('value');
+        });
+    });
 
-                        $.ajax({
-                            url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxduplicate',
-                            type: 'POST',
-                            data: 'current='+_current+'&pageid='+_pageid+'&sesskey='+_sesskey,
-                            success: function(data) {
-                                    //
-                            }
-                        });									
-                    }
-                },
-                modal:true 
-            });
-	});
+    // ====== Avoid replay during 10 sec
+    _generatePdf = false;
+    $('.page_pdf_url').click(function() {
+        if (!_generatePdf) {
+            _generatePdf = true;
+            $("#pdf_alert").fadeIn('slow');
+            setTimeout(hidealert, 10000);
+            return true;
+        }
+        return false;
 
-	$('.addnewmodule').click(function(ev) {
-            ev.preventDefault();
-            $.ajax({
-                url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxaddnewmodule',
-                type: 'POST',
-                data: 'current=<?php echo $pageid; ?>&sesskey=<?php echo $sesskey; ?>',
-                success: function(data) {
-                        //
+    });	
+    function hidealert() {
+        _generatePdf = false;
+        $('.alert').fadeOut('slow');
+    }
+
+    $('.deleteitem').click(function(ev) {
+        ev.preventDefault();
+        _parent = $(this).parent().parent();
+        _current = $(this).parent().parent().children('.input_id').attr('name');
+        _sesskey = $('#sesskey').attr('value');
+        $('#popup_delete').dialog({
+            closeOnEscape: true,
+            width:'550px',
+            buttons: { 
+                'confirmer la suppression': function() {
+                    $(this).dialog('close');
+                    $.ajax({
+                        url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxdeleteitem',
+                        type: 'POST',
+                        data: 'current='+_current+'&sesskey='+_sesskey,
+                        success: function(data) {
+                            _parent.fadeOut('slow');
+                        }
+                    });									
                 }
-            });
-            $('#popup').dialog({
-                closeOnEscape: true,
-                width:'400px',
-                modal:true
-            });
+            },
+            modal:true 
+        });
+    });	
 
-            $(".section-modchooser-link a").click(function(ev){
-                    $("#popup").dialog("destroy");
-            });
-	});	
-		
+    $('.duplicate').click(function(ev) {
+        ev.preventDefault();
+        _current = $(this).parent().parent().children('.input_id').attr('name');
+        _sesskey = $('#sesskey').attr('value');
+        $('#popup_duplication').dialog({
+            closeOnEscape: true,
+            width:'550px',
+            buttons: { 
+                'valider': function() {
+                    $(this).dialog('close');
+                    _pageid = $('#select_page_duplication :selected').attr('value');
 
-	<?php endif ?>	
+                    $.ajax({
+                        url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxduplicate',
+                        type: 'POST',
+                        data: 'current='+_current+'&pageid='+_pageid+'&sesskey='+_sesskey,
+                        success: function(data) {
+                                //
+                        }
+                    });									
+                }
+            },
+            modal:true 
+        });
+    });
+
+    $('.addnewmodule').click(function(ev) {
+        ev.preventDefault();
+        $.ajax({
+            url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxaddnewmodule',
+            type: 'POST',
+            data: 'current=<?php echo $pageid; ?>&sesskey=<?php echo $sesskey; ?>',
+            success: function(data) {
+                    //
+            }
+        });
+        $('#popup').dialog({
+            closeOnEscape: true,
+            width:'400px',
+            modal:true
+        });
+
+        $(".section-modchooser-link a").click(function(ev){
+                $("#popup").dialog("destroy");
+        });
+    });	
+
+
+    <?php endif ?>	
 
 });
 

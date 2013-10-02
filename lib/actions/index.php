@@ -148,8 +148,8 @@ class indexAction extends Action
             else if ($course_module['type'] == "choice") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='boite-dial' style='margin:5px auto;'>
-                                    <div class='boite-head-sondage'>
+                                    <div class='activity-box'>
+                                    <div class='activity-content activity-logo-survey'>
                                     <span>Sondage</span>
                                     <p><a href='" . $CFG->wwwroot . "/mod/choice/view.php?id=" . $course_module['cmid'] . "'>" .
                             $course_module['object']->name . "</a></p>
@@ -161,8 +161,8 @@ class indexAction extends Action
             else if ($course_module['type'] == "forum") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='boite-dial' style='margin:5px auto;'>
-                                    <div class='boite-head-forum'>
+                                    <div class='activity-box'>
+                                    <div class='activity-content activity-logo-forum'>
                                     <span>Forum</span>
                                     <br><a href='" . $CFG->wwwroot . "/mod/forum/view.php?id=" . $course_module['cmid'] . "'>" .
                             $course_module['object']->name . "</a>
@@ -174,8 +174,8 @@ class indexAction extends Action
             else if ($course_module['type'] == "quiz") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='boite-dial' style='margin:5px auto;'>
-                                    <div class='boite-head-test'>
+                                    <div class='activity-box'>
+                                    <div class='activity-content activity-logo-quiz'>
                                     <span>Test</span>
                                     <br><a href='" . $CFG->wwwroot . "/mod/quiz/view.php?id=" . $course_module['cmid'] . "'>" .
                             $course_module['object']->name . "</a>
@@ -187,8 +187,8 @@ class indexAction extends Action
             else if ($course_module['type'] == "wiki") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='boite-dial' style='margin:5px auto;'>
-                                    <div class='boite-head-wiki'>
+                                    <div class='activity-box'>
+                                    <div class='activity-content activity-logo-wiki'>
                                     <span>Wiki</span>
                                     <br><a href='" . $CFG->wwwroot . "/mod/wiki/view.php?id=" . $course_module['cmid'] . "'>" .
                             $course_module['object']->name . "</a>
@@ -200,8 +200,8 @@ class indexAction extends Action
             else if ($course_module['type'] == "data") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='boite-dial' style='margin:5px auto;'>
-                                    <div class='boite-head-bdd'>
+                                    <div class='activity-box'>
+                                    <div class='activity-content activity-logo-bdd'>
                                     <span>Base de données</span>
                                     <br><a href='" . $CFG->wwwroot . "/mod/data/view.php?id=" . $course_module['cmid'] . "'>" .
                             $course_module['object']->name . "</a>
@@ -213,8 +213,8 @@ class indexAction extends Action
             else if ($course_module['type'] == "feedback") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='boite-dial' style='margin:5px auto;'>
-                                    <div class='boite-head-feedback'>
+                                    <div class='activity-box'>
+                                    <div class='activity-content activity-logo-feedback'>
                                     <span>Feedback</span>
                                     <p><a href='" . $CFG->wwwroot . "/mod/feedback/view.php?id=" . $course_module['cmid'] . "'>" .
                             $course_module['object']->name . "</a>
@@ -227,8 +227,8 @@ class indexAction extends Action
             else if ($course_module['type'] == "chat") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='boite-dial' style='margin:5px auto;'>
-                                    <div class='boite-head-chat'>
+                                    <div class='activity-box'>
+                                    <div class='activity-content activity-logo-chat'>
                                     <span>Chat</span>
                                     <p><a href='" . $CFG->wwwroot . "/mod/chat/view.php?id=" . $course_module['cmid'] . "'>" .
                             $course_module['object']->name . "</a>
@@ -241,7 +241,15 @@ class indexAction extends Action
             else {
                 $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "<div class='module'>";
                 $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                            <a href='" . $CFG->wwwroot . "/mod/" . $course_module['type'] . "/view.php?id=" . $course_module['cmid'] . "'>" . $course_module['object']->name . "</a></div>";
+                    <a href='" . 
+                        $CFG->wwwroot . 
+                        "/mod/" . 
+                        $course_module['type'] . 
+                        "/view.php?id=" . 
+                        $course_module['cmid'] . 
+                        "'>" . 
+                        $course_module['object']->name . 
+                        "</a></div>";
             }
             $Column2[$course_module['position']][$course_module['sortorder']]['moduleid'] = $course_module['id'];
             $Column2[$course_module['position']][$course_module['sortorder']]['display_mode'] = $course_module['display_mode'];
@@ -371,7 +379,6 @@ class indexAction extends Action
     {
         global $CFG;
         $active_filters = SimplePageLib::getActiveFilters();
-        //$coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
         foreach ($active_filters as $currentfilter) {
             if (file_exists($CFG->dirroot . '/filter/' . $currentfilter->filter . '/filter.php')) {
                 require_once($CFG->dirroot . '/filter/' . $currentfilter->filter . '/filter.php');

@@ -358,7 +358,6 @@ ul.walkincourses{
 	color:white;
 }
 
-
 .addmodule_page{
     float:right;
     margin:20px;
@@ -454,7 +453,6 @@ ul.walkincourses{
 .modules_table tbody tr:hover td.dd-placeholder {
     background: #1ea9d0;
     color: #339;
-
 }
 
 .modules_table a:hover {
@@ -567,75 +565,22 @@ ul.walkincourses{
         margin-right:20px;
 }
 	
-/* boites picto*/
+/* boxes used to display activities */
 
-.boite-dial a {
+.activity-box {
+    width:160px;
+    margin:5px auto;
+}
+
+.activity-box a {
     color:#039;
 }
-.boite-dial {
-    width:160px;
-    margin-left:0px;
-}
-.boite-dial p {
+.activity-box p {
     margin:5px 0 0 0;
 }
-.boite-head { 
-    width:160px;
-    background-color:#66d02f;
-    background:-moz-linear-gradient( top, #b1e795, #66d02f);
-    background:-webkit-gradient( linear, left top, left bottom, from(#b1e795), to(#66d02f));
-    border-top:1px solid #FFF;
-    border-radius:5px; 
-    padding:5px;   
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-}
-.boite-head span {
-    background-image:url('/theme/athena/pix/help.png');
-    background-repeat:no-repeat;
-    padding:0 0 10px 30px;
-    color:white;
-    font-weight: bold; 
-    font-size: large;
-}
-.boite-foot2 { 
-    background-image:url('/theme/athena/pix/pointe2.png');
-    background-repeat:no-repeat; 
-    padding:10px;
-    margin-left: 0px;
-    width:150px;
-}
 
-.boite-foot { 
-    background-image:url('/theme/athena/pix/pointe.png');
-    background-repeat:no-repeat; 
-    padding:10px;
-    margin-left: 0px;
-    width:150px;
-}
-
-.boite-head-test { 
-    width:160px;
-    background-color:#01baff;
-    background:-moz-linear-gradient( top, #7fdcff, #01baff);
-    background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-    border-top:1px solid #FFF;
-    border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);}
-.boite-head-test span {
-    background-image:url('/theme/athena/pix/tester.png');
-    background-repeat:no-repeat;
-    padding:0 0 10px 30px;
-    color:white;
-    font-weight: bold; 
-    font-size: large;
-}
-
-.boite-head-bdd { 
-    width:160px;
+.activity-content {
+    width:100%;
     background-color:#01baff;
     background:-moz-linear-gradient( top, #7fdcff, #01baff);
     background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
@@ -645,8 +590,7 @@ ul.walkincourses{
     -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
     box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
 }
-.boite-head-bdd span {
-    background-image:url('/theme/athena/pix/bdd.png');
+.activity-content span {
     background-repeat:no-repeat;
     padding:0 0 10px 30px;
     color:white;
@@ -654,128 +598,36 @@ ul.walkincourses{
     font-size: large; 
     color:#FFF;
 }
-
-.boite-head-forum { 
-    width:160px;
-    background-color:#01baff;
-    background:-moz-linear-gradient( top, #7fdcff, #01baff);
-    background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-    border-top:1px solid #FFF;
-    border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
+.activity-logo-bdd span {
+    background-image:url('/course/format/page/lib/template/images/activity/bdd.png');
 }
-.boite-head-forum span {
-    background-image:url('/theme/athena/pix/forum.png');
-    background-repeat:no-repeat;
-    padding:0 0 10px 30px;
-    color:white;
-    font-weight: bold; 
-    font-size: large;
+.activity-logo-forum span {
+    background-image:url('/course/format/page/lib/template/images/activity/forum.png');
 }
-
-.boite-head-wiki { width:160px;background-color:#01baff;
-background:-moz-linear-gradient( top, #7fdcff, #01baff);
-background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-border-top:1px solid #FFF;
-border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    }
-.boite-head-wiki span {background-image:url('/theme/athena/pix/wiki.png');background-repeat:no-repeat;padding:0 0 10px 30px;color:white;font-weight: bold; font-size: large;}
-
-.boite-head-glossaire { width:160px;background-color:#01baff;
-background:-moz-linear-gradient( top, #7fdcff, #01baff);
-background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-border-top:1px solid #FFF;
-border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    }
-.boite-head-glossaire span {background-image:url('/theme/athena/pix/glossaire.png');background-repeat:no-repeat;padding:0 0 10px 30px;color:white;font-weight: bold; font-size: large;}
-
-.boite-head-visio { width:160px;background-color:#01baff;
-background:-moz-linear-gradient( top, #7fdcff, #01baff);
-background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-border-top:1px solid #FFF;
-border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    }
-.boite-head-visio span {background-image:url('/theme/athena/pix/visio.png');background-repeat:no-repeat;padding:0 0 10px 30px;color:white;font-weight: bold; font-size: large;}
-
-.boite-head-chat { width:160px;background-color:#01baff;
-background:-moz-linear-gradient( top, #7fdcff, #01baff);
-background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-border-top:1px solid #FFF;
-border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    }
-.boite-head-chat span {background-image:url('/theme/athena/pix/chat.png');background-repeat:no-repeat;padding:0 0 10px 30px;color:white;font-weight: bold; font-size: large;}
-
-.boite-head-devoirs { width:160px;background-color:#01baff;
-background:-moz-linear-gradient( top, #7fdcff, #01baff);
-background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-border-top:1px solid #FFF;
-border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    }
-.boite-head-devoirs span {background-image:url('/theme/athena/pix/devoirs.png');background-repeat:no-repeat;padding:0 0 10px 30px;color:white;font-weight: bold; font-size: large;}
-
-
-.boite-head-feedback { width:160px;background-color:#01baff;
-background:-moz-linear-gradient( top, #7fdcff, #01baff);
-background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-border-top:1px solid #FFF;
-border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    }
-.boite-head-feedback span {background-image:url('/theme/athena/pix/feedback.png');background-repeat:no-repeat;padding:0 0 10px 30px;color:white;font-weight: bold; font-size: large;}
-
-.boite-head-sondage { width:160px;background-color:#01baff;
-background:-moz-linear-gradient( top, #7fdcff, #01baff);
-background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-border-top:1px solid #FFF;
-border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    }
-.boite-head-sondage span {
-    background-image:url('/theme/athena/pix/sondage.png');
-    background-repeat:no-repeat;
-    padding:0 0 10px 30px;
-    color:white;
-    font-weight: bold; 
-    font-size: large;
+.activity-logo-wiki span {
+    background-image:url('/course/format/page/lib/template/images/activity/wiki.png');
 }
-
-.boite-head-formateur { 
-    width:160px;
-    background-color:#01baff;
-    background:-moz-linear-gradient( top, #7fdcff, #01baff);
-    background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
-    border-top:1px solid #FFF;
-    border-radius:5px; padding:5px;
-    -webkit-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    -moz-box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
-    box-shadow:1px 1px 3px #333 , 0 1px 0 rgba(51,51,51,0.5);
+.activity-logo-glossary span {
+    background-image:url('/course/format/page/lib/template/images/activity/glossaire.png');
 }
-.boite-head-formateur span {
-    background-image:url('/theme/athena/pix/formateur.png');
-    background-repeat:no-repeat;
-    padding:0 0 10px 30px;
-    color:white;
-    font-weight: bold; 
-    font-size: large;
-}	
+.activity-logo-visio span {
+    background-image:url('/course/format/page/lib/template/images/activity/visio.png');
+}
+.activity-logo-chat span {
+    background-image:url('/course/format/page/lib/template/images/activity/chat.png');
+}
+.activity-logo-lessons span {
+    background-image:url('/course/format/page/lib/template/images/activity/devoirs.png');
+}
+.activity-logo-feedback span {
+    background-image:url('/course/format/page/lib/template/images/activity/feedback.png');
+}
+.activity-logo-survey span {
+    background-image:url('/course/format/page/lib/template/images/activity/sondage.png');
+}
+.activity-logo-trainer span {
+    background-image:url('/course/format/page/lib/template/images/activity/formateur.png');
+}
+.activity-logo-quiz span {
+    background-image:url('/course/format/page/lib/template/images/activity/tester.png');
+}

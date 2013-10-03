@@ -50,9 +50,9 @@ function callback_page_load_content(&$navigation, $course, $coursenode) {
          * Manage breadcrumb
          */
         $PAGE->navbar->ignore_active();
-        $PAGE->navbar->add('Cours',new moodle_url('/course/'));
-        $categ = $DB->get_record_sql("SELECT name FROM {course_categories}  WHERE id = '".$course->category."' ");
-        $PAGE->navbar->add($categ->name,new moodle_url('/course/category.php?id='.$course->category));
+        //$PAGE->navbar->add('Cours',new moodle_url('/course/'));
+        //$categ = $DB->get_record_sql("SELECT name FROM {course_categories}  WHERE id = '".$course->category."' ");
+        //$PAGE->navbar->add($categ->name,new moodle_url('/course/category.php?id='.$course->category));
         $PAGE->navbar->add($course->fullname,new moodle_url('/course/view.php?id='.$course->id));
 
         /**
@@ -193,9 +193,9 @@ class format_page extends format_base {
          * Manage breadcrumb
          */
         $PAGE->navbar->ignore_active();
-        $PAGE->navbar->add('Cours',new moodle_url('/course/'));
-        $categ = $DB->get_record_sql("SELECT name FROM {course_categories}  WHERE id = '".$course->category."' ");
-        $PAGE->navbar->add($categ->name,new moodle_url('/course/category.php?id='.$course->category));
+        //$PAGE->navbar->add('Cours',new moodle_url('/course/'));
+        //$categ = $DB->get_record_sql("SELECT name FROM {course_categories}  WHERE id = '".$course->category."' ");
+        //$PAGE->navbar->add($categ->name,new moodle_url('/course/category.php?id='.$course->category));
         $PAGE->navbar->add($course->fullname,new moodle_url('/course/view.php?id='.$course->id));        
         /**
          * Manage navigation block

@@ -35,9 +35,7 @@
     margin:10px auto;
     text-align:center;
     padding:10px 5px 10px 5px;
-    /*float:left;*/
     border:1px solid #a7a9a9;
-    /*background-image: url("/theme/athena/pix/bg-btn-brown.png");*/
     background-color:#888C8C;
     @include border-radius(4px);
     color:#FFF;
@@ -59,8 +57,7 @@
 
 }
 .format_content {
-    /*background-color:#ffffff;
-    padding:5px;*/
+
 }
 #account_style {
     display: block;
@@ -155,7 +152,6 @@
     margin:4px auto;
     text-align:left;
     padding:10px 5px 10px 5px;
-    /*float:left;*/
     border:1px solid #777777;
     background:#F4F4F4;
     background: -moz-linear-gradient(top, #EEEEEE, #BBBBBB);
@@ -314,9 +310,7 @@ ul.walkincourses{
     margin:10px auto;
     text-align:center;
     padding:10px 5px 10px 5px;
-    /*float:left;*/
     border:1px solid #a7a9a9;
-    /*background-image: url("/theme/athena/pix/bg-btn-brown.png");*/
     background-color:#888C8C;
     @include border-radius(4px);
     color:#FFF;
@@ -329,9 +323,7 @@ ul.walkincourses{
     margin:10px auto;
     text-align:center;
     padding:10px 5px 10px 5px;
-    /*float:left;*/
     border:1px solid #a7a9a9;
-    /*background-image: url("/theme/athena/pix/bg-btn-brown2.png");*/
     background-color:#888C8C;
     @include border-radius(4px);
     color:#FFF;
@@ -344,10 +336,8 @@ ul.walkincourses{
     margin:10px auto;
     text-align:center;
     padding:10px 5px 10px 5px;
-    /*float:left;*/
     border:1px solid #a7a9a9;
     background-color:#888C8C;
-    /*background-image: url("/theme/athena/pix/bg-btn-brown3.png");*/
     @include border-radius(4px);
     color:#FFF;
     text-shadow:1px 1px 1px #000000;
@@ -395,7 +385,6 @@ ul.walkincourses{
         display:none;
 	@include box-shadow(1px 1px 5px #555);
 	margin:10px auto 5px auto;
-	/*border-collapse: collapse;*/
 	border:1px solid #d0d5eb;
 	width:100%;
 	border-spacing: 0px;
@@ -482,72 +471,72 @@ ul.walkincourses{
 /* thanks to http://cssdeck.com/labs/css-checkbox-styles */
 
 .squaredOne {
-	width: 28px;
-	height: 28px;
-	background: #fcfff4;
-	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
-	margin: 10px;
-        position: relative;
-        float:right;
-	-webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    width: 28px;
+    height: 28px;
+    background: #fcfff4;
+    background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+    margin: 10px;
+    position: relative;
+    float:right;
+    -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
 	
 }
 
 .squaredOne label {
-	cursor: pointer;
-	position: absolute;
-	width: 20px;
-	height: 20px;
-	left: 4px;
-	top: 4px;
+    cursor: pointer;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 4px;
+    top: 4px;
 
-	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
-	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
-	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+    -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+    -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
 
-	background: -webkit-linear-gradient(top, #222 0%, #45484d 100%);
-	background: -moz-linear-gradient(top, #222 0%, #45484d 100%);
-	background: -o-linear-gradient(top, #222 0%, #45484d 100%);
-	background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
-	background: linear-gradient(top, #222 0%, #45484d 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
+    background: -webkit-linear-gradient(top, #222 0%, #45484d 100%);
+    background: -moz-linear-gradient(top, #222 0%, #45484d 100%);
+    background: -o-linear-gradient(top, #222 0%, #45484d 100%);
+    background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
+    background: linear-gradient(top, #222 0%, #45484d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
 }
 
 .squaredOne label:after {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	filter: alpha(opacity=0);
-	opacity: 0;
-	content: '';
-	position: absolute;
-	width: 16px;
-	height: 16px;
-	background: #00bf00;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #00bf00;
 
-	background: -webkit-linear-gradient(top, #00bf00 0%, #009400 100%);
-	background: -moz-linear-gradient(top, #00bf00 0%, #009400 100%);
-	background: -o-linear-gradient(top, #00bf00 0%, #009400 100%);
-	background: -ms-linear-gradient(top, #00bf00 0%, #009400 100%);
-	background: linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: -webkit-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: -moz-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: -o-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: -ms-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: linear-gradient(top, #00bf00 0%, #009400 100%);
 
-	top: 2px;
-	left: 2px;
+    top: 2px;
+    left: 2px;
 
-	-webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-	-moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
-	box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
 }
 
 .squaredOne label:hover::after {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-	filter: alpha(opacity=30);
-	opacity: 0.3;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
+    opacity: 0.3;
 }
 
 .squaredOne input[type=checkbox] {

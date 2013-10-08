@@ -37,7 +37,6 @@ ul#menu {
     text-align:center;
     position:relative;
     padding: 4px 5px 4px 5px;
-    /*margin-right:30px;*/
     margin:7px  5px 0 5px;
     border:none;
     border:1px solid transparent;
@@ -104,7 +103,7 @@ ul#menu {
     @include box-shadow(2px 3px 3px #ccc , 0 1px 0 rgba(204,204,204,0.1));
 }
 
-.dropdown_1column {width: 140px;}
+.dropdown_1column {width: 280px;}
 .dropdown_2columns {width: 280px;}
 .dropdown_3columns {width: 420px;}
 .dropdown_4columns {width: 560px;}
@@ -232,7 +231,7 @@ ul#menu {
 	margin:0px 0px 0px 0px;
 	float:none;
 	text-align:left;
-	width:130px;
+	width:270px;
 	padding-bottom:5px;
 	text-indent:5px;
 }

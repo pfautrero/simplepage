@@ -18,6 +18,8 @@
 global $CFG;
 include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
 include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/page.php");
+
 
 /**
  * Version details
@@ -53,7 +55,9 @@ class ajaxdeletepageAction extends Action
 
         $current = $request->getParam('current');
         if (is_numeric($current)) {
-            $message = SimplePageLib::deletePage($current);
+            //$message = SimplePageLib::deletePage($current);
+            $page = new simplepage\Page($current);
+            $message = $page->delete();
         }
         $content = $message;
         $response->addVar('content', $content);

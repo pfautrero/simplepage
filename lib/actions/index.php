@@ -20,6 +20,7 @@
 global $CFG;
 include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
 include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/page.php");
 
 /**
  * prepare a page display
@@ -34,6 +35,13 @@ class indexAction extends Action
 
     public $coursecontext = null;
 
+    /**
+     * Retrieve modules of specified page and store them in an array
+     *
+     *
+     * @param int $page page id
+     * @param ref array &$Column2
+     */    
     public function retrieveModules($page, &$Column2) 
     {
         global $PAGE, $USER,$CFG;
@@ -258,7 +266,12 @@ class indexAction extends Action
         }
     }
 
-    
+    /**
+     * Retrieve blocks of specified page and store them in an array
+     *
+     * @param int $page page id
+     * @param ref array &$Column2
+     */        
     public function retrieveBlocks($page, &$Column2) 
     {
         global $PAGE, $OUTPUT;    
@@ -300,7 +313,15 @@ class indexAction extends Action
                 $Column2[$block->position][$block->sortorder]['display_mode'] = 1;
             }
     }
+
     
+    /**
+     * Generate page output 
+     *
+     *
+     * @param ref array &$Column source array
+     * @param ref array &$Column destination array
+     */        
 
     public function buildOutput(&$Column, &$Column2) 
     {
@@ -373,6 +394,16 @@ class indexAction extends Action
             }
         }    
     }
+    
+
+    
+    /**
+     * Apply moodle filters
+     *
+     *
+     * @param ref array &$Column page output
+     */        
+    
     
     
     public function applyFilters(&$Column) 
@@ -506,7 +537,13 @@ class indexAction extends Action
                 } else {
                     $pageparente = 0;
                 }
-                $page = SimplePageLib::addPage($request->getParam('page_name'), $id, $pageparente);
+                //$page = SimplePageLib::addPage($request->getParam('page_name'), $id, $pageparente);
+                $page_object = new simplepage\Page();
+                $page_object->_pagename = $request->getParam('page_name');
+                $page_object->_courseid = $id;
+                $page_object->_pageparentid = $pageparente;
+                $page_object->save();
+                $page = $page_object->_id;
             } else {
                 $message = get_string('voidNamePage', 'format_page');
             }

@@ -11,6 +11,7 @@
  */
 global $CFG;
 include_once($CFG->dirroot . '/course/format/page/lib/model/lib.php');
+include_once($CFG->dirroot . '/course/format/page/lib/model/page.php');
 
 class simplepage_lib_test extends advanced_testcase 
 {
@@ -35,13 +36,17 @@ class simplepage_lib_test extends advanced_testcase
                                'format' => 'page'
                            )
                        );
-        $pageid = SimplePageLib::addPage("First Page", $course->id, 0);
+        //$pageid = SimplePageLib::addPage("First Page", $course->id, 0);
+        $page = new simplepage\Page();
+        $page->_courseid = $course->id;
+        $page->save();
         $this->assertTrue(
-            $DB->record_exists('format_page', array('id' => $pageid))
+            $DB->record_exists('format_page', array('id' => $page->_id))
         );
-        SimplePageLib::deletePage($pageid);
+        //SimplePageLib::deletePage($pageid);
+        $page->delete();
         $this->assertFalse(
-            $DB->record_exists('format_page', array('id' => $pageid))
+            $DB->record_exists('format_page', array('id' => $page->_id))
         );
     }
 }

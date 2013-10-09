@@ -24,6 +24,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['page:addpages'] = 'page:addpages';
+$string['page:editpages'] = 'page:editpages';
+$string['page:managepages'] = 'page:managepages';
+$string['page:viewpagesettings'] = 'page:viewpagesettings';
 
 $string['assign'] = '';
 $string['book'] = '';

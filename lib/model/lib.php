@@ -884,22 +884,6 @@ class SimplePageLib {
     }
 	
     /**
-     * 
-     * 
-     * 
-     */
-	
-    public static function renamePage($pageid, $newpagename) {
-        global $DB;
-        $rec = $DB->get_record_sql("SELECT *
-                                        FROM {format_page}
-                                        WHERE id = '".$pageid."'
-                                          ");
-        $rec->nameone = addslashes($newpagename);
-        $DB->update_record('format_page', $rec);
-    }
-	
-    /**
      * Display modules and blocks for a specific page
      * 
      * @param int $current
@@ -1258,62 +1242,6 @@ class SimplePageLib {
         return $new_module;
     }
 
-    /**
-     * add a new page
-     * 
-     * @global type $DB
-     * @param string $pagename
-     * @param int $courseid
-     * @param int $pageparentid
-     * @return int $new_id
-     */
-        
-    public static function addPage($pagename,$courseid,$pageparentid) {
-        global $DB;        
-        $params = new stdClass;
-        $params->parent = $pageparentid;
-        $max = $DB->get_records_sql("SELECT MAX(sortorder) as max
-                                     FROM {format_page}
-                                     WHERE courseid = $courseid
-                                     AND parent='".$pageparentid."'
-                                     ");
-        $max = array_values($max);
-        $params->sortorder = $max[0]->max + 1;
-        $params->nameone = addslashes($pagename);
-        $params->nametwo = addslashes($pagename);
-        $params->display = 7;
-        $params->courseid = $courseid;
-        $params->prefcenterwidth = 600;
-        $params->showbuttons = 3;
-        $new_id = $DB->insert_record('format_page', $params, true);
-        return $new_id;
-     }    
-    /**
-     * 
-     * 
-     * 
-     */
-	
-    public static function deletePage($pageid) {
-        global $DB;
-        $rec = $DB->get_records_sql("SELECT * FROM {format_page}  WHERE parent = '".$pageid."' ");
-        if (!$rec) {
-            $rec = $DB->get_records_sql("SELECT * FROM {format_page_items}  WHERE pageid = '".$pageid."' ");
-            if (!$rec) {
-                $page = array();
-                $page['id'] = $pageid;
-                $DB->delete_records('format_page', $page);	
-                $message = 'done';
-            }
-            else {
-                $message = get_string('warningDeletePage', 'format_page');
-            }
-        }
-        else {
-            $message = "La page ne peut pas être supprimée car elle contient au moins une sous-page.";
-        }
-        return trim($message);
-    }
     /**
      * 
      * 

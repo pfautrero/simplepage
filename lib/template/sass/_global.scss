@@ -267,16 +267,16 @@ ul.walkincourses{
 	cursor:pointer;
 }
 .duplicate:hover {
-	cursor:pointer;
+    cursor:pointer;
 }
 .moveup:hover {
-	cursor:pointer;
+    cursor:pointer;
 }
 .movedown:hover {
-	cursor:pointer;
+    cursor:pointer;
 }
 .deleteitem:hover {
-	cursor:pointer;
+    cursor:pointer;
 }
 .deletepage{
     float:right;
@@ -382,13 +382,13 @@ ul.walkincourses{
     background-color:#aaaaaa;	
 }
 .modules_table {
-        display:none;
-	@include box-shadow(1px 1px 5px #555);
-	margin:10px auto 5px auto;
-	border:1px solid #d0d5eb;
-	width:100%;
-	border-spacing: 0px;
-        background-color: #ffffff;
+    display:none;
+    @include box-shadow(1px 1px 5px #555);
+    margin:10px auto 5px auto;
+    border:1px solid #d0d5eb;
+    width:100%;
+    border-spacing: 0px;
+    background-color: #ffffff;
 }
 .modules_table th {
     text-align:center;
@@ -448,11 +448,11 @@ ul.walkincourses{
     text-decoration:underline;
 }
 .modules_table input {
-	border:0px;
-	background-color:white;
-	width:20px;
-	padding:3px;
-	text-align:center;
+    border:0px;
+    background-color:white;
+    width:20px;
+    padding:3px;
+    text-align:center;
 }
 
 .cell input[type="radio"] {
@@ -540,18 +540,18 @@ ul.walkincourses{
 }
 
 .squaredOne input[type=checkbox] {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 .squaredOne input[type=checkbox]:checked + label:after {
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-	filter: alpha(opacity=100);
-	opacity: 1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
 }
 
 .page_pdf_url {
-        float: right;
-        margin-right:20px;
+    float: right;
+    margin-right:20px;
 }
 	
 /* boxes used to display activities */

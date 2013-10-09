@@ -18,6 +18,7 @@
 global $CFG;
 include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
 include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/page.php");
 
 /**
  * Version details
@@ -51,7 +52,10 @@ class ajaxrenameAction extends Action
         }
         $current = $request->getParam('current');
         $name = htmlentities($request->getParam('name'), ENT_QUOTES, 'UTF-8');
-        SimplePageLib::renamePage($current, $name);
+        //SimplePageLib::renamePage($current, $name);
+        $page = new simplepage\Page($current);
+        $page->rename($name);
+        $page->save();
         $content = "done";
         $response->addVar('content', $content);
         $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");

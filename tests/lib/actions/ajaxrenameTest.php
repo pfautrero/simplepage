@@ -12,6 +12,7 @@ if (!isset($plugin))
     $plugin = new stdClass();
 include_once($CFG->dirroot . '/course/format/page/version.php');
 include_once($CFG->dirroot . '/course/format/page/lib/model/lib.php');
+include_once($CFG->dirroot . '/course/format/page/lib/model/page.php');
 include_once($CFG->dirroot 
     . '/course/format/page/lib/controller/frontcontroller.class.php');
 include_once($CFG->dirroot . '/course/format/page/globals.php');
@@ -33,8 +34,12 @@ class ajaxrename_test extends advanced_testcase
                                    'format' => 'page'
                                    )
                        );
-        $pageid = SimplePageLib::addPage("First Page", $COURSE->id, 0);
+        //$pageid = SimplePageLib::addPage("First Page", $COURSE->id, 0);
 
+        $page = new simplepage\Page();
+        $page->_courseid = $COURSE->id;
+        $pageid = $page->save();
+        
         $PAGE = new moodle_page();
         $PAGE->set_context(get_context_instance(CONTEXT_COURSE, $COURSE->id));
 

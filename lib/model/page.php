@@ -148,6 +148,7 @@ class Page {
     }     
 
     /**
+     * NOT YET AVAILABLE
      * Display modules and blocks for a specific page
      * 
      * @param int $this->_id
@@ -328,7 +329,7 @@ class Page {
      * 
      */
 	
-    public static function showhidePage() {
+    public function toggleVisibility() {
         if ($this->_display == 0) {
                 $this->_display = 7;
         }

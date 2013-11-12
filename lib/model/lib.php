@@ -842,47 +842,7 @@ class SimplePageLib {
         $rec->parent = $parent;
         $DB->update_record('format_page', $rec);
     }
-    /**
-     * 
-     * 
-     * 
-     */
-	
-    public static function showhidePage($current) {
-        global $DB;
-        $rec = $DB->get_record_sql("SELECT *
-                                        FROM {format_page}
-                                        WHERE id = '".$current."'
-                                          ");
-        if ($rec->display == 0) {
-                $rec->display = 7;
-        }
-        else {
-                $rec->display = 0;
-        }
-        $DB->update_record('format_page', $rec);
-    }
 
-    /**
-     * 
-     * 
-     * 
-     */
-	
-    public static function isPageHidden($pageid) {
-        global $DB;
-        $rec = $DB->get_record_sql("SELECT *
-                                        FROM {format_page}
-                                        WHERE id = '".$pageid."'
-                                          ");
-        if ($rec) {		
-            if ($rec->display == 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-	
     /**
      * Display modules and blocks for a specific page
      * 

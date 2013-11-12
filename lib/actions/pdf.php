@@ -25,6 +25,7 @@
 global $CFG;
 include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
 include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/page.php");
 
 class pdfAction extends Action 
 {
@@ -59,7 +60,8 @@ class pdfAction extends Action
 
         $course = $DB->get_record('course', array('id' => $id));
         $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
-        if (SimplePageLib::isPageHidden($page)) {
+        $page_object = new simplepage\Page($page);
+        if ($page_object->isHidden()) {
             if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
                 $page = null;
             }

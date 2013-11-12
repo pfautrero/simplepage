@@ -544,6 +544,7 @@ class indexAction extends Action
                 $page_object->_pageparentid = $pageparente;
                 $page_object->save();
                 $page = $page_object->_id;
+                unset($page_object);
             } else {
                 $message = get_string('voidNamePage', 'format_page');
             }
@@ -557,6 +558,8 @@ class indexAction extends Action
             }
         }
         if ($page) {
+            $page_object = new simplepage\Page($page);
+            
             $_SESSION[$entry][$id]['lastpagevisited'] = $page;
             $tab = SimplePageLib::getTab($page);
             $Column = array();$Column['l'] = null;$Column['r'] = null;
@@ -564,7 +567,7 @@ class indexAction extends Action
             $Column2 = array();$Column2['l'] = array();$Column2['r'] = array();
             $Column2['c'] = array();
 
-            if (SimplePageLib::isPageHidden($page)) {
+            if ($page_object->isHidden()) {
                 if (has_capability('moodle/course:manageactivities', $this->coursecontext)) {
                     $message = 'Page cachée';
                 } else {

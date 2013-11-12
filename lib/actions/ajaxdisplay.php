@@ -17,6 +17,7 @@
 global $CFG;
 include_once($CFG->dirroot . "/course/format/page/lib/actions/action.class.php");
 include_once($CFG->dirroot . "/course/format/page/lib/model/lib.php");
+include_once($CFG->dirroot . "/course/format/page/lib/model/page.php");
 
 /**
  * Version details
@@ -49,8 +50,11 @@ class ajaxdisplayAction extends Action
             return;
         }
         $current = $request->getParam('current');
-        SimplePageLib::showhidePage($current);
-        $content = "done";
+        $page = new simplepage\Page($current);
+        $page->toggleVisibility();
+        $page->save();
+        //SimplePageLib::showhidePage($current);
+        $content = $page->_display;
         $response->addVar('content', $content);
         $this->render($CFG->dirroot . "/course/format/page/lib/template/ajaxSuccess.php");
         $this->printOut();

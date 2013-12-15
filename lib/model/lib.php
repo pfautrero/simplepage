@@ -1097,7 +1097,7 @@ class SimplePageLib {
 	
 	public static function getLastIdModuleOfPage($current) {
             global $DB;
-            $rec = $DB->get_record_sql("SELECT *
+            $rec = $DB->get_record_sql("SELECT courseid
                                             FROM {format_page}
                                             WHERE id = '".$current."'
                                               ");
@@ -1117,12 +1117,13 @@ class SimplePageLib {
      */
     public static function getLastIdOrphanModule($pageid,$timestamp) {
         global $DB;
-        $rec = $DB->get_record_sql("SELECT * FROM {format_page} WHERE id = '".$pageid."' ");
+        $rec = $DB->get_record_sql("SELECT courseid FROM {format_page} WHERE id = '".$pageid."' ");
         $module = $DB->get_record_sql(" SELECT cm.id 
                                         FROM {course_modules} AS cm LEFT OUTER JOIN {format_page_items} AS fpi ON fpi.cmid=cm.id
                                         WHERE cm.course='".$rec->courseid."'
                                         AND added > '".$timestamp."'
-                                        AND fpi.cmid IS NULL");
+                                        AND fpi.cmid IS NULL
+                                        ORDER BY added DESC");
         if ($module) {
             $return = $module->id;
         }
@@ -1140,7 +1141,7 @@ class SimplePageLib {
      */
     public static function getLastModuleTimestamp($pageid) {
         global $DB;
-        $rec = $DB->get_record_sql("SELECT * FROM {format_page} WHERE id = '".$pageid."' ");
+        $rec = $DB->get_record_sql("SELECT courseid FROM {format_page} WHERE id = '".$pageid."' ");
         if ($rec->courseid == $_SESSION['courseid']) {
             $module = $DB->get_record_sql("SELECT MAX(added) as max_timestamp FROM {course_modules} WHERE course = '".$rec->courseid."' ");									  
             $return=$module->max_timestamp;            

@@ -157,12 +157,18 @@ class indexAction extends Action
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
-                                    <div class='activity-content activity-logo-survey'>
-                                    <span>Sondage</span>
-                                    <p><a href='" . $CFG->wwwroot . "/mod/choice/view.php?id=" . $course_module['cmid'] . "'>" .
-                            $course_module['object']->name . "</a></p>
-                                    </div>
+                                    <div class='activity-module activity-content activity-logo-survey'>
+                                        <span>Base de données</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/choice/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
             // ==================== Module forum
@@ -170,25 +176,41 @@ class indexAction extends Action
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
-                                    <div class='activity-content activity-logo-forum'>
-                                    <span>Forum</span>
-                                    <br><a href='" . $CFG->wwwroot . "/mod/forum/view.php?id=" . $course_module['cmid'] . "'>" .
-                            $course_module['object']->name . "</a>
-                                    </div>
+                                    <div class='activity-module activity-content activity-logo-forum'>
+                                        <span>Base de données</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/forum/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
             // ==================== Module quiz
             else if ($course_module['type'] == "quiz") {
+                
+                
+                $page_options = unserialize($course_module['object']->displayoptions);
+                
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
-                                    <div class='activity-content activity-logo-quiz'>
-                                    <span>Test</span>
-                                    <br><a href='" . $CFG->wwwroot . "/mod/quiz/view.php?id=" . $course_module['cmid'] . "'>" .
-                            $course_module['object']->name . "</a>
-                                    </div>
+                                    <div class='activity-module activity-content activity-logo-quiz'>
+                                        <span>Base de données</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/quiz/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
             // ==================== Module wiki
@@ -196,25 +218,38 @@ class indexAction extends Action
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
-                                    <div class='activity-content activity-logo-wiki'>
-                                    <span>Wiki</span>
-                                    <br><a href='" . $CFG->wwwroot . "/mod/wiki/view.php?id=" . $course_module['cmid'] . "'>" .
-                            $course_module['object']->name . "</a>
-                                    </div>
+                                    <div class='activity-module activity-content activity-logo-wiki'>
+                                        <span>Base de données</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/wiki/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
             // ==================== Module data
             else if ($course_module['type'] == "data") {
+                
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
-                                    <div class='activity-content activity-logo-bdd'>
-                                    <span>Base de données</span>
-                                    <br><a href='" . $CFG->wwwroot . "/mod/data/view.php?id=" . $course_module['cmid'] . "'>" .
-                            $course_module['object']->name . "</a>
-                                    </div>
+                                    <div class='activity-module activity-content activity-logo-bdd'>
+                                        <span>Base de données</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/data/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
             // ==================== Module feedback
@@ -222,13 +257,18 @@ class indexAction extends Action
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
-                                    <div class='activity-content activity-logo-feedback'>
-                                    <span>Feedback</span>
-                                    <p><a href='" . $CFG->wwwroot . "/mod/feedback/view.php?id=" . $course_module['cmid'] . "'>" .
-                            $course_module['object']->name . "</a>
-                                    </p>
-                                    </div>
+                                    <div class='activity-module activity-content activity-logo-feedback'>
+                                        <span>Base de données</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/feedback/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
             // ==================== Module chat
@@ -236,13 +276,18 @@ class indexAction extends Action
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
-                                    <div class='activity-content activity-logo-chat'>
-                                    <span>Chat</span>
-                                    <p><a href='" . $CFG->wwwroot . "/mod/chat/view.php?id=" . $course_module['cmid'] . "'>" .
-                            $course_module['object']->name . "</a>
-                                    </p>
-                                    </div>
+                                    <div class='activity-module activity-content activity-logo-chat'>
+                                        <span>Base de données</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/chat/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
             // ==================== Module non reconnu

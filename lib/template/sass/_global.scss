@@ -569,7 +569,7 @@ ul.walkincourses{
 }
 
 .activity-content {
-    width:100%;
+    width:auto;
     background-color:#01baff;
     background:-moz-linear-gradient( top, #7fdcff, #01baff);
     background:-webkit-gradient( linear, left top, left bottom, from(#7fdcff), to(#01baff));
@@ -620,3 +620,56 @@ ul.walkincourses{
 .activity-logo-quiz span {
     background-image:url('/course/format/page/lib/template/images/activity/tester.png');
 }
+
+
+#region-main .activity-box {
+    width:auto;
+    margin:0px;
+}
+
+#region-main .activity-box .module{
+    padding:1em; 
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, .3);
+    font-family:Arial, Helvetica, sans-serif;}
+
+#region-main .activity-box .activity-content {
+        margin-top:5px;
+        color:#333;
+        border-top:1px solid #90c7f3;
+        border-bottom:1px solid #90c7f3;
+        filter: dropshadow(color=#fff, offx=1, offy=1);
+        background: rgb(103,182,244);
+        background: -moz-linear-gradient(top,  rgba(103,182,244,1) 0%, rgba(58,144,206,1) 99%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(103,182,244,1)), color-stop(99%,rgba(58,144,206,1)));
+        background: -webkit-linear-gradient(top,  rgba(103,182,244,1) 0%,rgba(58,144,206,1) 99%);
+        background: -o-linear-gradient(top,  rgba(103,182,244,1) 0%,rgba(58,144,206,1) 99%);
+        background: -ms-linear-gradient(top,  rgba(103,182,244,1) 0%,rgba(58,144,206,1) 99%);
+        background: linear-gradient(to bottom,  rgba(103,182,244,1) 0%,rgba(58,144,206,1) 99%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#67b6f4', endColorstr='#3a90ce',GradientType=0 );
+}
+#region-main .activity-box .activity-content h1 {color:white;font-size:2em; font-family:Arial, Helvetica, sans-serif; background-image:url(icone.png);padding-left:1.5em;background-repeat: no-repeat;font-weight:bold;}
+#region-main .activity-box .activity-content p{text-shadow: 1px 1px 2px #b6e0ff;}
+
+.activity-box .description {
+    display:none;
+}
+#region-main .activity-box .description {
+        display:block;
+        color:white;
+        padding:5px;
+        text-shadow: 1px 1px 2px #747474;
+        border-bottom:3px solid #888888;
+        border-top:1px solid #cdcdcd;
+        filter: dropshadow(color=#000, offx=1, offy=1);
+        background: rgb(198,197,197);
+        background: -moz-linear-gradient(top,  rgba(198,197,197,1) 0%, rgba(176,176,176,1) 99%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(198,197,197,1)), color-stop(99%,rgba(176,176,176,1)));
+        background: -webkit-linear-gradient(top,  rgba(198,197,197,1) 0%,rgba(176,176,176,1) 99%);
+        background: -o-linear-gradient(top,  rgba(198,197,197,1) 0%,rgba(176,176,176,1) 99%);
+        background: -ms-linear-gradient(top,  rgba(198,197,197,1) 0%,rgba(176,176,176,1) 99%);
+        background: linear-gradient(to bottom,  rgba(198,197,197,1) 0%,rgba(176,176,176,1) 99%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c6c5c5', endColorstr='#b0b0b0',GradientType=0 );
+}
+
+.activity-box > .activity-module:first-child { border-top-left-radius: .8em; border-top-right-radius: .8em; }
+.activity-box > .activity-module:last-child { border-bottom-left-radius: .8em; border-bottom-right-radius: .8em; }

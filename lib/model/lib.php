@@ -542,6 +542,7 @@ class SimplePageLib {
                         $modules[$i]['context'] = $modulecontext->id;
                         $modules[$i]['display_mode'] = $display;
                         $modules[$i]['completion'] = $module_completion;
+                        $modules[$i]['showdescription'] = $course_module->showdescription;
                         $i++;
                     }
                 }
@@ -725,7 +726,7 @@ class SimplePageLib {
                     echo "<img class='linknextpage' src='".NEXT_DISABLED."' alt='lien suivant' title='".get_string('title7', 'format_page')."' />";
                 }
                 echo "<input class='input_course' name=\"".$tab[$i]->id."\" value=\"".stripslashes($tab[$i]->nameone)."\" size='35' title='".get_string('title8', 'format_page')."'/>";
-                echo "<img class='edit_title' src='".EDIT."' alt='éditer le titre' title='".get_string('title7', 'format_page')."' />";                        
+                echo "<img class='edit_title' src='".EDIT."' alt='éditer le titre' title='".get_string('editTitle', 'format_page')."' />";                        
                 //echo "<a href='/course/view.php?id=".$tab[$i]->courseid."&page=".$tab[$i]->id."'><img style='margin:2px;width:17px;' src='".SEE_PAGE."' alt='voir la page' title='Voir la page' /></a>";
                 echo "<img class='deletepage' src='".DELETE."' alt='supprimer' title='".get_string('title9', 'format_page')."' />";	
                 echo "<table class='dd modules_table hideactivities' id='table_".$tab[$i]->id."'>

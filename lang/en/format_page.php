@@ -75,6 +75,7 @@ $string['title12'] = "show-hide";
 $string['title13'] = "delete this item";
 $string['title14'] = "deleting this item won't delete the block";
 $string['title15'] = "move this item to a new page";
+$string['editTitle'] = "edit title";
 
 $string['label'] = 'Label';
 $string['workshop'] = 'Workshop';

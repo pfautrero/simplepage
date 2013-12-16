@@ -75,6 +75,7 @@ $string['title12'] = "montrer-cacher";
 $string['title13'] = "suppression de cet item";
 $string['title14'] = "la suppression de cet item n'entraine pas la suppression du bloc";
 $string['title15'] = "déplacer cet item vers une page";
+$string['editTitle'] = "éditer le titre";
 
 $string['label'] = 'Insérer une étiquette';
 $string['workshop'] = 'Atelier';

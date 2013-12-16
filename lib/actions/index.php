@@ -158,7 +158,7 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
                                     <div class='activity-module activity-content activity-logo-survey'>
-                                        <span>Base de données</span>
+                                        <span>Sondage</span>
                                         <br><a href='" . $CFG->wwwroot . "/mod/choice/view.php?id=" . $course_module['cmid'] . "'>" .
                                         $course_module['object']->name . "</a>
                                     </div>";
@@ -177,7 +177,7 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
                                     <div class='activity-module activity-content activity-logo-forum'>
-                                        <span>Base de données</span>
+                                        <span>Forum</span>
                                         <br><a href='" . $CFG->wwwroot . "/mod/forum/view.php?id=" . $course_module['cmid'] . "'>" .
                                         $course_module['object']->name . "</a>
                                     </div>";
@@ -200,7 +200,7 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
                                     <div class='activity-module activity-content activity-logo-quiz'>
-                                        <span>Base de données</span>
+                                        <span>Quiz</span>
                                         <br><a href='" . $CFG->wwwroot . "/mod/quiz/view.php?id=" . $course_module['cmid'] . "'>" .
                                         $course_module['object']->name . "</a>
                                     </div>";
@@ -219,7 +219,7 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
                                     <div class='activity-module activity-content activity-logo-wiki'>
-                                        <span>Base de données</span>
+                                        <span>Wiki</span>
                                         <br><a href='" . $CFG->wwwroot . "/mod/wiki/view.php?id=" . $course_module['cmid'] . "'>" .
                                         $course_module['object']->name . "</a>
                                     </div>";
@@ -258,7 +258,7 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
                                     <div class='activity-module activity-content activity-logo-feedback'>
-                                        <span>Base de données</span>
+                                        <span>Feedback</span>
                                         <br><a href='" . $CFG->wwwroot . "/mod/feedback/view.php?id=" . $course_module['cmid'] . "'>" .
                                         $course_module['object']->name . "</a>
                                     </div>";
@@ -277,7 +277,7 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
                                     <div class='activity-module activity-content activity-logo-chat'>
-                                        <span>Base de données</span>
+                                        <span>Chat</span>
                                         <br><a href='" . $CFG->wwwroot . "/mod/chat/view.php?id=" . $course_module['cmid'] . "'>" .
                                         $course_module['object']->name . "</a>
                                     </div>";

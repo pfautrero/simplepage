@@ -137,12 +137,21 @@ class indexAction extends Action
             // ==================== Module url
             else if ($course_module['type'] == "url") {
                 if ($course_module['object']->name) {
+                                    
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='module'>
-                                    <a href='" . $course_module['object']->externalurl . "'>" .
-                            $course_module['object']->name . "
-                                    </a>
+                                    <div class='activity-box'>
+                                    <div class='activity-module activity-content activity-logo-survey'>
+                                        <a href='" . $course_module['object']->externalurl . "'>" .
+                                        $course_module['object']->name . "</a>
                                     </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";                    
+                    
                 } else {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div>

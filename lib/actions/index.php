@@ -180,6 +180,63 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
                 }
             }
+            // ==================== Module dossier
+            else if ($course_module['type'] == "folder") {
+                if ($course_module['object']->name) {
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                                    <div class='activity-box'>
+                                    <div class='activity-module activity-content activity-logo-folder'>
+                                        <span>Fichiers</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/folder/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
+                                    </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
+                }
+            }
+            // ==================== Module Ressource
+            else if ($course_module['type'] == "resource") {
+                if ($course_module['object']->name) {
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                                    <div class='activity-box'>
+                                    <div class='activity-module activity-content activity-logo-resource'>
+                                        <span>Ressource</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/resource/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
+                                    </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
+                }
+            }                        
+            // ==================== Module glossaire
+            else if ($course_module['type'] == "glossary") {
+                if ($course_module['object']->name) {
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                                    <div class='activity-box'>
+                                    <div class='activity-module activity-content activity-logo-glossary'>
+                                        <span>Glossaire</span>
+                                        <br><a href='" . $CFG->wwwroot . "/mod/glossary/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        $course_module['object']->name . "</a>
+                                    </div>";
+                    if ($course_module['showdescription']) {
+                        $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
+                            <div class='activity-module description'>" .
+                                $course_module['object']->intro .
+                            "</div>";
+                    }
+                    $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "</div>";
+                }
+            }                        
             // ==================== Module forum
             else if ($course_module['type'] == "forum") {
                 if ($course_module['object']->name) {

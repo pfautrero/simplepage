@@ -492,9 +492,9 @@ class indexAction extends Action
                                 "</div>";
                     } else {
                         // add rectangle around each item event if it is not
-                        // in edit mode
+                        // in edit mode -> removed on 03/10/2014
                         $Column[$key] .= "
-                                <div class='module_mode_edit'>
+                                <div>
                                 <div class='header_module'>" .
                                 //$selected_column[$i]['header'] .
                                 "</div>" .

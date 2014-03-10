@@ -266,7 +266,7 @@ class indexAction extends Action
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                                     <div class='activity-box'>
                                     <div class='activity-module activity-content activity-logo-quiz'>
-                                        <span>Quiz</span>
+                                        <span>Test</span>
                                         <br><a href='" . $CFG->wwwroot . "/mod/quiz/view.php?id=" . $course_module['cmid'] . "'>" .
                                         $course_module['object']->name . "</a>
                                     </div>";

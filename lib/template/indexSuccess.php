@@ -23,7 +23,7 @@
     <div id="pdf_alert" class="alert" style="display:none;">Veuillez patienter...</div>
 
     <?php if ($rightColumn): ?>
-    <div class='center' style='float:left;width:78%;'>
+    <div class='center module_mode_edit' style='float:left;width:78%;'>
     <?php echo $centerColumn; ?>
     </div>		
     <div class='right' style='float:right;width:20%;'>
@@ -31,7 +31,7 @@
     </div>
 
     <?php else: ?>
-    <div class='center' style='width:98%;'>
+    <div class='center module_mode_edit' style='width:98%;'>
     <?php echo $centerColumn; ?>
     </div>			
     <?php endif; ?>

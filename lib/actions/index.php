@@ -484,7 +484,7 @@ class indexAction extends Action
                                     $selected_column[$i]['content'] .
                                 "</div>";
                     } elseif (isset($selected_column[$i]['completion']) && $selected_column[$i]['completion'] != 0) {
-                        $Column[$key] .= "  <div class='module_mode_edit'>
+                        $Column[$key] .= "  <div>
                                                     <div class='header_module'>" .
                                 $selected_column[$i]['header'] .
                                 "</div>" .

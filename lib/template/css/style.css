@@ -1378,10 +1378,11 @@ ul.walkincourses {
   height: 32px;
   width: 159px;
   text-align: right;
-  float: right;
+  margin-left: auto;
+  margin-right: 0px;
 }
 
-/* line 564, ../sass/_global.scss */
+/* line 565, ../sass/_global.scss */
 .check-box-validate .tip {
   display: inline-block;
   margin: 0px;
@@ -1397,7 +1398,7 @@ ul.walkincourses {
   transition: all 250ms ease-out;
 }
 
-/* line 578, ../sass/_global.scss */
+/* line 579, ../sass/_global.scss */
 .tip p {
   display: table-cell;
   /* make vertical-align available */
@@ -1408,13 +1409,13 @@ ul.walkincourses {
   color: #CCC;
 }
 
-/* line 586, ../sass/_global.scss */
+/* line 587, ../sass/_global.scss */
 .check-box-validate:hover .tip {
   left: 0;
   opacity: 1;
 }
 
-/* line 591, ../sass/_global.scss */
+/* line 592, ../sass/_global.scss */
 .check-box-validate .squaredOne {
   display: inline-block;
   width: 32px;
@@ -1426,59 +1427,59 @@ ul.walkincourses {
   border-radius: 3px;
 }
 
-/* line 600, ../sass/_global.scss */
+/* line 601, ../sass/_global.scss */
 .check-box-validate input[type="checkbox"] {
   display: none;
 }
 
-/* line 603, ../sass/_global.scss */
+/* line 604, ../sass/_global.scss */
 .squaredOne {
   background-position: top;
   background: url(../images/validated-hover.png) center center no-repeat #333333;
 }
 
-/* line 607, ../sass/_global.scss */
+/* line 608, ../sass/_global.scss */
 .squaredOne:hover {
   background-position: center;
   background: url(../images/validated-hover2.png) center center no-repeat #333333;
 }
 
-/* line 611, ../sass/_global.scss */
+/* line 612, ../sass/_global.scss */
 .check-box-validate input[type=checkbox]:checked + .squaredOne {
   background-position: bottom;
   background: url(../images/cursor1validated.png) center center no-repeat #009933;
 }
 
-/* line 615, ../sass/_global.scss */
+/* line 616, ../sass/_global.scss */
 .check-box-validate input[type=checkbox]:checked + .squaredOne:hover {
   background-position: bottom;
   background: url(../images/cursor1validated2.png) center center no-repeat #009933;
 }
 
-/* line 620, ../sass/_global.scss */
+/* line 621, ../sass/_global.scss */
 .page_pdf_url {
   float: right;
   margin-right: 20px;
 }
 
 /* boxes used to display activities */
-/* line 627, ../sass/_global.scss */
+/* line 628, ../sass/_global.scss */
 .activity-box {
   width: 160px;
   margin: 5px auto;
 }
 
-/* line 632, ../sass/_global.scss */
+/* line 633, ../sass/_global.scss */
 .activity-box a {
   color: #fff;
 }
 
-/* line 635, ../sass/_global.scss */
+/* line 636, ../sass/_global.scss */
 .activity-box p {
   margin: 5px 0 0 0;
 }
 
-/* line 639, ../sass/_global.scss */
+/* line 640, ../sass/_global.scss */
 .activity-content {
   width: auto;
   background-color: #01baff;
@@ -1492,7 +1493,7 @@ ul.walkincourses {
   box-shadow: 1px 1px 3px #333333, 0 1px 0 rgba(51, 51, 51, 0.5);
 }
 
-/* line 650, ../sass/_global.scss */
+/* line 651, ../sass/_global.scss */
 .activity-content span {
   background-repeat: no-repeat;
   padding: 0 0 10px 30px;
@@ -1502,75 +1503,75 @@ ul.walkincourses {
   color: #FFF;
 }
 
-/* line 658, ../sass/_global.scss */
+/* line 659, ../sass/_global.scss */
 .activity-logo-bdd span {
   background-image: url("/course/format/page/lib/template/images/activity/bdd.png");
 }
 
-/* line 661, ../sass/_global.scss */
+/* line 662, ../sass/_global.scss */
 .activity-logo-forum span {
   background-image: url("/course/format/page/lib/template/images/activity/forum.png");
 }
 
-/* line 664, ../sass/_global.scss */
+/* line 665, ../sass/_global.scss */
 .activity-logo-wiki span {
   background-image: url("/course/format/page/lib/template/images/activity/wiki.png");
 }
 
-/* line 667, ../sass/_global.scss */
+/* line 668, ../sass/_global.scss */
 .activity-logo-glossary span {
   background-image: url("/course/format/page/lib/template/images/activity/glossaire.png");
 }
 
-/* line 670, ../sass/_global.scss */
+/* line 671, ../sass/_global.scss */
 .activity-logo-visio span {
   background-image: url("/course/format/page/lib/template/images/activity/visio.png");
 }
 
-/* line 673, ../sass/_global.scss */
+/* line 674, ../sass/_global.scss */
 .activity-logo-chat span {
   background-image: url("/course/format/page/lib/template/images/activity/chat.png");
 }
 
-/* line 676, ../sass/_global.scss */
+/* line 677, ../sass/_global.scss */
 .activity-logo-lessons span {
   background-image: url("/course/format/page/lib/template/images/activity/devoirs.png");
 }
 
-/* line 679, ../sass/_global.scss */
+/* line 680, ../sass/_global.scss */
 .activity-logo-feedback span {
   background-image: url("/course/format/page/lib/template/images/activity/feedback.png");
 }
 
-/* line 682, ../sass/_global.scss */
+/* line 683, ../sass/_global.scss */
 .activity-logo-survey span {
   background-image: url("/course/format/page/lib/template/images/activity/sondage.png");
 }
 
-/* line 685, ../sass/_global.scss */
+/* line 686, ../sass/_global.scss */
 .activity-logo-trainer span {
   background-image: url("/course/format/page/lib/template/images/activity/formateur.png");
 }
 
-/* line 688, ../sass/_global.scss */
+/* line 689, ../sass/_global.scss */
 .activity-logo-quiz span {
   background-image: url("/course/format/page/lib/template/images/activity/tester.png");
 }
 
-/* line 693, ../sass/_global.scss */
+/* line 694, ../sass/_global.scss */
 #region-main .activity-box {
   width: auto;
   margin: 0px;
 }
 
-/* line 698, ../sass/_global.scss */
+/* line 699, ../sass/_global.scss */
 #region-main .activity-box .module {
   padding: 1em;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* line 703, ../sass/_global.scss */
+/* line 704, ../sass/_global.scss */
 #region-main .activity-box .activity-content {
   margin-top: 5px;
   color: #333;
@@ -1587,7 +1588,7 @@ ul.walkincourses {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67b6f4', endColorstr='#3a90ce',GradientType=0 );
 }
 
-/* line 718, ../sass/_global.scss */
+/* line 719, ../sass/_global.scss */
 #region-main .activity-box .activity-content h1 {
   color: white;
   font-size: 2em;
@@ -1598,17 +1599,17 @@ ul.walkincourses {
   font-weight: bold;
 }
 
-/* line 719, ../sass/_global.scss */
+/* line 720, ../sass/_global.scss */
 #region-main .activity-box .activity-content p {
   text-shadow: 1px 1px 2px #b6e0ff;
 }
 
-/* line 721, ../sass/_global.scss */
+/* line 722, ../sass/_global.scss */
 .activity-box .description {
   display: none;
 }
 
-/* line 724, ../sass/_global.scss */
+/* line 725, ../sass/_global.scss */
 #region-main .activity-box .description {
   display: block;
   color: white;
@@ -1627,19 +1628,19 @@ ul.walkincourses {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6c5c5', endColorstr='#b0b0b0',GradientType=0 );
 }
 
-/* line 742, ../sass/_global.scss */
+/* line 743, ../sass/_global.scss */
 .activity-box > .activity-module:first-child {
   border-top-left-radius: .8em;
   border-top-right-radius: .8em;
 }
 
-/* line 743, ../sass/_global.scss */
+/* line 744, ../sass/_global.scss */
 .activity-box > .activity-module:last-child {
   border-bottom-left-radius: .8em;
   border-bottom-right-radius: .8em;
 }
 
-/* line 745, ../sass/_global.scss */
+/* line 746, ../sass/_global.scss */
 .header_module {
   margin-top: 50px;
 }

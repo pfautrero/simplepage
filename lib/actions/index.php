@@ -48,7 +48,8 @@ class indexAction extends Action
         $course_modules = SimplePageLib::getCourseModules($page, $USER->id);
         $i = 0;
         foreach ($course_modules as $course_module) {
-
+            $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "";
+            $Column2[$course_module['position']][$course_module['sortorder']]['footer'] = "";
             if ($PAGE->user_is_editing() && has_capability('moodle/course:manageactivities', $this->coursecontext)) {
                 $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
                             <a href='modedit.php?update=" . $course_module['cmid'] . "&return=0'>
@@ -83,17 +84,33 @@ class indexAction extends Action
             } elseif ($course_module['completion']) {
                 if (isset($USER->username) && ($USER->username!="guest")) {
                     if ($course_module['completion'] == 1) {
-                        $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
+                        /* $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
                             <div class='squaredOne'>
                                     <input type='checkbox' id='checkbox_" . $course_module['cmid'] . "' checked />
                                     <label for='checkbox_" . $course_module['cmid'] . "'></label>
+                            </div>"; */
+                        $Column2[$course_module['position']][$course_module['sortorder']]['footer'] = "
+                            <div class='check-box-validate'>
+                                <div class='tip'>
+                                    <p>J'ai fini cette partie</p>
+                                </div>
+                                <input id='checkbox_" . $course_module['cmid'] . "' type='checkbox' checked >
+                                <label for='checkbox_" . $course_module['cmid'] . "' class='squaredOne'></label>
                             </div>";
                     }
                     if ($course_module['completion'] == 2) {
-                        $Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
+                        /*$Column2[$course_module['position']][$course_module['sortorder']]['header'] = "
                             <div class='squaredOne'>
                                     <input type='checkbox' id='checkbox_" . $course_module['cmid'] . "' />
                                     <label for='checkbox_" . $course_module['cmid'] . "'></label>
+                            </div>";*/
+                        $Column2[$course_module['position']][$course_module['sortorder']]['footer'] = "
+                            <div class='check-box-validate'>
+                                <div class='tip'>
+                                    <p>J'ai fini cette partie</p>
+                                </div>
+                                <input id='checkbox_" . $course_module['cmid'] . "' type='checkbox' >
+                                <label  for='checkbox_" . $course_module['cmid'] . "' class='squaredOne'></label>
                             </div>";
                     }
                 }
@@ -419,6 +436,7 @@ class indexAction extends Action
                 $bc->id = $block->id;
                 //$bc->attributes = array("id"=>"inst".$bc->id, "class"=>"block");
                 $Column2[$block->position][$block->sortorder]['header'] = "";
+                $Column2[$block->position][$block->sortorder]['footer'] = "";
                 $Column2[$block->position][$block->sortorder]['content'] = $OUTPUT->block($bc, null);
                 $Column2[$block->position][$block->sortorder]['moduleid'] = $block->item_id;
                 $Column2[$block->position][$block->sortorder]['display_mode'] = 1;
@@ -436,7 +454,7 @@ class indexAction extends Action
 
     public function buildOutput(&$Column, &$Column2) 
     {
-        global $PAGE,$COURSE;    
+        global $PAGE,$COURSE;
    
         ksort($Column2['l']);
         ksort($Column2['c']);
@@ -465,13 +483,15 @@ class indexAction extends Action
                             $selected_column[$i]['header'] .
                             "</div>" .
                             $selected_column[$i]['content'] .
+                            $selected_column[$i]['footer'] .
                             "</div>";
                     } else {
-                        $Column[$key] .= "  <div class='module_mode_edit'>
-                                                    <div class='header_module'>" .
+                        $Column[$key] .= "<div class='module_mode_edit'>" . 
+                                "<div class='header_module'>" .
                                 $selected_column[$i]['header'] .
                                 "</div>" .
                                 $selected_column[$i]['content'] .
+                                $selected_column[$i]['footer'] .
                                 "</div>";
                     }
                 } else {
@@ -482,23 +502,25 @@ class indexAction extends Action
                                     $selected_column[$i]['header'] .
                                 "</div>" .
                                     $selected_column[$i]['content'] .
+                                    $selected_column[$i]['footer'] .
                                 "</div>";
                     } elseif (isset($selected_column[$i]['completion']) && $selected_column[$i]['completion'] != 0) {
-                        $Column[$key] .= "  <div>
-                                                    <div class='header_module'>" .
+                        $Column[$key] .= "<div><div class='header_module'>" .
                                 $selected_column[$i]['header'] .
                                 "</div>" .
                                 $selected_column[$i]['content'] .
+                                $selected_column[$i]['footer'] .
                                 "</div>";
                     } else {
                         // add rectangle around each item event if it is not
-                        // in edit mode -> removed on 03/10/2014
+                        // in edit mode -> removed on 03/10/2013
                         $Column[$key] .= "
                                 <div>
                                 <div class='header_module'>" .
                                 //$selected_column[$i]['header'] .
                                 "</div>" .
                                 $selected_column[$i]['content'] .
+                                $selected_column[$i]['footer'] .
                                 "</div>";
                     }
                 }

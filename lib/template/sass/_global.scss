@@ -476,7 +476,7 @@ ul.walkincourses{
 
 /* thanks to http://cssdeck.com/labs/css-checkbox-styles */
 
-.squaredOne {
+/*.squaredOne {
     width: 28px;
     height: 28px;
     background: #fcfff4;
@@ -553,6 +553,68 @@ ul.walkincourses{
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
     filter: alpha(opacity=100);
     opacity: 1;
+}*/
+
+.check-box-validate {
+    height: 32px;
+    width: 159px;
+    text-align: right;
+	float:right;
+}
+.check-box-validate .tip {
+	display: inline-block;
+	margin:0px;
+    width: 122px;
+	height:32px;
+    position: relative;
+    left: -100px;
+    opacity: 0;
+	font-size:13px;
+    font-family:'hubuntu',Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    -webkit-transition: all 250ms ease-out;
+    transition: all 250ms ease-out; 
+}
+.tip p {
+    display: table-cell; /* make vertical-align available */
+	margin:0px;
+    width: 122px;
+	height:32px;	
+	vertical-align:middle;
+	color:#CCC;	
+}
+.check-box-validate:hover .tip {
+    left: 0;
+    opacity: 1;   
+}
+
+.check-box-validate .squaredOne {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+	font-size:1em;
+	cursor: pointer;
+	vertical-align:top; /* maintain block alignment */
+    border-radius:3px;
+}
+.check-box-validate input[type="checkbox"] {
+    display:none;
+}
+.squaredOne {
+    background-position: top;
+    background:url(../images/validated-hover.png) center center no-repeat #333;
+}
+.squaredOne:hover {
+    background-position: center;
+    background:url(../images/validated-hover2.png) center center no-repeat #333;
+}
+.check-box-validate input[type=checkbox]:checked + .squaredOne {
+    background-position: bottom;
+    background:url(../images/cursor1validated.png) center center no-repeat #093;
+}
+.check-box-validate input[type=checkbox]:checked + .squaredOne:hover {
+    background-position: bottom;
+    background:url(../images/cursor1validated2.png) center center no-repeat #093;
 }
 
 .page_pdf_url {
@@ -679,3 +741,7 @@ ul.walkincourses{
 
 .activity-box > .activity-module:first-child { border-top-left-radius: .8em; border-top-right-radius: .8em; }
 .activity-box > .activity-module:last-child { border-bottom-left-radius: .8em; border-bottom-right-radius: .8em; }
+
+.header_module {
+    margin-top: 50px;
+}

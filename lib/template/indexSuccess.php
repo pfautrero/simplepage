@@ -97,7 +97,7 @@ $(document).ready(function() {
 
     $('.squaredOne').mouseup(function(ev) {
         //ev.preventDefault();
-        _current = $(this).children(':checkbox').attr('id');
+        _current = $(this).attr('for');
         $.ajax({
             url: '/course/format/<?php echo $maindir; ?>/ajax.php?action=ajaxassignment',
             type: 'POST',
@@ -106,8 +106,8 @@ $(document).ready(function() {
                     //
             }
         });
-    });            
-
+    });  
+    
     <?php if ($editing) : ?>
 
 

@@ -63,7 +63,7 @@ class SimplePageLib {
                     else {
                             $result .= "<li class='menu_left $selected'><a href='".$tab->link."'>";
                     }
-                    $result .= $tab->text;
+                    $result .= stripslashes($tab->text);
                     $result .= "</a>";
                     if (!empty($pages)) {
                         $result .= '<div class="dropdown_1column">';

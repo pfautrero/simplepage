@@ -1295,109 +1295,190 @@ ul.walkincourses {
 }
 
 /* thanks to http://cssdeck.com/labs/css-checkbox-styles */
-/* line 479, ../sass/_global.scss */
-.squaredOne {
-  width: 28px;
-  height: 28px;
-  background: #fcfff4;
-  background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
-  margin: 10px;
-  position: relative;
-  float: right;
-  -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+/*.squaredOne {
+    width: 28px;
+    height: 28px;
+    background: #fcfff4;
+    background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+    margin: 10px;
+    position: relative;
+    float:right;
+    -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+	
 }
 
-/* line 498, ../sass/_global.scss */
 .squaredOne label {
-  cursor: pointer;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  left: 4px;
-  top: 4px;
-  -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
-  -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
-  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px white;
-  background: -webkit-linear-gradient(top, #222222 0%, #45484d 100%);
-  background: -moz-linear-gradient(top, #222222 0%, #45484d 100%);
-  background: -o-linear-gradient(top, #222222 0%, #45484d 100%);
-  background: -ms-linear-gradient(top, #222222 0%, #45484d 100%);
-  background: linear-gradient(top, #222222 0%, #45484d 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#222', endColorstr='#45484d',GradientType=0 );
+    cursor: pointer;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 4px;
+    top: 4px;
+
+    -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+    -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+    box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,1);
+
+    background: -webkit-linear-gradient(top, #222 0%, #45484d 100%);
+    background: -moz-linear-gradient(top, #222 0%, #45484d 100%);
+    background: -o-linear-gradient(top, #222 0%, #45484d 100%);
+    background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
+    background: linear-gradient(top, #222 0%, #45484d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
 }
 
-/* line 518, ../sass/_global.scss */
 .squaredOne label:after {
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  opacity: 0;
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  background: #00bf00;
-  background: -webkit-linear-gradient(top, #00bf00 0%, #009400 100%);
-  background: -moz-linear-gradient(top, #00bf00 0%, #009400 100%);
-  background: -o-linear-gradient(top, #00bf00 0%, #009400 100%);
-  background: -ms-linear-gradient(top, #00bf00 0%, #009400 100%);
-  background: linear-gradient(top, #00bf00 0%, #009400 100%);
-  top: 2px;
-  left: 2px;
-  -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #00bf00;
+
+    background: -webkit-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: -moz-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: -o-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: -ms-linear-gradient(top, #00bf00 0%, #009400 100%);
+    background: linear-gradient(top, #00bf00 0%, #009400 100%);
+
+    top: 2px;
+    left: 2px;
+
+    -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
+    box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5);
 }
 
-/* line 542, ../sass/_global.scss */
 .squaredOne label:hover::after {
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
-  filter: alpha(opacity=30);
-  opacity: 0.3;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=30);
+    opacity: 0.3;
 }
 
-/* line 548, ../sass/_global.scss */
 .squaredOne input[type=checkbox] {
-  visibility: hidden;
+    visibility: hidden;
 }
 
-/* line 552, ../sass/_global.scss */
 .squaredOne input[type=checkbox]:checked + label:after {
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-  filter: alpha(opacity=100);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+}*/
+/* line 558, ../sass/_global.scss */
+.check-box-validate {
+  height: 32px;
+  width: 159px;
+  text-align: right;
+  float: right;
+}
+
+/* line 564, ../sass/_global.scss */
+.check-box-validate .tip {
+  display: inline-block;
+  margin: 0px;
+  width: 122px;
+  height: 32px;
+  position: relative;
+  left: -100px;
+  opacity: 0;
+  font-size: 13px;
+  font-family: 'hubuntu',Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  -webkit-transition: all 250ms ease-out;
+  transition: all 250ms ease-out;
+}
+
+/* line 578, ../sass/_global.scss */
+.tip p {
+  display: table-cell;
+  /* make vertical-align available */
+  margin: 0px;
+  width: 122px;
+  height: 32px;
+  vertical-align: middle;
+  color: #CCC;
+}
+
+/* line 586, ../sass/_global.scss */
+.check-box-validate:hover .tip {
+  left: 0;
   opacity: 1;
 }
 
-/* line 558, ../sass/_global.scss */
+/* line 591, ../sass/_global.scss */
+.check-box-validate .squaredOne {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  font-size: 1em;
+  cursor: pointer;
+  vertical-align: top;
+  /* maintain block alignment */
+  border-radius: 3px;
+}
+
+/* line 600, ../sass/_global.scss */
+.check-box-validate input[type="checkbox"] {
+  display: none;
+}
+
+/* line 603, ../sass/_global.scss */
+.squaredOne {
+  background-position: top;
+  background: url(../images/validated-hover.png) center center no-repeat #333333;
+}
+
+/* line 607, ../sass/_global.scss */
+.squaredOne:hover {
+  background-position: center;
+  background: url(../images/validated-hover2.png) center center no-repeat #333333;
+}
+
+/* line 611, ../sass/_global.scss */
+.check-box-validate input[type=checkbox]:checked + .squaredOne {
+  background-position: bottom;
+  background: url(../images/cursor1validated.png) center center no-repeat #009933;
+}
+
+/* line 615, ../sass/_global.scss */
+.check-box-validate input[type=checkbox]:checked + .squaredOne:hover {
+  background-position: bottom;
+  background: url(../images/cursor1validated2.png) center center no-repeat #009933;
+}
+
+/* line 620, ../sass/_global.scss */
 .page_pdf_url {
   float: right;
   margin-right: 20px;
 }
 
 /* boxes used to display activities */
-/* line 565, ../sass/_global.scss */
+/* line 627, ../sass/_global.scss */
 .activity-box {
   width: 160px;
   margin: 5px auto;
 }
 
-/* line 570, ../sass/_global.scss */
+/* line 632, ../sass/_global.scss */
 .activity-box a {
   color: #fff;
 }
 
-/* line 573, ../sass/_global.scss */
+/* line 635, ../sass/_global.scss */
 .activity-box p {
   margin: 5px 0 0 0;
 }
 
-/* line 577, ../sass/_global.scss */
+/* line 639, ../sass/_global.scss */
 .activity-content {
   width: auto;
   background-color: #01baff;
@@ -1411,7 +1492,7 @@ ul.walkincourses {
   box-shadow: 1px 1px 3px #333333, 0 1px 0 rgba(51, 51, 51, 0.5);
 }
 
-/* line 588, ../sass/_global.scss */
+/* line 650, ../sass/_global.scss */
 .activity-content span {
   background-repeat: no-repeat;
   padding: 0 0 10px 30px;
@@ -1421,75 +1502,75 @@ ul.walkincourses {
   color: #FFF;
 }
 
-/* line 596, ../sass/_global.scss */
+/* line 658, ../sass/_global.scss */
 .activity-logo-bdd span {
   background-image: url("/course/format/page/lib/template/images/activity/bdd.png");
 }
 
-/* line 599, ../sass/_global.scss */
+/* line 661, ../sass/_global.scss */
 .activity-logo-forum span {
   background-image: url("/course/format/page/lib/template/images/activity/forum.png");
 }
 
-/* line 602, ../sass/_global.scss */
+/* line 664, ../sass/_global.scss */
 .activity-logo-wiki span {
   background-image: url("/course/format/page/lib/template/images/activity/wiki.png");
 }
 
-/* line 605, ../sass/_global.scss */
+/* line 667, ../sass/_global.scss */
 .activity-logo-glossary span {
   background-image: url("/course/format/page/lib/template/images/activity/glossaire.png");
 }
 
-/* line 608, ../sass/_global.scss */
+/* line 670, ../sass/_global.scss */
 .activity-logo-visio span {
   background-image: url("/course/format/page/lib/template/images/activity/visio.png");
 }
 
-/* line 611, ../sass/_global.scss */
+/* line 673, ../sass/_global.scss */
 .activity-logo-chat span {
   background-image: url("/course/format/page/lib/template/images/activity/chat.png");
 }
 
-/* line 614, ../sass/_global.scss */
+/* line 676, ../sass/_global.scss */
 .activity-logo-lessons span {
   background-image: url("/course/format/page/lib/template/images/activity/devoirs.png");
 }
 
-/* line 617, ../sass/_global.scss */
+/* line 679, ../sass/_global.scss */
 .activity-logo-feedback span {
   background-image: url("/course/format/page/lib/template/images/activity/feedback.png");
 }
 
-/* line 620, ../sass/_global.scss */
+/* line 682, ../sass/_global.scss */
 .activity-logo-survey span {
   background-image: url("/course/format/page/lib/template/images/activity/sondage.png");
 }
 
-/* line 623, ../sass/_global.scss */
+/* line 685, ../sass/_global.scss */
 .activity-logo-trainer span {
   background-image: url("/course/format/page/lib/template/images/activity/formateur.png");
 }
 
-/* line 626, ../sass/_global.scss */
+/* line 688, ../sass/_global.scss */
 .activity-logo-quiz span {
   background-image: url("/course/format/page/lib/template/images/activity/tester.png");
 }
 
-/* line 631, ../sass/_global.scss */
+/* line 693, ../sass/_global.scss */
 #region-main .activity-box {
   width: auto;
   margin: 0px;
 }
 
-/* line 636, ../sass/_global.scss */
+/* line 698, ../sass/_global.scss */
 #region-main .activity-box .module {
   padding: 1em;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* line 641, ../sass/_global.scss */
+/* line 703, ../sass/_global.scss */
 #region-main .activity-box .activity-content {
   margin-top: 5px;
   color: #333;
@@ -1506,7 +1587,7 @@ ul.walkincourses {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#67b6f4', endColorstr='#3a90ce',GradientType=0 );
 }
 
-/* line 656, ../sass/_global.scss */
+/* line 718, ../sass/_global.scss */
 #region-main .activity-box .activity-content h1 {
   color: white;
   font-size: 2em;
@@ -1517,17 +1598,17 @@ ul.walkincourses {
   font-weight: bold;
 }
 
-/* line 657, ../sass/_global.scss */
+/* line 719, ../sass/_global.scss */
 #region-main .activity-box .activity-content p {
   text-shadow: 1px 1px 2px #b6e0ff;
 }
 
-/* line 659, ../sass/_global.scss */
+/* line 721, ../sass/_global.scss */
 .activity-box .description {
   display: none;
 }
 
-/* line 662, ../sass/_global.scss */
+/* line 724, ../sass/_global.scss */
 #region-main .activity-box .description {
   display: block;
   color: white;
@@ -1546,14 +1627,19 @@ ul.walkincourses {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6c5c5', endColorstr='#b0b0b0',GradientType=0 );
 }
 
-/* line 680, ../sass/_global.scss */
+/* line 742, ../sass/_global.scss */
 .activity-box > .activity-module:first-child {
   border-top-left-radius: .8em;
   border-top-right-radius: .8em;
 }
 
-/* line 681, ../sass/_global.scss */
+/* line 743, ../sass/_global.scss */
 .activity-box > .activity-module:last-child {
   border-bottom-left-radius: .8em;
   border-bottom-right-radius: .8em;
+}
+
+/* line 745, ../sass/_global.scss */
+.header_module {
+  margin-top: 50px;
 }

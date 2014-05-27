@@ -156,11 +156,12 @@ class indexAction extends Action
                 if ($course_module['object']->name) {
                                     
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-survey'>
-                                        <a href='" . $course_module['object']->externalurl . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $course_module['object']->externalurl . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-survey'>" .
+                                            $course_module['object']->name . 
+                                        "</div>" . 
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -182,12 +183,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "choice") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-survey'>
-                                        <span>Sondage</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/choice/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/choice/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-survey'>" .
+                                            "<span>Sondage</span>" . 
+                                            "<br>" . 
+                                            $course_module['object']->name . 
+                                        "</div>" . 
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -201,12 +204,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "folder") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-folder'>
-                                        <span>Fichiers</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/folder/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/folder/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-folder'>".
+                                            "<span>Fichiers</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name . 
+                                        "</div>" . 
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -220,12 +225,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "resource") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-resource'>
-                                        <span>Ressource</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/resource/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/resource/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-resource'>" .
+                                            "<span>Ressource</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name . 
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -239,12 +246,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "glossary") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-glossary'>
-                                        <span>Glossaire</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/glossary/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/glossary/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-glossary'>" .
+                                            "<span>Glossaire</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name . 
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -258,12 +267,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "forum") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-forum'>
-                                        <span>Forum</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/forum/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/forum/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-forum'>" .
+                                            "<span>Forum</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name . 
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -281,12 +292,14 @@ class indexAction extends Action
                 
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-quiz'>
-                                        <span>Test</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/quiz/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/quiz/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-quiz'>" .
+                                            "<span>Test</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name .
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -300,12 +313,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "wiki") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-wiki'>
-                                        <span>Wiki</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/wiki/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>".
+                                    "<a href='" . $CFG->wwwroot . "/mod/wiki/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-wiki'>" .
+                                            "<span>Wiki</span>" .
+                                            "<br>" . 
+                                            $course_module['object']->name . 
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -320,12 +335,14 @@ class indexAction extends Action
                 
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-bdd'>
-                                        <span>Base de données</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/data/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/data/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-bdd'>" .
+                                            "<span>Base de données</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name . 
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -339,12 +356,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "feedback") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-feedback'>
-                                        <span>Feedback</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/feedback/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/feedback/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-feedback'>" .
+                                            "<span>Feedback</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name . 
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .
@@ -358,12 +377,14 @@ class indexAction extends Action
             else if ($course_module['type'] == "chat") {
                 if ($course_module['object']->name) {
                     $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
-                                    <div class='activity-box'>
-                                    <div class='activity-module activity-content activity-logo-chat'>
-                                        <span>Chat</span>
-                                        <br><a href='" . $CFG->wwwroot . "/mod/chat/view.php?id=" . $course_module['cmid'] . "'>" .
-                                        $course_module['object']->name . "</a>
-                                    </div>";
+                                    <div class='activity-box'>" .
+                                    "<a href='" . $CFG->wwwroot . "/mod/chat/view.php?id=" . $course_module['cmid'] . "'>" .
+                                        "<div class='activity-module activity-content activity-logo-chat'>" .
+                                            "<span>Chat</span>" .
+                                            "<br>" .
+                                            $course_module['object']->name . 
+                                        "</div>" .
+                                    "</a>";
                     if ($course_module['showdescription']) {
                         $Column2[$course_module['position']][$course_module['sortorder']]['content'] .= "
                             <div class='activity-module description'>" .

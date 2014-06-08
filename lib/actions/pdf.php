@@ -59,7 +59,7 @@ class pdfAction extends Action
 
 
         $course = $DB->get_record('course', array('id' => $id));
-        $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+        $coursecontext = context_course::instance($course->id);
         $page_object = new simplepage\Page($page);
         if ($page_object->isHidden()) {
             if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
@@ -225,7 +225,7 @@ class pdfAction extends Action
 			// ==================================================		
 
             $active_filters = SimplePageLib::getActiveFilters();
-            $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+            $coursecontext = context_course::instance($course->id);
             foreach ($active_filters as $currentfilter) {
                 if (file_exists($CFG->dirroot . '/filter/' . $currentfilter->filter . '/filter.php')) {
                     require_once($CFG->dirroot . '/filter/' . $currentfilter->filter . '/filter.php');

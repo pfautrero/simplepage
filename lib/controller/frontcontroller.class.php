@@ -63,7 +63,7 @@ class FrontController
     public function forward($action)
     {
         global $COURSE;
-        $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        $coursecontext = context_course::instance($COURSE->id);
         if ($coursecontext == null) {
             $content = "context_null";
             $this->_response->addVar('content', $content);

@@ -34,7 +34,7 @@ class add_test extends advanced_testcase
                                );
 
         $PAGE = new moodle_page();
-        $PAGE->set_context(get_context_instance(CONTEXT_COURSE, $COURSE->id));
+        $PAGE->set_context(context_course::instance($COURSE->id));
 
         /**
          * Try to access 'Add Page' with authentication and edition activated

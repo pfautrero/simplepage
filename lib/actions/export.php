@@ -33,7 +33,7 @@ class exportAction extends Action
     {
 
         $csv = utf8_decode("nom;prénom;rôle;email\n");
-        $coursecontext = get_context_instance(CONTEXT_COURSE, $courseid);
+        $coursecontext = context_course::instance($courseid);
         $users = $this->_registry->db
                       ->get_records_sql("SELECT   ra.id,
                                                 ra.userid, 
@@ -74,7 +74,7 @@ class exportAction extends Action
         if (isset($_GET['id'])) {
             $course = $this->_registry->db
                             ->get_record('course', array('id' => $_GET['id']));
-            $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+            $coursecontext = context_course::instance($course->id);
 
             if (
                 !has_capability(

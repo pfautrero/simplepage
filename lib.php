@@ -45,7 +45,8 @@ function callback_page_uses_sections() {
  */
 function callback_page_load_content(&$navigation, $course, $coursenode) {
 	global $PAGE,$DB ;	
-	$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+	//$coursecontext = context_course::instance($course->id);
+        $coursecontext = context_course::instance($course->id);
         /**
          * Manage breadcrumb
          */
@@ -100,7 +101,9 @@ function callback_page_request_key() {
 function callback_page_get_section_name($course, $section) {
     // We can't add a node without any text
     if (!empty($section->name)) {
-        return format_string($section->name, true, array('context' => get_context_instance(CONTEXT_COURSE, $course->id)));
+        $coursecontext = context_course::instance($course->id);
+        //return format_string($section->name, true, array('context' => get_context_instance(CONTEXT_COURSE, $course->id)));
+        return format_string($section->name, true, array('context' => $coursecontext));
     } else if ($section->section == 0) {
         return get_string('section0name', 'format_page');
     } else {
@@ -200,7 +203,8 @@ class format_page extends format_base {
         /**
          * Manage navigation block
          */        
-	$coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+	//$coursecontext = context_course::instance($course->id);
+        $coursecontext = context_course::instance($course->id);
 	if (has_capability('moodle/course:manageactivities', $coursecontext)) {
 		$coursenode = $PAGE->navigation->find($course->id, navigation_node::TYPE_COURSE);
 		$children = $coursenode->get_children_key_list();

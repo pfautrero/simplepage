@@ -651,7 +651,7 @@ class indexAction extends Action
         $moduleid = $request->getParam('module');
         $displacement = $request->getParam('displacement');
         $entry = 'formatpage' . $USER->id;
-        $this->coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        $this->coursecontext = context_course::instance($COURSE->id);
         
         // ============ retrieve created module and set the correct page owner.		
         if (isset($_SESSION[$entry][$COURSE->id]['idpage'])) {

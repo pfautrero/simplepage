@@ -41,7 +41,7 @@ class ajaxdisplay_test extends advanced_testcase
         unset($page);
         
         $PAGE = new moodle_page();
-        $PAGE->set_context(get_context_instance(CONTEXT_COURSE, $COURSE->id));
+        $PAGE->set_context(context_course::instance($COURSE->id));
 
         $this->setAdminUser();
         $USER->editing = 1;

@@ -70,7 +70,7 @@ class SimplePageLib {
                         $result .= '<div class="col_1">';
                         $result .= '<ul class="simple">';
                         //$result .= '<li><a href="'.$tab->link.'">'.get_string("introductionTitle", "format_page").'</a></li>';
-                        $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+                        $coursecontext = context_course::instance($COURSE->id);
                         foreach ($pages as $page) {
                             if (($page->display & AFFICHER_COMME_ONGLET) && ($page->display & PUBLISH)) {
                                     $result .= '<li><a href="view.php?id='.$page->courseid.'&page='.$page->id.'">'.stripslashes($page->nameone).'</a></li>';
@@ -106,7 +106,7 @@ class SimplePageLib {
 		$pages = $DB->get_records_sql("SELECT * FROM {format_page} WHERE courseid = $courseid ORDER BY parent,sortorder ASC");
 		$i = 0;
 		if ($pages) {
-			$coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+			$coursecontext = context_course::instance($COURSE->id);
 			foreach ($pages as $page) {
                             if (($page->display & AFFICHER_COMME_ONGLET) && ($page->display & PUBLISH)&& ($page->parent == '0')) {
                                 $row[$i] = new tabobject('tab'.$page->id, 'view.php?id='.$page->courseid.'&page='.$page->id, $page->nameone);
@@ -439,7 +439,7 @@ class SimplePageLib {
      */	
 	public static function getCourseModules($mypage, $uid) {
             global $DB, $COURSE, $PAGE;
-            $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+            $coursecontext = context_course::instance($COURSE->id);
             $manageactivities = false;$viewhiddenactivities = false;
             if (has_capability('moodle/course:manageactivities', $coursecontext)) {
                     $manageactivities = true;

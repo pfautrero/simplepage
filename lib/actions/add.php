@@ -31,7 +31,7 @@ class addAction extends Action
     public function launch(Request $request, Response $response) 
     {
         global $COURSE, $PAGE, $USER, $CFG;
-        $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        $coursecontext = context_course::instance($COURSE->id);
 
         if (
             !$PAGE->user_is_editing() || 

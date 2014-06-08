@@ -33,7 +33,7 @@ class ajaxaddnewmoduleAction extends Action
     {
         global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH, $USER;
         $course = $DB->get_record('course', array('id' => $_SESSION['courseid']));
-        $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+        $coursecontext = context_course::instance($course->id);
 
         if (!has_capability(PERMISSION_ADD_NEW_MODULE, $coursecontext)) {
             $this->render($CFG->dirroot . "/course/format/page/lib/template/forbiddenSuccess.php");

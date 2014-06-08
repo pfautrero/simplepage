@@ -35,7 +35,7 @@ class editcourseAction extends Action
         global $CFG, $DB, $OUTPUT, $PAGE, $LOCAL_PATH, $USER, $MAIN_DIR;
 
         global $COURSE;
-        $coursecontext = get_context_instance(CONTEXT_COURSE, $COURSE->id);
+        $coursecontext = context_course::instance($COURSE->id);
 
         if (!$PAGE->user_is_editing() || !has_capability(PERMISSION_ACCESS_EDIT_PAGE, $coursecontext)) {
             $this->render($CFG->dirroot . "/course/format/page/lib/template/forbiddenSuccess.php");

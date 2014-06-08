@@ -41,7 +41,7 @@ class ajaxdeletesectionsAction extends Action
         $_SESSION['SESSION']->navcache = new stdClass;
 
         $course = $DB->get_record('course', array('id' => $_SESSION['courseid']));
-        $coursecontext = get_context_instance(CONTEXT_COURSE, $course->id);
+        $coursecontext = context_course::instance($course->id);
 
         if (!has_capability('moodle/course:manageactivities', $coursecontext)) {
             $this->render($CFG->dirroot . "/course/format/page/lib/template/forbiddenSuccess.php");
